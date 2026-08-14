@@ -7,6 +7,7 @@ Current evaluation package:
 - `docs/ls06-ls10-runbook-v2.md`: current 10-task scope and per-run capability reset gate
 - `docs/task-cards-v1.md`: 25 workflow-compliant task cards
 - `docs/deterministic-rubrics-v2.tsv`: per-task 10/40/15/5/10 deterministic rubric
+- `docs/benchmark-rubrics/`: source-grounded native scoring evidence for all 25 selected tasks
 - `docs/oracles/<task-id>/oracle.py`: 25 fail-closed static oracle entry points
 - `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
 - `docs/capability-whitelist-v1.tsv`: exact 222-catalog names allowed in T1/T2
