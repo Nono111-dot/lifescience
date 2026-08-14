@@ -4,6 +4,7 @@ This repository contains reproducible desktop UI evaluation tasks for life-scien
 
 Current evaluation package:
 
+- `docs/ls06-ls10-runbook-v2.md`: current 10-task scope and per-run capability reset gate
 - `docs/task-cards-v1.md`: 25 workflow-compliant task cards
 - `docs/deterministic-rubrics-v2.tsv`: per-task 10/40/15/5/10 deterministic rubric
 - `docs/oracles/<task-id>/oracle.py`: 25 fail-closed static oracle entry points

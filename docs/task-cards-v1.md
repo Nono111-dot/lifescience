@@ -1,5 +1,7 @@
 # Life-science evaluation task cards v1
 
+Current formal evaluation scope is LS06–LS10 only (10 tasks). LS01–LS05 cards below are retained as candidate-development material and must not be scheduled in the current run matrix. Use `ls06-ls10-runbook-v2.md` as the controlling execution document.
+
 These cards follow the evaluation workflow revision 135. The operator pastes only the **Prompt** block. Rubric, gates and source notes remain outside the run workspace. All formal artifacts must be written under `output/`; inputs are read-only. JSON/CSV numeric values must be finite, identifiers unique, and missing values represented as empty/`null`, never invented. L2/L3 tasks must include a rerunnable `output/analysis.py` and `output/report.md` (≤300 words unless noted).
 
 The authoritative deterministic rubric is `deterministic-rubrics-v2.tsv`: **coverage 10 + task-specific core scientific calculation 40 + direction/decision 15 + summary consistency 5 + rerunnable script 10 = 80**. This replaces the older per-card draft allocations below; the blind 20-point rubric is unchanged. Oracles must emit all five component scores separately.

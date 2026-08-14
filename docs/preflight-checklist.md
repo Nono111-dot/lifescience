@@ -26,6 +26,16 @@
 - [ ] Installed/invoked/failed/out-of-catalog attempts will be captured automatically
 - [ ] Permission policy and timer checked
 
+## Previous-run reset gate
+
+- [ ] Previous run's installed/invoked capability trace preserved
+- [ ] All skills installed by the previous run uninstalled/disabled
+- [ ] All MCPs enabled by the previous run removed/disabled and sessions terminated
+- [ ] Previous conversation closed and workspace detached/frozen
+- [ ] Post-reset normalized inventory equals the experiment baseline
+- [ ] Fresh-conversation smoke check shows no previous task state
+- [ ] `reset_status=clean`; otherwise the next run is blocked
+
 ## Freeze/score
 
 - [ ] Write access closed at stop

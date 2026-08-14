@@ -1,5 +1,9 @@
 # 端砚 × Codex life-science evaluation protocol v1
 
+## Evaluation scope
+
+The current experiment covers **LS06–LS10 only: 10 tasks, two tasks per LS group**. LS01–LS05 assets remain candidate-development material and are not scheduled in this evaluation. The controlling workflow is Feishu revision 138; every task card must contain all §3.1 fields before it can enter a run.
+
 ## What is being compared
 
 The primary harness comparison is **Codex C0 vs 端砚 T0** on the same frozen task card, input bytes, time limit, machine class, network policy and trial count. Capability uplift is measured separately inside 端砚: **T0 vs T1**, and only where justified, **T1 vs T2**. Do not report C0-vs-T1 as a pure harness effect.
@@ -35,18 +39,19 @@ No main run starts until all are true:
 5. Stop at completion or the card time limit. Revoke/close client write access, capture end time and classify `success`, `timeout`, `crash`, `harness_no_artifact`, `operator_invalid`, or `other_failure`.
 6. Hash and freeze the whole workspace. Run the static Python oracle/checklist against the frozen copy, then any isolated clean rerun. Send only designated nondeterministic artifacts to blind judges.
 7. Store raw run record, oracle JSON, judge forms, screenshots/logs and frozen-artifact manifest. Never repair outputs before scoring.
+8. Before any next task or trial, perform the capability reset in `ls06-ls10-runbook-v2.md`: preserve the just-finished capability trace, uninstall/disable every skill and MCP added by the run, close the conversation, detach the workspace, clear task-scoped capability state, and compare the post-reset inventory with the experiment baseline. A mismatch blocks the next run.
 
-If an operator gives scientific help, mark `operator_invalid` and exclude the run from the primary result while retaining it in the audit log. A normally ending UI with no required artifact is `harness_no_artifact`, not missing data.
+If an operator gives scientific help, mark `operator_invalid` and exclude the run from the primary result while retaining it in the audit log. A normally ending UI with no required artifact is `harness_no_artifact`, not missing data. Failure to restore the capability baseline is `environment_contaminated`; do not start the next run until resolved.
 
 ## Experimental design
 
 - Minimum calibration: 3 representative ready tasks × C0/T0 × 1 trial. Calibration is excluded from headline results.
-- Main result: 25 cards only after acceptance, recommended 3 independent trials per condition. Randomize task order within harness; counterbalance harness order; use fresh workspaces and conversations.
-- Run C0 and T0 for all 25 accepted cards. For T1/T2, expose the full experiment-approved subset of the 222 catalog rather than preselecting a single package; the agent autonomously chooses and may install/call multiple relevant capabilities. T2 is used only when external scientific connectors are allowed and network/API snapshot policy is frozen.
+- Main result: the 10 accepted LS06–LS10 cards. Randomize task order within harness; counterbalance harness order; use fresh workspaces, conversations and capability baselines.
+- Following workflow §5.2, start with `k=1`: C0 vs T2 on all 10 tasks, and add T0/T1 on predeclared representative L2 tasks. Only hard-gate flips or conclusion-critical runs are repeated twice. For T1/T2, expose the experiment-approved subset of the 222 catalog rather than preselecting a package; the agent autonomously chooses and may install/call multiple relevant capabilities. T2 is used only when local scientific MCP policy is frozen.
 - Preserve every failed run. Do not rerun selectively; predeclare retry rules for infrastructure outages.
 - Stratify reporting by P0/P1, task, level and capability tag. The calibration-only protein-shape card must not enter the primary scientific aggregate unless replaced by an ecologically valid LS05 card.
 
-At 25 tasks × 3 trials, C0+T0 require 150 runs. T1/T2 add runs only for eligible cards; publish the exact denominator for every rate.
+Publish the exact run denominator and any predeclared repeats. Do not silently expand to three trials for every arm or task; the default is the lightweight workload in §5.2.
 
 ## Scoring and result presentation
 
