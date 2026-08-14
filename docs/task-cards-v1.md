@@ -208,7 +208,7 @@ The authoritative deterministic rubric is `deterministic-rubrics-v2.tsv`: **cove
 
 - Domain/subdomain: lab automation / liquid handling recovery; P1; L2, 40 min; D/P/A/O; custom.
 - Inputs: dilution request, pipettes and run log plus missing plate/source map to be added.
-- Prompt: **Diagnose the failed dilution run and produce a physically feasible recovery plan. Write `output/root_cause.json`, `output/recovery_plan.csv` with `step,source,destination,transfer_uL,diluent_uL,final_concentration,final_volume_uL,pipette`, `output/analysis.py`, and `output/report.md`. Enforce pipette ranges, mass balance and supplied solvent/volume limits.**
+- Prompt: **Diagnose the failed dilution run and produce a physically feasible recovery plan. Write `output/root_cause.json`, `output/recovery_plan.csv` with `step,source,destination,transfer_uL,transfer_pipette,diluent_source,diluent_uL,diluent_pipette,final_concentration,final_volume_uL`, `output/analysis.py`, and `output/report.md`. Enforce pipette ranges, mass balance and supplied solvent/volume limits.**
 - Gates: root cause traceable; all transfers feasible; concentrations/mass balance correct; no overdraw; rerun.
 - Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
 - Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.

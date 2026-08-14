@@ -5,12 +5,15 @@ This repository contains reproducible desktop UI evaluation tasks for life-scien
 Current evaluation package:
 
 - `docs/ls06-ls10-runbook-v2.md`: current 10-task scope and per-run capability reset gate
-- `docs/task-cards-v1.md`: 25 workflow-compliant task cards
+- `docs/ls06-ls10-task-cards-v2.md`: current ten complete §3.1 task cards and scientific release gates
+- `docs/task-cards-v1.md`: legacy 25-card index
 - `docs/deterministic-rubrics-v2.tsv`: per-task 10/40/15/5/10 deterministic rubric
 - `docs/benchmark-rubrics/`: source-grounded native scoring evidence for all 25 selected tasks
 - `docs/oracles/<task-id>/oracle.py`: 25 fail-closed static oracle entry points
 - `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
-- `docs/capability-whitelist-v1.tsv`: exact 222-catalog names allowed in T1/T2
+- `docs/capability-whitelist-v1.tsv`: 22-row previously smoke-tested subset; **not** the complete catalog
+- `docs/capability-catalog-audit-2026-08-14.md`: Feishu revision-717 audit of the 222-row life-science candidate catalog
+- `docs/formal-run-queue-2026-08-14.tsv`: 10-task × C0/T0/T1/T2 fail-closed execution queue
 - `docs/evaluation-protocol-v1.md`: Codex/端砚 conditions, SOP, scoring and go/no-go
 - `docs/preflight-checklist.md`: formal-run acceptance checklist
 - `docs/run-record-template.tsv`: immutable per-run record schema

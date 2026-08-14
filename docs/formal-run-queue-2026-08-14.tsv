@@ -1,0 +1,41 @@
+task_id	harness	condition	scientific_gate	harness_gate	execution_status	reset_required	blocking_reason
+ls06-eno1-effect-size	codex	C0	pass	fail	not_started	true	Codex executable cannot start independent session: Windows Access denied
+ls06-eno1-effect-size	duanyan	T0	pass	fail	not_started	true	No observable Duanyan UI/API, inventory export, or reset control
+ls06-eno1-effect-size	duanyan	T1	pass	fail	not_started	true	No observable Duanyan discovery/install/call/reset interface
+ls06-eno1-effect-size	duanyan	T2	pass	fail	not_started	true	No observable Duanyan MCP enable/call/reset interface
+ls06-eno1-significance-audit	codex	C0	pass	fail	not_started	true	Codex executable cannot start independent session: Windows Access denied
+ls06-eno1-significance-audit	duanyan	T0	pass	fail	not_started	true	No observable Duanyan UI/API, inventory export, or reset control
+ls06-eno1-significance-audit	duanyan	T1	pass	fail	not_started	true	No observable Duanyan discovery/install/call/reset interface
+ls06-eno1-significance-audit	duanyan	T2	pass	fail	not_started	true	No observable Duanyan MCP enable/call/reset interface
+ls07-combination-treatment-deg	codex	C0	fail	not_checked	blocked	true	Pinned DESeq2 reference/checker not 3-of-3 accepted
+ls07-combination-treatment-deg	duanyan	T0	fail	not_checked	blocked	true	Pinned DESeq2 reference/checker not 3-of-3 accepted
+ls07-combination-treatment-deg	duanyan	T1	fail	not_checked	blocked	true	Pinned DESeq2 reference/checker not 3-of-3 accepted
+ls07-combination-treatment-deg	duanyan	T2	fail	not_checked	blocked	true	Pinned DESeq2 reference/checker not 3-of-3 accepted
+ls07-combination-treatment-mechanism	codex	C0	fail	not_checked	blocked	true	Frozen Reactome_2022 resource/reference absent
+ls07-combination-treatment-mechanism	duanyan	T0	fail	not_checked	blocked	true	Frozen Reactome_2022 resource/reference absent
+ls07-combination-treatment-mechanism	duanyan	T1	fail	not_checked	blocked	true	Frozen Reactome_2022 resource/reference absent
+ls07-combination-treatment-mechanism	duanyan	T2	fail	not_checked	blocked	true	Frozen Reactome_2022 resource/reference absent
+ls08-multiome-column-match	codex	C0	fail	not_checked	blocked	true	Hidden mapping and normalization policy not 3-of-3 accepted
+ls08-multiome-column-match	duanyan	T0	fail	not_checked	blocked	true	Hidden mapping and normalization policy not 3-of-3 accepted
+ls08-multiome-column-match	duanyan	T1	fail	not_checked	blocked	true	Hidden mapping and normalization policy not 3-of-3 accepted
+ls08-multiome-column-match	duanyan	T2	fail	not_checked	blocked	true	Hidden mapping and normalization policy not 3-of-3 accepted
+ls08-enhancer-promoter-integration	codex	C0	fail	not_checked	blocked	true	Aggregation and tie rule not 3-of-3 accepted
+ls08-enhancer-promoter-integration	duanyan	T0	fail	not_checked	blocked	true	Aggregation and tie rule not 3-of-3 accepted
+ls08-enhancer-promoter-integration	duanyan	T1	fail	not_checked	blocked	true	Aggregation and tie rule not 3-of-3 accepted
+ls08-enhancer-promoter-integration	duanyan	T2	fail	not_checked	blocked	true	Aggregation and tie rule not 3-of-3 accepted
+ls09-opentrons-sop	codex	C0	fail	not_checked	blocked	true	Pinned Opentrons simulator unavailable
+ls09-opentrons-sop	duanyan	T0	fail	not_checked	blocked	true	Pinned Opentrons simulator unavailable
+ls09-opentrons-sop	duanyan	T1	fail	not_checked	blocked	true	Pinned Opentrons simulator unavailable
+ls09-opentrons-sop	duanyan	T2	fail	not_checked	blocked	true	Pinned Opentrons simulator unavailable
+ls09-plate-dilution-recovery	codex	C0	pass	fail	not_started	true	Codex executable cannot start independent session: Windows Access denied
+ls09-plate-dilution-recovery	duanyan	T0	pass	fail	not_started	true	No observable Duanyan UI/API, inventory export, or reset control
+ls09-plate-dilution-recovery	duanyan	T1	pass	fail	not_started	true	No observable Duanyan discovery/install/call/reset interface
+ls09-plate-dilution-recovery	duanyan	T2	pass	fail	not_started	true	No observable Duanyan MCP enable/call/reset interface
+ls10-neun-power-analysis	codex	C0	pass	fail	not_started	true	Codex executable cannot start independent session: Windows Access denied
+ls10-neun-power-analysis	duanyan	T0	pass	fail	not_started	true	No observable Duanyan UI/API, inventory export, or reset control
+ls10-neun-power-analysis	duanyan	T1	pass	fail	not_started	true	No observable Duanyan discovery/install/call/reset interface
+ls10-neun-power-analysis	duanyan	T2	pass	fail	not_started	true	No observable Duanyan MCP enable/call/reset interface
+ls10-treatment-response-model	codex	C0	pass	fail	not_started	true	Codex executable cannot start independent session: Windows Access denied
+ls10-treatment-response-model	duanyan	T0	pass	fail	not_started	true	No observable Duanyan UI/API, inventory export, or reset control
+ls10-treatment-response-model	duanyan	T1	pass	fail	not_started	true	No observable Duanyan discovery/install/call/reset interface
+ls10-treatment-response-model	duanyan	T2	pass	fail	not_started	true	No observable Duanyan MCP enable/call/reset interface

@@ -12,10 +12,10 @@ The primary harness comparison is **Codex C0 vs 端砚 T0** on the same frozen t
 |---|---|---|
 | C0 | Codex | Native client only; no added life-science skill/MCP |
 | T0 | 端砚 | Bare client; no added life-science skill/MCP |
-| T1 | 端砚 | Agent autonomously discovers, installs and invokes every skill needed for the task; every installed/invoked skill must be an exact, runtime-smoke-tested entry from `capability-whitelist-v1.tsv` |
-| T2 | 端砚 | T1 plus autonomous use of all necessary allowlisted scientific MCP/API capabilities; every installed/invoked connector must also be in the exact allowlist |
+| T1 | 端砚 | Agent autonomously discovers, installs and invokes every skill needed for the task; every installed/invoked skill must match the Feishu revision-717 222-row life-science catalog and the target-client runtime inventory |
+| T2 | 端砚 | T1 plus autonomous use of all necessary catalog-listed scientific MCP/API capabilities; every installed/invoked connector must also have a target-client runtime match |
 
-T1/T2 deliberately do **not** cap the number of capabilities. Capability selection is part of the agent behavior being evaluated: the agent should infer what it needs, install it without operator scientific guidance, call it when useful, and stop when sufficient. Any installed, attempted, automatically routed or invoked domain capability outside the exact 222-item catalog is a protocol violation. General filesystem, shell and client-native editing are harness functions, not scientific capability packages; record them but do not treat them as T1/T2. Catalog membership does not prove runtime availability: record exact package name/version, install/call timestamps, outcome and a preflight smoke-test result.
+T1/T2 deliberately do **not** cap the number of capabilities. Capability selection is part of the agent behavior being evaluated: the agent should infer what it needs, install it without operator scientific guidance, call it when useful, and stop when sufficient. Any installed, attempted, automatically routed or invoked domain capability outside the exact 222-item catalog is a protocol violation. General filesystem, shell and client-native editing are harness functions, not scientific capability packages; record them but do not treat them as T1/T2. Catalog membership does not prove runtime availability: record canonical package ID, exact display name/version, install/call timestamps, outcome and a preflight smoke-test result. `capability-whitelist-v1.tsv` is only a 22-row previously smoke-tested subset and is not the catalog authority.
 
 ## Preflight gates
 
