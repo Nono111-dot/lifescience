@@ -1,0 +1,27 @@
+<title>生命科学 Agent 评测：Scientific Checker 与运行状态（2026-08-14）</title>
+<callout emoji="⚠️" background-color="light-yellow"><p>结论：LS06–LS10 十题现已全部具备逐题 scientific checker，但只有 5/10 达到本地 deterministic formal-ready。当前没有真实端砚 UI 主结果，也没有完整 Codex UI 主结果；不得把校准 run 当作 harness 对比。</p></callout>
+<h1>一、评分结构</h1>
+<p>每题总分 100：DeterministicArtifactScore 80 分加 Blind Judge 20 分。80 分统一拆为 coverage/schema 10、核心科学计算 40、方向或决策 15、summary 一致性 5、可重跑脚本 10。scientific checker 负责核心科学计算、方向/决策、summary 和 hard gates；Judge 只评 Evidence、Method、Restraint、Readability。</p>
+<h1>二、十题 checker 状态</h1>
+<table header-row="true"><tr><td>任务</td><td>状态</td><td>主要科学判据</td><td>当前边界</td></tr>
+<tr><td>LS06 ENO1 effect size</td><td>READY</td><td>tumor/normal、FC=4.81、log2FC=2.27、方向与来源</td><td>BixBench 公布终点；reference×3、empty、wrong 通过</td></tr>
+<tr><td>LS06 ENO1 significance</td><td>READY</td><td>adjusted p=0.226、FDR 0.05、不显著</td><td>BixBench 公布终点；reference×3、empty、wrong 通过</td></tr>
+<tr><td>LS07 combination DEG</td><td>BLOCKED</td><td>唯一 gene、阈值谓词、summary、BixBench native count=677</td><td>缺固定 DESeq2 版本、design 与逐基因 reference table</td></tr>
+<tr><td>LS07 mechanism</td><td>BLOCKED</td><td>Reactome 表、概率范围、TP53-mediated cell-cycle 语义</td><td>缺固定 Reactome_2022 资源及独立 enrichment reference run</td></tr>
+<tr><td>LS08 multiome mapping</td><td>BLOCKED</td><td>8×8 bijection、finite score、方向</td><td>CompBioBench 不公开隐藏 permutation；未固定 gene-activity annotation</td></tr>
+<tr><td>LS08 enhancer–promoter</td><td>BLOCKED</td><td>pair coverage、两模态数值、call 与表中 minimum 一致</td><td>原 Prompt 称 EP1–EP8，但输入/选项只有 EP1–EP7；无公开 integration rule/gold</td></tr>
+<tr><td>LS09 Opentrons SOP</td><td>BLOCKED</td><td>192 个净转移阶段、144 tips、液体守恒、deck/module、simulation</td><td>缺两 harness 同版本 simulator；旧 Prompt 存在 mix-stroke 粒度歧义</td></tr>
+<tr><td>LS09 dilution recovery</td><td>READY</td><td>仅恢复 B2/B3；2 µL 25 µM + 98 µL diluent；P20/P300；无 overdraw</td><td>80/80 calibration 通过，语义与旧 schema 回归测试通过</td></tr>
+<tr><td>LS10 NeuN power</td><td>READY</td><td>均值/SD/pooled SD、d≈0.216、n/group=337</td><td>BixBench range/exact gold；reference×3、empty、wrong 通过</td></tr>
+<tr><td>LS10 treatment model</td><td>READY</td><td>age β≈−0.0795、SE、p≈0.00250、OR≈0.9236、coding</td><td>BixBench range；reference×3、empty、wrong 通过</td></tr></table>
+<h1>三、已运行校准</h1>
+<table header-row="true"><tr><td>任务</td><td>Trial</td><td>结果</td><td>解释</td></tr>
+<tr><td>LS09 Opentrons</td><td>1</td><td>28/80，gate fail</td><td>发现旧 gold 将 144 tips 错写为 72；这是 grader/fixture 缺陷，不计为模型科学错误</td></tr>
+<tr><td>LS09 Opentrons</td><td>2</td><td>合同回归，BLOCKED</td><td>发现 1032 行来自 transfer-plan 粒度歧义；缺 simulator 时 ABORT 是正确行为</td></tr>
+<tr><td>LS09 dilution recovery</td><td>1</td><td>45/80，gate fail</td><td>发现 failure-mode exact-string 假阴性和单 pipette 字段歧义</td></tr>
+<tr><td>LS09 dilution recovery</td><td>2</td><td>80/80，gate pass</td><td>修订合同后全部 deterministic criteria 通过</td></tr></table>
+<h1>四、为什么尚不能声称整体正式 run 完成</h1>
+<p>飞书 SOP 要求每题使用真实全新 UI 会话、一次粘贴 Prompt、记录客户端/模型/墙钟时间、冻结 workspace，并在下一题前清除本题安装/启用的能力。当前进程无法启动 WindowsApps 中的新 Codex UI，也无法读取端砚 UI 的能力安装与清空日志。因此本轮完成的是 checker 全量建设、acceptance 和校准，而不是端砚与 Codex 的十题正式对比。</p>
+<p>下一步只有在五个 BLOCKED 项的参考资源/合同闭环、两个 UI 均可观察、能力基线与 reset diff 可导出后，才能按 C0/T0/T1/T2 进入主结果。正常结束但无 artifact 必须记 harness failure；操作员提供科学帮助的 run 必须排除。</p>
+<h1>五、证据位置</h1>
+<p>仓库：Nono111-dot/lifescience，commit 之后的 docs/oracles/、scripts/audit-evaluation-readiness.ps1、scripts/freeze-and-score.ps1、docs/run-status-2026-08-14.md。运行 workspace 与 results/ 保存在本机并按 SHA-256 冻结。</p>

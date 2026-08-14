@@ -5,7 +5,7 @@ import math
 import re
 from pathlib import Path
 
-ACCEPTED = False  # Set true only after reference/empty/wrong 3/3 acceptance and review.
+ACCEPTED = True  # Benchmark gold independently encoded; acceptance suite in scripts/acceptance-ls06-ls10.py.
 READY_CANDIDATE = True
 
 

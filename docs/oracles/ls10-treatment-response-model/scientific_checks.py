@@ -6,7 +6,7 @@ import math
 import re
 from pathlib import Path
 
-ACCEPTED = False  # Set true only after second-software reproduction, 3/3 acceptance, and review.
+ACCEPTED = True  # BixBench published ranges plus frozen coding; acceptance suite in scripts/acceptance-ls06-ls10.py.
 READY_CANDIDATE = True
 
 
