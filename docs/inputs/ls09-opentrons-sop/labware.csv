@@ -1,0 +1,6 @@
+slot,labware,capacity_ul,role
+1,opentrons_24_tuberack_eppendorf_1.5ml_safelock_snapcap,1500,samples
+2,nest_12_reservoir_15ml,15000,reagents
+3,corning_96_wellplate_360ul_flat,360,processing
+4,opentrons_96_tiprack_300ul,300,tips
+5,magnetic_module_v2,360,magnet

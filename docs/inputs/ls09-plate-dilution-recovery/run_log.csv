@@ -1,0 +1,3 @@
+step,status,last_completed_well,error
+dispense_intermediate_dilution,completed,H6,
+dispense_final_plate,stopped,B4,tip_pickup_failed
