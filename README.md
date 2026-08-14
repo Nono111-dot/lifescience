@@ -2,6 +2,17 @@
 
 This repository contains reproducible desktop UI evaluation tasks for life-science workflows.
 
+Current evaluation package:
+
+- `docs/task-cards-v1.md`: 25 workflow-compliant task cards
+- `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
+- `docs/capability-whitelist-v1.tsv`: exact 222-catalog names allowed in T1/T2
+- `docs/evaluation-protocol-v1.md`: Codex/端砚 conditions, SOP, scoring and go/no-go
+- `docs/preflight-checklist.md`: formal-run acceptance checklist
+- `docs/run-record-template.tsv`: immutable per-run record schema
+- `docs/blind-judge-form.md`: blinded 20-point review form
+- `scripts/prepare-workspace.ps1`: non-overwriting one-use workspace preparation
+
 ## Repository layout
 
 ```text
