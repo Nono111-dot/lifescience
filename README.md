@@ -5,6 +5,8 @@ This repository contains reproducible desktop UI evaluation tasks for life-scien
 Current evaluation package:
 
 - `docs/task-cards-v1.md`: 25 workflow-compliant task cards
+- `docs/deterministic-rubrics-v2.tsv`: per-task 10/40/15/5/10 deterministic rubric
+- `docs/oracles/<task-id>/oracle.py`: 25 fail-closed static oracle entry points
 - `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
 - `docs/capability-whitelist-v1.tsv`: exact 222-catalog names allowed in T1/T2
 - `docs/evaluation-protocol-v1.md`: Codex/端砚 conditions, SOP, scoring and go/no-go

@@ -2,14 +2,16 @@
 
 These cards follow the evaluation workflow revision 135. The operator pastes only the **Prompt** block. Rubric, gates and source notes remain outside the run workspace. All formal artifacts must be written under `output/`; inputs are read-only. JSON/CSV numeric values must be finite, identifiers unique, and missing values represented as empty/`null`, never invented. L2/L3 tasks must include a rerunnable `output/analysis.py` and `output/report.md` (≤300 words unless noted).
 
+The authoritative deterministic rubric is `deterministic-rubrics-v2.tsv`: **coverage 10 + task-specific core scientific calculation 40 + direction/decision 15 + summary consistency 5 + rerunnable script 10 = 80**. This replaces the older per-card draft allocations below; the blind 20-point rubric is unchanged. Oracles must emit all five component scores separately.
+
 ## LS01-1 `ls01-grna-offtarget-rank`
 
 - Domain/subdomain: molecular biology / CRISPR design; P0; L2, 40 min; anchor D/P/A/O; source: custom fixture.
 - Inputs: `inputs/candidates.csv`, `inputs/off_targets.csv`.
 - Prompt: **Read the two supplied CSV files and rank all candidate guides by on-target activity and annotated off-target risk. Do not fetch external data or alter inputs. Write `output/ranked_guides.csv` with `rank,guide_id,on_target_score,risk_class,decision,rationale`, `output/analysis.py`, and `output/report.md`. Rankings must be unique; every input guide must appear once; explicitly treat coding/exonic near matches and mismatch count as safety evidence and state any trade-off rather than hiding it.**
 - Hard gates: all guides exactly once; unique integer ranks 1..N; numeric values traceable to inputs; decisions/rationales nonempty; script reruns cleanly.
-- Deterministic 80: files/schema 10, identity/completeness 15, source values 10, risk rule 20, ranking consistency 15, rerun 10. Judge 20: evidence, method, restraint, readability (0/3/5 each).
-- Ablation: C0/T0; T1 may use exact allowlist sequence-analysis capability only. T2 not justified.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS01-2 `ls01-primer-transcript-audit`
 
@@ -17,8 +19,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/transcripts.fa`, `inputs/primer_candidates.csv`.
 - Prompt: **Audit every primer pair against the supplied transcript isoforms. Write `output/primer_audit.csv` with `pair_id,transcripts_matched,amplicon_length,cds_compatible,status,reason`, `output/analysis.py`, and `output/report.md`. Use only supplied sequences; report malformed or internally inconsistent sequence metadata rather than silently repairing it.**
 - Gates: every pair once; sequence/coordinate validation reported; no fabricated bases; finite lengths; rerun.
-- Deterministic 80: files 10, completeness 10, FASTA parsing 15, binding/amplicon logic 20, CDS/metadata validation 15, rerun 10. Judge standard 20.
-- Ablation: C0/T0; T1 exact sequence-analysis capability. **Blocked until FASTA/CDS mismatch is repaired or deliberately made the test target.**
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS01-3 `ls01-vector-orf-audit`
 
@@ -26,8 +28,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/constructs.csv`.
 - Prompt: **Audit each construct for start/stop codons, reading frame, tag/linker compatibility and cloning flags represented in the input. Write `output/construct_audit.csv` with `construct_id,frame_ok,start_ok,stop_ok,tag_ok,overall_status,issues`, `output/analysis.py`, and `output/report.md`. Do not infer sequence features that are absent from the input.**
 - Gates: every construct once; boolean fields valid; issues agree with status; rerun.
-- Deterministic 80: files 10, completeness 10, field preservation 10, ORF checks 25, tag/cloning checks 15, rerun 10. Judge standard 20.
-- Ablation: C0/T0; T1 `Synthetic Biology Design` only.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS02-1 `ls02-deleterious-mutation`
 
@@ -35,8 +37,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/deleterious.mutation.q2.R1.fq.gz` plus evaluator-pinned chr9 reference bundle (to be added).
 - Prompt: **Analyze the supplied chr9 exome reads to identify the high-confidence mosaic nonsense SNV in a highly loss-of-function-intolerant protein-coding gene. Write `output/variant.tsv` with `chrom,pos,ref,alt,gene,consequence,alt_reads,total_reads,allele_fraction`, `output/evidence.json`, `output/analysis.py`, and `output/report.md`. Report allele fraction as 0–1 and document reference/annotation versions.**
 - Gates: one valid variant; coordinates/reference consistent; read counts support AF; consequence/gene supported; rerun.
-- Deterministic 80: files 10, mapping/QC 10, variant identity 25, read evidence/AF 20, annotation/constraint 10, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 variant-impact/pathogenicity; T2 only exact gnomAD/FAVOR/ClinVar/NCBI capabilities when internet arm is declared.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS02-2 `ls02-find-deletion`
 
@@ -44,8 +46,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: paired FASTQ files plus pinned hg38 bundle (to be added).
 - Prompt: **Locate the large deletion in the supplied shallow paired-end hg38 data. Write `output/deletion.tsv` with `chrom,start_100kb,end_100kb,size_bp,supporting_signals`, `output/qc.json`, `output/analysis.py`, and `output/report.md`. Round breakpoints to the nearest 100 kb and distinguish evidence from precision limits.**
 - Gates: one interval, start<end, hg38 coordinates, support nonempty, rerun.
-- Deterministic 80: files 10, alignment/QC 15, chromosome 10, breakpoint tolerances 25, size 10, rerun 10. Judge standard 20.
-- Ablation: C0/T0; T1 UCSC exploration permitted only in internet arm; no T2 need.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS02-3 `ls02-infer-genome-build`
 
@@ -53,8 +55,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/vcf.infer.build.q1.vcf.gz` plus pinned diagnostic reference bundle (to be added).
 - Prompt: **Determine whether the supplied chr20 VCF uses hg18, hg19, hg38 or T2T coordinates. Write `output/build_call.json` with `build,confidence,n_variants_checked,n_ref_matches,n_ref_mismatches,evidence`, `output/analysis.py`, and `output/report.md`. Base the call on reproducible allele/coordinate checks and do not treat chromosome naming alone as proof.**
 - Gates: allowed build label; counts nonnegative; evidence present; rerun.
-- Deterministic 80: files 10, VCF parsing 10, diagnostic checks 25, build identity 25, uncertainty 5, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 UCSC; T2 ClinGen allele registry only if enabled.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS03-1 `ls03-cryptic-exon`
 
@@ -62,8 +64,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/cryptic.exon.q1.fq.gz` plus pinned human genome/transcriptome index (to be added).
 - Prompt: **Identify the protein-coding HGNC gene containing the highly expressed cryptic exon supported by two novel splice junctions. Write `output/cryptic_exon.tsv` with `gene,chrom,start,end,left_junction_reads,right_junction_reads,expression_evidence`, `output/junctions.tsv`, `output/analysis.py`, and `output/report.md`. Novelty must be assessed against the supplied annotation version.**
 - Gates: one gene/interval; two flanking novel junctions; read support finite; rerun.
-- Deterministic 80: files 10, alignment/QC 10, junction extraction 20, exon/gene identity 25, support 10, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 Transcriptome Analysis Pipeline; T2 NCBI Gene only if declared.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS03-2 `ls03-atac-sample-swap`
 
@@ -71,8 +73,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: compressed ATAC count table and chromosome sizes.
 - Prompt: **Determine whether two organ labels are swapped in the axolotl bulk ATAC-seq data. Write `output/swap_call.json` with `swap_detected,organ_a,organ_b,confidence,evidence`, `output/sample_similarity.csv`, `output/analysis.py`, and `output/report.md`. If evidence does not support a unique swap, return `swap_detected=false` and explain uncertainty.**
 - Gates: valid organ labels or null; symmetric swap; finite similarity matrix; rerun.
-- Deterministic 80: files 10, parsing/QC 10, normalization 15, similarity 15, swap call 25, rerun 5. Judge standard 20.
-- Ablation: C0/T0; no catalog capability with adequate task-specific coverage; T1/T2 ineligible pending catalog update.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS03-3 `ls03-genome-coordinates`
 
@@ -80,8 +82,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/single_cell_dynamics_question.csv`.
 - Prompt: **Analyze enhancer-promoter 3D distance and transcription dynamics across cells and time. Write `output/cell_metrics.csv`, `output/lag_analysis.csv` with `lag,association,n_observations`, `output/analysis.py`, and `output/report.md`. Use 260 nm as the supplied contact threshold. Separate temporal association from causation and state what the observational data cannot establish.**
 - Gates: all cells represented; finite metrics; lag direction defined; no categorical causal claim unsupported by intervention; rerun.
-- Deterministic 80: files 10, parsing 10, distance/contact 15, temporal/lag analysis 20, reproducible conclusions 15, restraint gate 5, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 Regulatory Region Analysis; no T2 need.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS04-1 `ls04-differential-composition`
 
@@ -89,8 +91,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: two Matrix Market matrices and gene list; pinned marker reference to be added.
 - Prompt: **Compare the two retinal single-cell expression matrices and identify the cell population that is severely depleted in sample 2. Write `output/composition.csv` with `sample,cell_type,n_cells,fraction`, `output/depleted_call.json`, `output/analysis.py`, and `output/report.md`. Document QC, normalization, annotation evidence and uncertainty.**
 - Gates: both samples; fractions valid/sum within tolerance; one call or explicit ambiguity; rerun.
-- Deterministic 80: files 10, matrix parsing/QC 10, annotation 20, composition 15, depleted identity 20, rerun 5. Judge standard 20.
-- Ablation: C0/T0; catalog has no verified single-cell annotation capability; T1/T2 ineligible.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS04-2 `ls04-perturbseq-reference-map`
 
@@ -98,8 +100,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: query and reference `.h5ad` files.
 - Prompt: **Map query perturbation groups to the labeled reference across the cell-type shift and identify the query guide IDs corresponding to PABPC1, NUDT21 and LEO1. Write `output/guide_mapping.csv` with `target_gene,query_guide_id,score,runner_up_score,confidence`, `output/analysis.py`, and `output/report.md`. Prevent target metadata leakage and quantify ambiguity.**
 - Gates: exactly three target genes; unique guide call per target; finite scores; rerun.
-- Deterministic 80: files 10, h5ad/QC 10, leakage control 10, mapping method 15, guide identities 30, uncertainty 10, rerun 5. Judge standard 20.
-- Ablation: C0/T0; no verified task-specific catalog capability; T1/T2 ineligible.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS04-3 `ls04-spatial-deconvolution`
 
@@ -107,8 +109,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/spatial.sim.tar.gz`.
 - Prompt: **Use the supplied single-cell reference and Visium data to identify the cell type or mixture represented at `Spot_710-1`. Write `output/spot_710_composition.csv` with `cell_type,weight,evidence`, `output/analysis.py`, and `output/report.md`. Weights must be nonnegative and sum to 1 within 0.01; do not force a single type if a mixture is supported.**
 - Gates: target spot exists; valid labels; normalized weights; rerun.
-- Deterministic 80: files 10, unpack/QC 10, reference use 15, cell-type identity 25, weights 15, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1/T2 ineligible.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS05-1 `ls05-protein-shape`
 
@@ -116,8 +118,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/protein.shape.q1.pdb`.
 - Prompt: **Inspect the supplied PDB geometry and determine which one of `B,D,F,H,J,L,N,P,R,T,V,X,Z` it most resembles. Write `output/shape_call.json` with `letter,confidence,orientation_notes` and `output/shape_view.png`. Use only the supplied structure.**
 - Gates: allowed letter; valid nonempty PNG; confidence 0–1.
-- Deterministic 80: files 15, PDB parse 15, call identity 40, PNG 10. Judge standard 20.
-- Ablation: C0/T0; T1 Protein Structure Comprehensive Analysis. Calibration only, excluded from primary scientific aggregate.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS05-2 `ls05-structure-model-ranking`
 
@@ -125,8 +127,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: model and residue metric CSVs.
 - Prompt: **Rank all supplied structural models using global confidence, interface confidence and residue-level errors. Write `output/model_ranking.csv` with `rank,model_id,global_score,interface_score,critical_residue_risk,decision`, `output/analysis.py`, and `output/report.md`. Explain how chain mapping and local uncertainty affect the ranking.**
 - Gates: every model once; unique ranks; input metrics preserved; rerun.
-- Deterministic 80: files 10, completeness 10, metrics 15, local-risk calculation 15, rank 25, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 Protein Structure Comprehensive Analysis.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS05-3 `ls05-low-confidence-pocket`
 
@@ -134,8 +136,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: confidence and mutation-candidate CSVs.
 - Prompt: **Assess whether the nominated pocket is reliable enough to prioritize mutations. Write `output/mutation_priorities.csv` with `rank,mutation,pocket_support,confidence_penalty,decision`, `output/pocket_assessment.json`, `output/analysis.py`, and `output/report.md`. Propagate structural uncertainty and avoid claiming binding effects unsupported by the inputs.**
 - Gates: all candidates once; ranks unique; confidence evidence traceable; rerun.
-- Deterministic 80: files 10, completeness 10, confidence parsing 15, uncertainty penalty 20, ranking consistency 20, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 Protein-Drug Interaction Profiling or Protein Structure Comprehensive Analysis, one exact package per run.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS06-1 `ls06-eno1-effect-size`
 
@@ -143,8 +145,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: two workbooks; proteomics workbook is the analysis target.
 - Prompt: **Using the supplied proteomics results, calculate ENO1 tumor-versus-normal fold change and log2 fold change. Write `output/eno1_effect.json` with `gene,tumor_value,normal_value,fold_change,log2_fold_change,source_file,source_sheet`, `output/analysis.py`, and `output/report.md`. State the fold-change direction and do not substitute the unrelated workbook.**
 - Gates: ENO1 exact; source traceable; positive FC; log2 consistency; rerun.
-- Deterministic 80: files 10, source selection 15, row identity 10, values 15, FC 15, log2FC 10, rerun 5. Judge standard 20.
-- Ablation: C0/T0; no necessary domain package; T1 optional Biomarker Discovery Pipeline only after smoke test.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS06-2 `ls06-eno1-significance-audit`
 
@@ -152,8 +154,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: same two workbooks; proteomics workbook is target.
 - Prompt: **Retrieve ENO1's adjusted p-value from the supplied proteomics results and give a threshold-calibrated interpretation at FDR 0.05. Write `output/eno1_significance.json` with `gene,adjusted_p_value,fdr_threshold,significant,source_file,source_sheet`, `output/analysis.py`, and `output/report.md`. Do not relabel a raw p-value as adjusted.**
 - Gates: exact gene/source; finite p in [0,1]; significance boolean consistent; rerun.
-- Deterministic 80: files 10, source 15, identity 10, adjusted p 25, interpretation 15, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 optional Biomarker Discovery Pipeline.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS07-1 `ls07-combination-treatment-deg`
 
@@ -161,8 +163,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: counts, sample layout and Ensembl mapping.
 - Prompt: **Run the frozen combination-treatment contrast against its specified comparator using the sample layout. Write `output/differential_expression.csv` with `gene_id,gene_name,baseMean,log2FoldChange,pvalue,padj,pass`, `output/summary.json` with the number passing `padj<0.05`, `abs(log2FoldChange)>0.5`, and `baseMean>10`, `output/analysis.py`, and `output/report.md`. Preserve independent-filtering missing values as null.**
 - Gates: design/contrast recorded; unique gene IDs; pass rule exact; summary equals rows; rerun.
-- Deterministic 80: files 10, data/design 15, DE reference agreement 25, thresholds 15, count 10, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 Transcriptome Analysis Pipeline.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS07-2 `ls07-combination-treatment-mechanism`
 
@@ -170,8 +172,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: same expression inputs plus evaluator-pinned Reactome gene sets (to be added).
 - Prompt: **Using the frozen differential-expression rule and supplied Reactome release, identify the best-supported primary mechanism of the combination treatment. Write `output/pathway_enrichment.csv` with `pathway_id,pathway_name,overlap,p_value,padj,direction`, `output/mechanism_call.json`, `output/analysis.py`, and `output/report.md` (≤500 words). Distinguish enrichment from demonstrated causation.**
 - Gates: pinned release/universe; valid corrected statistics; mechanism supported by table; rerun.
-- Deterministic 80: files 10, DE input 10, universe/mapping 15, enrichment 20, primary mechanism 20, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 Protein Interaction Network Analysis; T2 exact KEGG search is a separate corroboration arm, never a replacement for frozen Reactome scoring. Blocked until reference bundle exists.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS08-1 `ls08-multiome-column-match`
 
@@ -179,8 +181,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: ATAC-bin and RNA-TPM tables.
 - Prompt: **Recover the one-to-one matching between the eight permuted ATAC population columns and RNA populations. Write `output/column_mapping.csv` with `rna_population,atac_column,match_score,runner_up_score`, `output/score_matrix.csv`, `output/analysis.py`, and `output/report.md`. Enforce a bijection and explain the shared biological signal used.**
 - Gates: all eight each side exactly once; finite scores; bijection; rerun.
-- Deterministic 80: files 10, parsing/QC 10, feature linking 15, score matrix 10, mapping identity 30, bijection 10, rerun 5. Judge standard 20.
-- Ablation: C0/T0; no verified catalog package sufficiently specific; T1/T2 ineligible.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS08-2 `ls08-enhancer-promoter-integration`
 
@@ -188,8 +190,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: Hi-C and CRISPR-expression CSVs.
 - Prompt: **Integrate the supplied Hi-C and CRISPR-expression evidence for all candidate enhancer-promoter pairs and identify the least supported causal pair. Write `output/pair_evidence.csv` with `pair_id,contact_evidence,perturbation_effect,combined_support,rank`, `output/least_supported.json`, `output/analysis.py`, and `output/report.md`. Treat physical contact and perturbation evidence as distinct.**
 - Gates: every candidate once; unique ranks; call matches minimum combined support; rerun.
-- Deterministic 80: files 10, completeness 10, Hi-C 15, perturbation 15, integration 15, identity 20, rerun 5. Judge standard 20.
-- Ablation: C0/T0; T1 Regulatory Region Analysis.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS09-1 `ls09-opentrons-sop`
 
@@ -197,8 +199,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: SOP and labware CSV plus missing validated definitions/deck map to be added.
 - Prompt: **Translate the supplied SOP into an auditable Opentrons protocol plan. Write `output/protocol.py`, `output/transfer_plan.csv` with `step,source,destination,volume_uL,pipette,tip_policy`, `output/simulation.txt`, and `output/report.md`. Respect labware, deck, pipette and volume constraints; abort with explicit errors rather than guessing missing physical details.**
 - Gates: simulation success; valid wells/volumes/pipettes; liquid balance; no undeclared labware; deterministic script.
-- Deterministic 80: files 10, schema 10, deck/labware 15, transfers 20, pipette/tips 10, balances 10, simulation 5. Judge standard 20.
-- Ablation: C0/T0 only; no verified catalog capability covers Opentrons. Blocked until inputs/simulator are packaged.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS09-2 `ls09-plate-dilution-recovery`
 
@@ -206,8 +208,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: dilution request, pipettes and run log plus missing plate/source map to be added.
 - Prompt: **Diagnose the failed dilution run and produce a physically feasible recovery plan. Write `output/root_cause.json`, `output/recovery_plan.csv` with `step,source,destination,transfer_uL,diluent_uL,final_concentration,final_volume_uL,pipette`, `output/analysis.py`, and `output/report.md`. Enforce pipette ranges, mass balance and supplied solvent/volume limits.**
 - Gates: root cause traceable; all transfers feasible; concentrations/mass balance correct; no overdraw; rerun.
-- Deterministic 80: files 10, diagnosis 15, dilution math 20, pipette feasibility 15, source/volume balance 15, rerun 5. Judge standard 20.
-- Ablation: C0/T0 only. Blocked until missing physical constraints are added.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS10-1 `ls10-neun-power-analysis`
 
@@ -215,8 +217,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/NeuN_quantification.csv`.
 - Prompt: **Estimate the standardized mean difference (Cohen's d) between the two supplied groups and the required equal sample size per group for a two-sided independent t-test at alpha 0.05 and power 0.80. Write `output/power_result.json` with `group_labels,n_each,means,sds,pooled_sd,cohens_d,alpha,power,alternative,required_n_per_group`, `output/analysis.py`, and `output/report.md`. Round required n upward.**
 - Gates: correct grouping; signed d convention stated; finite stats; ceiling rule; rerun.
-- Deterministic 80: files 10, parsing 10, summaries 15, pooled SD/d 20, power specification/result 20, rerun 5. Judge standard 20.
-- Ablation: C0/T0; no domain package required; T1/T2 ineligible.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS10-2 `ls10-treatment-response-model`
 
@@ -224,8 +226,8 @@ These cards follow the evaluation workflow revision 135. The operator pastes onl
 - Inputs: `inputs/data.xlsx`.
 - Prompt: **Fit a logistic regression for the binary treatment-response outcome using BMI, age and gender. Use complete cases, document outcome coding and gender reference level, and report the age log-odds coefficient and two-sided p-value. Write `output/model_coefficients.csv` with `term,estimate,std_error,z,p_value,odds_ratio`, `output/model_metadata.json`, `output/analysis.py`, and `output/report.md`.**
 - Gates: specified model only; coding/reference documented; unique terms; coefficient/p-value finite; rerun.
-- Deterministic 80: files 10, data/coding 15, design 10, coefficient 20, p-value 20, rerun 5. Judge standard 20.
-- Ablation: C0/T0; no domain package required; T1/T2 ineligible.
+- Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
+- Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## Shared acceptance before a card enters the main result
 

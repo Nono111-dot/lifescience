@@ -19,9 +19,11 @@
 - [ ] Client/model/build and hardware recorded
 - [ ] Network policy frozen
 - [ ] C0/T0/T1/T2 assigned before opening task
-- [ ] Exact enabled capability copied from allowlist
-- [ ] All other life-science skills/MCPs disabled
-- [ ] Exact capability runtime smoke test passed
+- [ ] Full experiment-approved 222-catalog subset exposed to the agent
+- [ ] Agent is free to autonomously install/call multiple capabilities from that subset
+- [ ] All non-catalog life-science skills/MCPs disabled
+- [ ] Every exposed capability has an exact-name catalog match and runtime smoke-test result
+- [ ] Installed/invoked/failed/out-of-catalog attempts will be captured automatically
 - [ ] Permission policy and timer checked
 
 ## Freeze/score

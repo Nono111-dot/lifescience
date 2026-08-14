@@ -20,5 +20,5 @@ Biomarker Discovery Pipeline	verified	T1	LS06-LS08 omics interpretation
 Protein Interaction Network Analysis	verified	T1	LS07 mechanism interpretation
 Search KEGG database for pathways, genes, compounds, diseases, drugs, and molecular interactions.	verified	T2	LS07 pathway corroboration
 
-# Policy: exact-name allowlist only. A capability not present in the 222-item catalog, or not smoke-tested in the target client, is forbidden in formal runs.
+# Policy: exact-name allowlist only. The agent may autonomously install and call any number of relevant entries; the operator must not preselect a single package or provide scientific routing hints. A capability not present in the 222-item catalog, or not smoke-tested in the target client, is forbidden in formal runs.
 # Catalog presence and runtime availability are separate gates. "verified" here reproduces the catalog's validation status; preflight must still confirm the exact package is enabled.

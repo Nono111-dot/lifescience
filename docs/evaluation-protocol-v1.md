@@ -8,10 +8,10 @@ The primary harness comparison is **Codex C0 vs 端砚 T0** on the same frozen t
 |---|---|---|
 | C0 | Codex | Native client only; no added life-science skill/MCP |
 | T0 | 端砚 | Bare client; no added life-science skill/MCP |
-| T1 | 端砚 | Exactly one relevant, runtime-smoke-tested entry from `capability-whitelist-v1.tsv` |
-| T2 | 端砚 | T1 plus exactly one relevant allowlisted scientific connector/API capability |
+| T1 | 端砚 | Agent autonomously discovers, installs and invokes every skill needed for the task; every installed/invoked skill must be an exact, runtime-smoke-tested entry from `capability-whitelist-v1.tsv` |
+| T2 | 端砚 | T1 plus autonomous use of all necessary allowlisted scientific MCP/API capabilities; every installed/invoked connector must also be in the exact allowlist |
 
-Any installed or automatically routed domain capability outside the exact 222-item catalog must be disabled. General filesystem, shell and client-native editing are harness functions, not scientific capability packages; record them but do not treat them as T1/T2. Catalog membership does not prove runtime availability: record exact package name/version and a preflight smoke-test result.
+T1/T2 deliberately do **not** cap the number of capabilities. Capability selection is part of the agent behavior being evaluated: the agent should infer what it needs, install it without operator scientific guidance, call it when useful, and stop when sufficient. Any installed, attempted, automatically routed or invoked domain capability outside the exact 222-item catalog is a protocol violation. General filesystem, shell and client-native editing are harness functions, not scientific capability packages; record them but do not treat them as T1/T2. Catalog membership does not prove runtime availability: record exact package name/version, install/call timestamps, outcome and a preflight smoke-test result.
 
 ## Preflight gates
 
@@ -42,7 +42,7 @@ If an operator gives scientific help, mark `operator_invalid` and exclude the ru
 
 - Minimum calibration: 3 representative ready tasks × C0/T0 × 1 trial. Calibration is excluded from headline results.
 - Main result: 25 cards only after acceptance, recommended 3 independent trials per condition. Randomize task order within harness; counterbalance harness order; use fresh workspaces and conversations.
-- Run C0 and T0 for all 25 accepted cards. Run T1 only on cards with a justified exact allowlist mapping. Run T2 only when the card requires an external scientific knowledge/query capability and both network policy and API snapshot policy are frozen.
+- Run C0 and T0 for all 25 accepted cards. For T1/T2, expose the full experiment-approved subset of the 222 catalog rather than preselecting a single package; the agent autonomously chooses and may install/call multiple relevant capabilities. T2 is used only when external scientific connectors are allowed and network/API snapshot policy is frozen.
 - Preserve every failed run. Do not rerun selectively; predeclare retry rules for infrastructure outages.
 - Stratify reporting by P0/P1, task, level and capability tag. The calibration-only protein-shape card must not enter the primary scientific aggregate unless replaced by an ecologically valid LS05 card.
 
