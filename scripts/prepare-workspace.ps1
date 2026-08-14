@@ -6,6 +6,9 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+if (($Harness -eq 'codex' -and $Condition -ne 'C0') -or ($Harness -eq 'duanyan' -and $Condition -eq 'C0')) {
+    throw "Invalid harness/condition pairing: codex uses C0; duanyan uses T0, T1, or T2."
+}
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $source = Join-Path $repoRoot (Join-Path 'docs\inputs' $TaskId)
 if (-not (Test-Path -LiteralPath $source -PathType Container)) { throw "Unknown task input directory: $source" }

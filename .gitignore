@@ -5,5 +5,7 @@ workspace/
 workspaces/
 work/
 outputs/
+results/
 .tmp_tests/
 
+docs/oracles/**/tmp*/

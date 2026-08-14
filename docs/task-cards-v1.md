@@ -125,18 +125,18 @@ The authoritative deterministic rubric is `deterministic-rubrics-v2.tsv`: **cove
 
 ## LS05-2 `ls05-structure-model-ranking`
 
-- Domain/subdomain: structural biology / model confidence; P0; L2, 35 min; D/P/A/O; custom.
-- Inputs: model and residue metric CSVs.
-- Prompt: **Rank all supplied structural models using global confidence, interface confidence and residue-level errors. Write `output/model_ranking.csv` with `rank,model_id,global_score,interface_score,critical_residue_risk,decision`, `output/analysis.py`, and `output/report.md`. Explain how chain mapping and local uncertainty affect the ranking.**
+- Domain/subdomain: structural biology / model confidence; P0; L2, 35 min; D/P/A/O; benchmark-informed local extension (not an upstream benchmark item).
+- Inputs: model and residue metric CSVs plus the frozen `SCORING_RULE.md`; provenance and limits are documented in `ls05-local-extension-provenance.md`.
+- Prompt: **Using only the files in `inputs/`, rank every supplied structural model exactly according to `inputs/SCORING_RULE.md`. Write `output/model_ranking.csv` with `rank,model_id,global_score,interface_score,critical_residue_risk,decision`, `output/analysis.py`, and `output/report.md`. Explain how chain-mapping completeness and critical-region uncertainty affect the ranking. Do not claim coordinate-level, interface, or experimental properties that are not present in the inputs.**
 - Gates: every model once; unique ranks; input metrics preserved; rerun.
 - Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
 - Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
 
 ## LS05-3 `ls05-low-confidence-pocket`
 
-- Domain/subdomain: structural biology / pocket uncertainty; P0; L2, 35 min; D/P/A/O; custom.
-- Inputs: confidence and mutation-candidate CSVs.
-- Prompt: **Assess whether the nominated pocket is reliable enough to prioritize mutations. Write `output/mutation_priorities.csv` with `rank,mutation,pocket_support,confidence_penalty,decision`, `output/pocket_assessment.json`, `output/analysis.py`, and `output/report.md`. Propagate structural uncertainty and avoid claiming binding effects unsupported by the inputs.**
+- Domain/subdomain: structural biology / pocket uncertainty; P0; L2, 35 min; D/P/A/O; benchmark-informed local extension (not an upstream benchmark item).
+- Inputs: confidence and mutation-candidate CSVs plus the frozen `SCORING_RULE.md`; provenance and limits are documented in `ls05-local-extension-provenance.md`.
+- Prompt: **Using only the files in `inputs/`, assess whether the nominated pocket is reliable enough to prioritize mutations, following `inputs/SCORING_RULE.md` exactly. Write `output/mutation_priorities.csv` with `rank,mutation,pocket_support,confidence_penalty,decision`, `output/pocket_assessment.json`, `output/analysis.py`, and `output/report.md`. Propagate pLDDT/PAE uncertainty and do not describe predicted ΔΔG/activity as measured effects.**
 - Gates: all candidates once; ranks unique; confidence evidence traceable; rerun.
 - Deterministic 80: authoritative five-component allocation is the task row in `deterministic-rubrics-v2.tsv`.
 - Ablation: C0/T0 baseline. In T1/T2 expose the full experiment-approved 222-catalog subset; the agent autonomously decides which and how many capabilities to install/call, including choosing none. Record all choices; the operator provides no capability routing.
