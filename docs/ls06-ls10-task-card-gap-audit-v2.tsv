@@ -2,10 +2,10 @@ task_id	id_domain_subdomain	level_time	anchor_related	source_idea	inputs_role_fi
 ls06-eno1-effect-size	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	formal_ready
 ls06-eno1-significance-audit	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	formal_ready
 ls07-combination-treatment-deg	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	blocked_oracle_acceptance
-ls07-combination-treatment-mechanism	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	blocked_reference_and_oracle
+ls07-combination-treatment-mechanism	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	blocked_oracle_acceptance
 ls08-multiome-column-match	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	blocked_oracle_acceptance
 ls08-enhancer-promoter-integration	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	blocked_oracle_acceptance
-ls09-opentrons-sop	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	blocked_simulator_and_oracle
+ls09-opentrons-sop	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	blocked_environment_acceptance
 ls09-plate-dilution-recovery	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	formal_ready
 ls10-neun-power-analysis	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	formal_ready
 ls10-treatment-response-model	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	pass	formal_ready

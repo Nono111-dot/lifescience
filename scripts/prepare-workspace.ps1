@@ -13,6 +13,30 @@ $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $source = Join-Path $repoRoot (Join-Path 'docs\inputs' $TaskId)
 if (-not (Test-Path -LiteralPath $source -PathType Container)) { throw "Unknown task input directory: $source" }
 
+$manifestPath = Join-Path $repoRoot 'docs\inputs\SHA256SUMS.tsv'
+if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf)) { throw "Missing global input manifest: $manifestPath" }
+$taskPrefix = "docs/inputs/${TaskId}/"
+$manifestRows = @(Import-Csv -LiteralPath $manifestPath -Delimiter "`t" | Where-Object { $_.path.StartsWith($taskPrefix, [System.StringComparison]::Ordinal) })
+if ($manifestRows.Count -eq 0) { throw "No global input manifest rows found for task: $TaskId" }
+$manifestByPath = @{}
+foreach ($row in $manifestRows) {
+    if ($manifestByPath.ContainsKey($row.path)) { throw "Duplicate global input manifest row: $($row.path)" }
+    $manifestByPath[$row.path] = $row
+    $relative = $row.path.Substring($taskPrefix.Length).Replace('/', [System.IO.Path]::DirectorySeparatorChar)
+    $expectedFile = Join-Path $source $relative
+    if (-not (Test-Path -LiteralPath $expectedFile -PathType Leaf)) { throw "Manifested input file is missing: $($row.path)" }
+}
+$sourceFiles = @(Get-ChildItem -LiteralPath $source -File -Recurse)
+foreach ($file in $sourceFiles) {
+    $relative = $file.FullName.Substring($repoRoot.Length + 1).Replace([System.IO.Path]::DirectorySeparatorChar, '/')
+    if (-not $manifestByPath.ContainsKey($relative)) { throw "Input file is absent from the global manifest: $relative" }
+    $expected = $manifestByPath[$relative]
+    $actualHash = (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ([int64]$expected.bytes -ne $file.Length -or $expected.sha256 -ne $actualHash) {
+        throw "Input file does not match the global manifest: $relative"
+    }
+}
+
 $workspaceRoot = Join-Path $repoRoot (Join-Path 'workspaces' (Join-Path $Harness (Join-Path $Condition (Join-Path $TaskId ("trial-{0}" -f $Trial)))))
 if (Test-Path -LiteralPath $workspaceRoot) { throw "Workspace already exists; one-use workspaces are never overwritten: $workspaceRoot" }
 

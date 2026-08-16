@@ -13,7 +13,8 @@ Current evaluation package:
 - `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
 - `docs/capability-whitelist-v1.tsv`: 22-row previously smoke-tested subset; **not** the complete catalog
 - `docs/capability-catalog-audit-2026-08-14.md`: Feishu revision-717 audit of the 222-row life-science candidate catalog
-- `docs/formal-run-queue-2026-08-14.tsv`: 10-task × C0/T0/T1/T2 fail-closed execution queue
+- `docs/formal-run-queue-2026-08-16.tsv`: current 10-task × C0/T0/T1/T2 fail-closed execution queue; the 2026-08-14 file is retained as historical evidence
+- `docs/input-remediation-2026-08-16.md`: exact input, provenance, integrity, environment, documentation, and remaining-blocker changes from the pre-evaluation remediation pass
 - `docs/evaluation-protocol-v1.md`: Codex/端砚 conditions, SOP, scoring and go/no-go
 - `docs/preflight-checklist.md`: formal-run acceptance checklist
 - `docs/run-record-template.tsv`: immutable per-run record schema
@@ -50,4 +51,3 @@ python3 docs/oracles/life-l2-paired-expression/oracle.py \
 ```
 
 The oracle prints JSON containing a `deterministic_score` from 0 to 80, per-criterion results, `hardgate_pass`, and `failure_codes`. Visual quality is scored separately from 0 to 20 by a blind judge.
-

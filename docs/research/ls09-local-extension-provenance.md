@@ -17,6 +17,18 @@ Codex C0 trial-2 produced 1,032 plan rows because it reasonably represented indi
 
 The same trial correctly recorded `ModuleNotFoundError: No module named 'opentrons'`, marked simulation `FAILED / NOT EXECUTION-READY`, and aborted. Requiring simulation success when neither harness has the pinned simulator is invalid. Accordingly, `ls09-opentrons-sop` is blocked and its checker is `ACCEPTED=False`. It may be unblocked only by one of two frozen designs: (1) install and pin the same Opentrons simulator version and invocation in both harnesses; or (2) have the evaluator prevalidate the frozen protocol contract and provide a signed/checksummed validation record as an input, while no longer asking the agent to claim a simulation it cannot execute. Trial-2 observations are frozen in `docs/oracles/ls09-opentrons-sop/regressions/codex-c0-trial-2.json`.
 
+### 2026-08-16 simulator-contract remediation
+
+The repository now pins option (1) at the contract level:
+
+- Opentrons package `7.1.0`, matching the Robot Software release that introduced Protocol API `2.16`.
+- Invocation `python -m opentrons.simulate output/protocol.py`.
+- CPython 3.10 / manylinux2014 x86_64 reference platform.
+- Exact transitive versions and wheel SHA-256 values in `docs/environments/opentrons-api-2.16/requirements-linux-x86_64-py310.lock`.
+- Participant-visible invocation/capture/failure rules in `inputs/simulator_contract.json`.
+
+This removes ambiguity about version and invocation, but does not claim the environment is already available in either harness. `ACCEPTED=False` remains correct until both harnesses provision the exact lock, record a smoke test, and the acceptance suite uses genuine simulator output for three clean reference runs plus negative controls.
+
 ## `ls09-plate-dilution-recovery`
 
 - The Opentrons official tutorial uses serial dilution as the canonical automated dilution workflow: https://docs.opentrons.com/python-api/tutorial/

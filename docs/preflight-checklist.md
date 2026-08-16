@@ -4,6 +4,7 @@
 
 - [ ] Card version and Prompt hash frozen
 - [ ] Input provenance/license and SHA-256 verified
+- [ ] `docs/inputs/SHA256SUMS.tsv` covers every copied input file, including README/resource/environment manifests, with current byte size and hash
 - [ ] No gold/oracle/judge notes in workspace
 - [ ] Scientific reviewer approved target and expected behavior
 - [ ] Reference output passes 3/3
@@ -11,6 +12,7 @@
 - [ ] Format-correct scientific error fails 3/3
 - [ ] Static oracle cannot execute submission code
 - [ ] Isolated clean-rerun environment pinned (if required)
+- [ ] Any required scientific simulator/reference environment is provisioned before timing, matches its exact lock, and passes the task-specific smoke check in every scheduled harness
 - [ ] Second operator completes within 1.5× limit
 
 ## Harness/condition
