@@ -42,6 +42,12 @@ def main() -> int:
     record = {"task_id": args.task_id, "clean_run_exit_code": None, "required_outputs_reproduced": False, "semantic_equivalence_pass": False, "compared_artifacts": [], "stderr_tail": ""}
     with tempfile.TemporaryDirectory(prefix=f"rerun-{args.task_id}-") as raw:
         clean = Path(raw); shutil.copytree(workspace / "inputs", clean / "inputs"); (clean / "output").mkdir()
+        # The root input manifest is part of every public one-use workspace and
+        # submission scripts may legitimately validate it. Preserve it in the
+        # isolated rerun just as faithfully as the read-only inputs directory.
+        manifest = workspace / "INPUT_MANIFEST.sha256.tsv"
+        if manifest.is_file():
+            shutil.copy2(manifest, clean / manifest.name)
         if args.task_id == "ls09-opentrons-sop":
             shutil.copy2(original / "protocol.py", clean / "output/protocol.py")
             command = [args.python, "-m", "opentrons.simulate", "output/protocol.py"]
