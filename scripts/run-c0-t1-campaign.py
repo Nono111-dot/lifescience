@@ -27,6 +27,22 @@ SKILLS = {
 }
 
 
+def set_python_runtime(python_bin: Path, log_dir: Path) -> None:
+    """Expose one pinned Python through the stable PATH used by fresh Codex shells."""
+    target = python_bin / "python"
+    wrapper = f"#!/bin/sh\nexec '{target}' \"$@\"\n"
+    local_bin = Path("/Users/mac/.local/bin")
+    local_bin.mkdir(parents=True, exist_ok=True)
+    for name in ("python", "python3"):
+        path = local_bin / name
+        path.write_text(wrapper, encoding="utf-8")
+        path.chmod(0o755)
+    probe = subprocess.run([str(local_bin / "python"), "-c", "import sys; print(sys.executable); print(sys.version)"], capture_output=True, text=True, check=False)
+    (log_dir / "python_runtime.txt").write_text(f"target={target}\nexit_code={probe.returncode}\n{probe.stdout}{probe.stderr}", encoding="utf-8")
+    if probe.returncode:
+        raise RuntimeError("pinned Python wrapper smoke failed")
+
+
 def utc() -> str:
     return datetime.now(timezone.utc).isoformat()
 
@@ -122,6 +138,7 @@ def main() -> int:
         command = [str(CODEX), "--search", "-s", "workspace-write", "-a", "never", "-m", args.model, "-c", f'model_reasoning_effort="{args.reasoning}"', "-c", 'shell_environment_policy.inherit="all"', "exec", "--ephemeral", "--ignore-user-config", "--skip-git-repo-check", "--json", "-o", str(final_message), "-"]
         env = {**os.environ, "CODEX_HOME": str(profile), "PYTHONHASHSEED": "0"}
         python_bin = OPENTRONS_PYTHON_BIN if task_id == "ls09-opentrons-sop" else BASE_PYTHON_BIN
+        set_python_runtime(python_bin, log_dir)
         env["PATH"] = str(python_bin) + os.pathsep + env.get("PATH", "")
         started = time.monotonic(); status = "completed"
         with (log_dir / "codex_events.jsonl").open("w", encoding="utf-8") as stdout, (log_dir / "codex_stderr.txt").open("w", encoding="utf-8") as stderr:
