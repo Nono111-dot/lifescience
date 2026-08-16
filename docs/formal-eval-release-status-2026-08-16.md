@@ -9,8 +9,8 @@ Current status: **NO-GO / preflight preparation**.
 - Scope/queue: 25 unique tasks, 50 paired rows, exactly one `C0` and one `T1` row per task.
 - Inputs: 69/69 agent-visible files materialized and SHA-256 verified after correcting six manifest rows that had recorded Windows CRLF bytes rather than the repository's canonical LF blobs and adding two omitted LS05 `SCORING_RULE.md` rows. `.gitattributes` now prevents line-ending conversion under `docs/inputs/**`.
 - Accepted scientific oracles: 7/25. LS05 model ranking/pocket, LS06 effect/significance, LS09 dilution recovery and both LS10 tasks pass their existing regression/acceptance controls. The remaining 18 are fail-closed.
-- T1 catalogue: 146/146 Agent Skill rows have confirmed fixed GitHub repository/commit/path and matching `SKILL.md` SHA-256. All 16 unique Skills preselected for this campaign pass installer and static-frontmatter smoke; fresh-Codex load/invoke/reset smoke remains required before formal use.
-- T1 plan: 21/25 tasks have a predeclared catalogue match using 16 unique Skills; all 16 install and static-frontmatter smoke checks pass. Four tasks have explicit `NONE` because the workbook has no Opentrons/liquid-handling/power-analysis/logistic-regression Skill.
+- T1 catalogue: 146/146 Agent Skill rows have confirmed fixed GitHub repository/commit/path and matching `SKILL.md` SHA-256. Dependency scanning finds 122/146 explicitly require MCP/SCP or an API key and are therefore installable but ineligible for strict skill-only T1; 24/146 remain direct candidates pending runtime smoke.
+- T1 plan: 4/25 tasks have a defensible strict-T1 match using two unique Skills (`scgpt`, `scvi-tools`); both installer/static checks pass. The other 21 tasks are explicit `NONE` rather than installing an irrelevant or MCP-dependent package. Fresh-Codex load/invoke/reset smoke remains required.
 
 ## Blocking gates
 

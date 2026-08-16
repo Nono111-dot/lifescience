@@ -63,7 +63,7 @@ The Excel workbook's `真实说明书索引` sheet is the selection and source a
 
 The run operator must not change the predeclared selection after seeing outputs, provide scientific hints or substitute an unlisted package. If the fixed source cannot be installed or loaded, record `capability_unavailable`; do not improvise another repository or branch.
 
-The 146 Agent Skill rows eligible for this campaign are normalized in `docs/capability-runtime-mapping-v1.tsv`. All 146 fixed `SKILL.md` sources and hashes have been verified. Installation smoke status is recorded separately; a source-verification pass is not the same as a successful Codex load/invoke/reset.
+The 146 Agent Skill rows are normalized in `docs/capability-runtime-mapping-v1.tsv`. All fixed `SKILL.md` sources and hashes have been verified, but 122 explicitly require MCP/SCP or an API key and are not eligible for strict skill-only T1. The task plan may select only the remaining direct candidates; installation success is not the same as a successful Codex load/invoke/reset.
 
 ## Run, freeze and score
 

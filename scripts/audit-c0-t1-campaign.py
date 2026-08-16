@@ -121,6 +121,13 @@ def main() -> int:
     unknown_selected = sorted(selected_ids - set(capability_by_id))
     for item in unknown_selected:
         failures.append(f"T1_SELECTED_SKILL_UNKNOWN:{item}")
+    ineligible_selected = sorted(
+        item for item in selected_ids
+        if item in capability_by_id
+        and capability_by_id[item]["strict_t1_eligibility"] != "candidate_pending_runtime_smoke"
+    )
+    for item in ineligible_selected:
+        failures.append(f"T1_SELECTED_SKILL_EXTERNAL_DEPENDENCY:{item}")
     selected_install_ready = {
         item for item in selected_ids
         if item in capability_by_id and capability_by_id[item]["install_smoke_status"] == "pass"
@@ -157,6 +164,12 @@ def main() -> int:
         "t1_tasks_with_selected_skill": sum(row["selected_catalog_item_ids"] != "NONE" for row in skill_plan),
         "t1_tasks_without_catalog_match": sum(row["selected_catalog_item_ids"] == "NONE" for row in skill_plan),
         "selected_unique_skills": len(selected_ids),
+        "strict_t1_source_candidates": sum(
+            row["strict_t1_eligibility"] == "candidate_pending_runtime_smoke" for row in capabilities
+        ),
+        "mcp_or_api_dependent_skill_rows": sum(
+            row["strict_t1_eligibility"] == "blocked_external_dependency" for row in capabilities
+        ),
         "selected_install_smoke_ready": len(selected_install_ready),
         "selected_full_smoke_ready": len(selected_full_smoke),
         "accepted_oracles": len(accepted & set(task_ids)),
