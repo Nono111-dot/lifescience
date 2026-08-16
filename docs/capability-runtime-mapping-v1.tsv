@@ -1,0 +1,147 @@
+catalog_item_id	display_name	object_type	runtime_package_id	runtime_version	runtime_install_source	install_smoke_status	invoke_smoke_status	uninstall_smoke_status	review_status
+ITEM-022	indication-dossier	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-023	alphafold2	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-024	boltz	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-025	chai1	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-026	openfold3	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-027	esmfold2	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-028	diffdock	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-029	proteinmpnn	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-030	ligandmpnn	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-031	solublempnn	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-032	fair-esm2	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-033	evo2	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-034	borzoi	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-035	scgpt	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-036	scvi-tools	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-092	Affinity Maturation Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-093	Alanine Scanning Mutagenesis Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-094	AlphaFold Structure Analysis Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-095	Analyze DNA and RNA sequences including molecular weight calculation, reverse complement generation, and oligonucleotide properties.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-096	Analyze protein sequences using InterProScan to identify functional domains, protein families, and Gene Ontology (GO) annotations.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-097	Analyze protein-protein interaction enrichment using STRING database to identify functional networks and pathway associations.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-098	Antibody Drug Development	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-099	Antibody-Target Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-100	Assess drug risks and adverse effects using FDA drug database to retrieve safety information and risk profiles.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-101	ATC Drug Classification Lookup	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-102	Binding Site Characterization	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-103	Bioassay Data Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-104	Biomarker Discovery Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-105	BioSample & Genome Cross-Reference	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-106	BLAST & Protein Analysis Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-107	Calculate comprehensive protein sequence properties including isoelectric point, molecular weight, hydrophobicity, and physicochemical parameters.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-108	Calculate disease reversal scores for the provided molecules relative to a specific disease.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-109	Calculate peptide sequence properties including molecular weight, isoelectric point, extinction coefficient, and chemical formula.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-110	Cancer Therapy Design	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-111	Cell Line Assay Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-112	Chromosome Structure Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-113	Clinical Pharmacology Report	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-114	Clinical Trial Drug Profiling	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-115	Comparative Drug Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-116	Compound-to-Drug Analysis Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-117	Comprehensive Drug Safety Profile	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-118	Comprehensive drug screening pipeline from molecular filtering through QED/ADMET criteria to protein-ligand docking, identifying promising drug candidates.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-119	Comprehensive protein analysis combining InterProScan domain identification with BLAST similarity search to provide complete functional and evolutionary annotation.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-120	Cross-Species Comparative Genomics	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-121	Cross-Species Protein Comparison	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-122	Disease Knowledge Graph	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-123	Disease Protein Profiling	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-124	Disease-Drug Landscape Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-125	Disease-Specific Compound Screening	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-126	Drug Metabolism Study	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-127	Drug Repurposing Screening	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-128	Drug Target Identification Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-129	Drug Toxicity Assessment	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-130	Drug Warning Intelligence Report	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-131	Drug-Drug Interaction Checker	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-132	Drug-Indication Mapping	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-133	Drug-Target Structural Biology	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-134	earch biomedical literature and web content using Tavily search engine for research and clinical information.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-135	Enzyme Active Site Engineering	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-136	Enzyme Inhibitor Design	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-137	Epigenetics & Drug Response	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-138	Epigenetics & Drug Response	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-139	Full Protein Characterization	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-140	Gene Comprehensive Lookup	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-141	Gene Expression Atlas	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-142	Gene Family Evolution Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-143	Gene Ontology Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-144	Gene Therapy Target Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-145	Gene-Disease Association Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-146	Gene-to-Drug Discovery Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-147	Gene-Variant-Drug Nexus	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-148	Generate new peptide molecules sampling from the input peptide sequence.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-149	Genetic Counseling Variant Report	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-150	Genome Annotation Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-151	Given a gene symbol (e.g	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-152	Given a protein sequence and its structure, employ ProSST model to predict mutation effects and obtain the top-k mutated sequences.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-153	Given an rsID, query multiple databases (dbSNP, FAVOR, GWAS Catalog, ClinVar, gnomAD, PharmGKB, ClinGen) for comprehensive annotation	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-154	Infectious Disease Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-155	InterProScan Analysis Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-156	Metabolomics Pathway Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-157	Microbiome Genomics Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-158	Molecular Docking Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-159	Mouse Model Disease Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-160	Multi-Omics Integration	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-161	Multi-Species Gene Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-162	Multi-Species Gene Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-163	NCBI Gene Deep Dive	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-164	One Health Pathogen Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-165	Organism Classification & Database	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-166	Orphan Drug & Rare Disease Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-167	Pandemic Preparedness Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-168	Pediatric Drug Safety Review	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-169	Personalized Medicine Report	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-170	Pharmacogenomics Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-171	Pharmacokinetics Profile Builder	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-172	Polypharmacology Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-173	Population Genetics Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-174	Precision Oncology Workflow	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-175	Predict a molecule's ability to reverse disease states using DLEPS (Disease-Ligand Embedding Projection Score) for drug repositioning and discovery.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-176	Predict protein-ligand binding affinity using Boltz-2 model to assess molecular interactions and binding probability for drug discovery.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-177	Protein Classification Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-178	Protein Complex Visualization & Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-179	Protein Cross-Database Reference	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-180	Protein Engineering Workflow	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-181	Protein Function Annotation Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-182	Protein Interaction Network Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-183	Protein Similarity Search	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-184	Protein Similarity Search	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-185	Protein Solubility Optimization	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-186	Protein Structure Comprehensive Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-187	Protein Structure Quality Assessment	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-188	Protein-Drug Interaction Profiling	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-189	Proteome-Level Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-190	Query ClinGen Allele Registry to map variant rsID to identifiers in other databases (ClinVar, gnomAD, COSMIC, UniProtKB, OMIM, etc.).	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-191	Query dbSNP + NCBI Gene to get variant genomic position (chromosome, coordinates, ref/alt alleles, mutation type) and associated gene coordinates.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-192	Query EBI GWAS Catalog for GWAS statistical associations (p-value, effect size, risk allele) between a variant and traits/diseases.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-193	Query FAVOR API for variant functional prediction scores (CADD, SIFT, PolyPhen, REVEL, etc.) and gene annotation.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-194	Query gnomAD for variant allele frequency across populations	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-195	Query IGVF Catalog for regulatory element–gene associations within a genomic region, including association scores, element types, and biosample context.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-196	Query NCBI ClinVar for variant clinical pathogenicity classification (Pathogenic/Benign/VUS), review status and associated diseases.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-197	Query PharmGKB (clinPGx) for pharmacogenomic clinical annotations — how a variant affects drug response, dosing, and adverse reactions.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-198	Rare Disease Genetic Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-199	Regulatory Region Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-200	Retrieve disease-associated targets from Open Targets using disease EFO IDs to identify therapeutic targets.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-201	Retrieve gene expression data from TCGA (The Cancer Genome Atlas) to analyze cancer-specific expression patterns.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-202	Retrieve gene information from NCBI Gene database by gene IDs to obtain genomic details, function, and expression data.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-203	Retrieve genomic sequences from Ensembl database using transcript or gene IDs to obtain nucleotide and protein sequences.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-204	Retrieve phenotype information from Monarch Initiative using HPO (Human Phenotype Ontology) IDs to understand disease manifestations.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-205	Retrieve protein sequences and functional information from UniProt database by protein name, enabling protein analysis and bioinformatics workflows.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-206	Search for similar protein sequences in UniProt Swiss-Prot database using BLAST to identify homologous proteins and functional relationships.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-207	Search KEGG database for gene information to retrieve pathway associations, functional annotations, and disease links.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-208	Search the protein information from the input gene name and downloads the optimal PDB or AlphaFold structures.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-209	SNP Functional Impact Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-210	Structural Homology & Evolution Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-211	Structural Pharmacogenomics	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-212	Substance Toxicology Report	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-213	Synthetic Biology Design	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-214	Systems Pharmacology Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-215	Tissue-Specific Expression Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-216	Transcriptome Analysis Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-217	UCSC Genome Browser Exploration	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-218	UniProt Deep Protein Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-219	Use ESMFold model to predict 3D structure of the input protein sequence.	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-220	Variant Pathogenicity Assessment	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-221	Virtual Screening Pipeline	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping
+ITEM-222	Virus Genomics Analysis	Agent技能包				pending	pending	pending	blocked_missing_runtime_mapping

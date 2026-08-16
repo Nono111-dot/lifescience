@@ -4,6 +4,8 @@ This repository contains reproducible desktop UI evaluation tasks for life-scien
 
 Current evaluation package:
 
+- `docs/task-cards-v2.md`: 25-task v2 entry point
+- `docs/task-cards/ls01-ls05-v2.md`: normalized §3.1 cards for LS01–LS05
 - `docs/ls06-ls10-runbook-v2.md`: current 10-task scope and per-run capability reset gate
 - `docs/ls06-ls10-task-cards-v2.md`: current ten complete §3.1 task cards and scientific release gates
 - `docs/task-cards-v1.md`: legacy 25-card index
@@ -13,13 +15,21 @@ Current evaluation package:
 - `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
 - `docs/capability-whitelist-v1.tsv`: 22-row previously smoke-tested subset; **not** the complete catalog
 - `docs/capability-catalog-audit-2026-08-14.md`: Feishu revision-717 audit of the 222-row life-science candidate catalog
+- `docs/capability-runtime-mapping-v1.tsv`: 146 T1 Agent Skill rows and unresolved 端砚 runtime/smoke gates
 - `docs/formal-run-queue-2026-08-16.tsv`: current 10-task × C0/T0/T1/T2 fail-closed execution queue; the 2026-08-14 file is retained as historical evidence
+- `docs/formal-run-queue-c0-t1-2026-08-16.tsv`: deterministic 50-row queue for the requested 25-task C0/T1 campaign
 - `docs/input-remediation-2026-08-16.md`: exact input, provenance, integrity, environment, documentation, and remaining-blocker changes from the pre-evaluation remediation pass
+- `docs/input-integrity-remediation-2026-08-16.md`: 25-task 69/69 hash audit, manifest-coverage repair and CRLF/LF correction evidence
 - `docs/evaluation-protocol-v1.md`: Codex/端砚 conditions, SOP, scoring and go/no-go
+- `docs/evaluation-protocol-c0-t1-v2.md`: requested 25-task × C0/T1 campaign supplement
+- `docs/formal-eval-release-status-2026-08-16.md`: explicit preflight no-go and unresolved release evidence
 - `docs/preflight-checklist.md`: formal-run acceptance checklist
 - `docs/run-record-template.tsv`: immutable per-run record schema
 - `docs/blind-judge-form.md`: blinded 20-point review form
 - `scripts/prepare-workspace.ps1`: non-overwriting one-use workspace preparation
+- `scripts/prepare-c0-t1-run.py`: non-destructive per-run input copy and hash manifest for the 50-run campaign
+- `scripts/freeze-c0-t1-run.py`: immutable local freeze/hash step that never executes submission code
+- `scripts/audit-c0-t1-campaign.py`: fail-closed 25-task/50-run/capability/oracle/input preflight
 
 ## Repository layout
 
@@ -37,7 +47,7 @@ docs/
         └── test_oracle.py
 ```
 
-Start with [the taskbook](docs/ai4s-ui-taskbook-v0.1.md). Input licensing and copying rules are documented in [the input index](docs/inputs/README.md).
+Start with [the 25-task v2 index](docs/task-cards-v2.md). Input licensing and copying rules are documented in [the input index](docs/inputs/README.md). The current formal campaign is fail-closed at preflight; do not interpret an unreviewed attempt as a formal score.
 
 ## Quick start
 

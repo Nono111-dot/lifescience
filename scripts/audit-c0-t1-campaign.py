@@ -1,0 +1,133 @@
+#!/usr/bin/env python3
+"""Fail-closed structural preflight for the 25-task C0/T1 campaign."""
+
+from __future__ import annotations
+
+import csv
+import hashlib
+import json
+import re
+from collections import Counter, defaultdict
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+DOCS = ROOT / "docs"
+
+
+def read_tsv(path: Path) -> list[dict[str, str]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle, delimiter="\t"))
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def accepted_oracles() -> set[str]:
+    accepted = set()
+    for path in (DOCS / "oracles").glob("*/scientific_checks.py"):
+        text = path.read_text(encoding="utf-8")
+        if re.search(r"^ACCEPTED\s*=\s*True(?:\s*#.*)?$", text, flags=re.MULTILINE):
+            accepted.add(path.parent.name)
+    return accepted
+
+
+def input_hash_audit() -> tuple[int, list[str]]:
+    manifest = DOCS / "inputs" / "SHA256SUMS.tsv"
+    if not manifest.is_file():
+        return 0, ["INPUT_HASH_MANIFEST_MISSING"]
+    failures = []
+    rows = read_tsv(manifest)
+    manifest_paths = {
+        (row.get("path") or row.get("file") or row.get("relative_path") or "").replace("\\", "/")
+        for row in rows
+    }
+    actual_paths = {
+        path.relative_to(ROOT).as_posix()
+        for path in (DOCS / "inputs").rglob("*")
+        if path.is_file() and path != manifest
+    }
+    for rel in sorted(actual_paths - manifest_paths):
+        failures.append(f"INPUT_UNMANIFESTED:{rel}")
+    for rel in sorted(manifest_paths - actual_paths):
+        failures.append(f"INPUT_MANIFEST_STALE:{rel}")
+    checked = 0
+    for row in rows:
+        rel = row.get("path") or row.get("file") or row.get("relative_path")
+        expected = row.get("sha256") or row.get("SHA256")
+        if not rel or not expected:
+            failures.append("INPUT_HASH_MANIFEST_SCHEMA")
+            continue
+        rel_path = Path(rel)
+        path = ROOT / rel_path if rel_path.parts[:2] == ("docs", "inputs") else DOCS / "inputs" / rel_path
+        if not path.is_file():
+            failures.append(f"INPUT_MISSING:{rel}")
+            continue
+        checked += 1
+        if sha256(path).lower() != expected.lower():
+            failures.append(f"INPUT_HASH_MISMATCH:{rel}")
+    return checked, failures
+
+
+def main() -> int:
+    inventory = read_tsv(DOCS / "input-problem-inventory-v1.tsv")
+    queue = read_tsv(DOCS / "formal-run-queue-c0-t1-2026-08-16.tsv")
+    capabilities = read_tsv(DOCS / "capability-runtime-mapping-v1.tsv")
+    task_ids = [row["task_id"] for row in inventory]
+    pair_counts: dict[str, Counter] = defaultdict(Counter)
+    for row in queue:
+        pair_counts[row["task_id"]][row["condition"]] += 1
+
+    failures = []
+    if len(task_ids) != 25 or len(set(task_ids)) != 25:
+        failures.append("TASK_SCOPE_NOT_25_UNIQUE")
+    if len(queue) != 50:
+        failures.append("RUN_QUEUE_NOT_50")
+    for task_id in task_ids:
+        if pair_counts[task_id] != Counter({"C0": 1, "T1": 1}):
+            failures.append(f"UNPAIRED_QUEUE:{task_id}")
+    if len(capabilities) != 146:
+        failures.append("T1_AGENT_SKILL_CATALOG_NOT_146")
+
+    mapped = [row for row in capabilities if row["runtime_package_id"] and row["runtime_install_source"]]
+    smoke_ready = [
+        row for row in capabilities
+        if row["install_smoke_status"] == row["invoke_smoke_status"] == row["uninstall_smoke_status"] == "pass"
+    ]
+    if len(mapped) != len(capabilities):
+        failures.append("T1_RUNTIME_MAPPING_INCOMPLETE")
+    if len(smoke_ready) != len(capabilities):
+        failures.append("T1_SMOKE_TESTS_INCOMPLETE")
+
+    accepted = accepted_oracles()
+    missing_accepted = sorted(set(task_ids) - accepted)
+    for task_id in missing_accepted:
+        failures.append(f"ORACLE_NOT_ACCEPTED:{task_id}")
+
+    checked_inputs, input_failures = input_hash_audit()
+    failures.extend(input_failures)
+
+    result = {
+        "campaign": "25-task-c0-t1-v2",
+        "task_count": len(task_ids),
+        "run_count": len(queue),
+        "paired_tasks": sum(pair_counts[t] == Counter({"C0": 1, "T1": 1}) for t in task_ids),
+        "agent_skill_catalog_rows": len(capabilities),
+        "runtime_mapped_rows": len(mapped),
+        "smoke_ready_rows": len(smoke_ready),
+        "accepted_oracles": len(accepted & set(task_ids)),
+        "input_files_checked": checked_inputs,
+        "formal_release": not failures,
+        "failure_codes": sorted(set(failures)),
+    }
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if not failures else 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
