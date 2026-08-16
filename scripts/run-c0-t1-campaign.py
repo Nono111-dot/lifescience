@@ -119,7 +119,7 @@ def main() -> int:
         inventory = sorted((p.relative_to(profile).as_posix(), sha(p)) for p in profile.rglob("SKILL.md"))
         (log_dir / "capability_inventory.json").write_text(json.dumps({"condition": condition, "selected_items": items, "skills": inventory}, indent=2) + "\n", encoding="utf-8")
         final_message = log_dir / "codex_final.txt"
-        command = [str(CODEX), "--search", "-s", "workspace-write", "-a", "never", "-m", args.model, "-c", f'model_reasoning_effort="{args.reasoning}"', "exec", "--ephemeral", "--ignore-user-config", "--skip-git-repo-check", "--json", "-o", str(final_message), "-"]
+        command = [str(CODEX), "--search", "-s", "workspace-write", "-a", "never", "-m", args.model, "-c", f'model_reasoning_effort="{args.reasoning}"', "-c", 'shell_environment_policy.inherit="all"', "exec", "--ephemeral", "--ignore-user-config", "--skip-git-repo-check", "--json", "-o", str(final_message), "-"]
         env = {**os.environ, "CODEX_HOME": str(profile), "PYTHONHASHSEED": "0"}
         python_bin = OPENTRONS_PYTHON_BIN if task_id == "ls09-opentrons-sop" else BASE_PYTHON_BIN
         env["PATH"] = str(python_bin) + os.pathsep + env.get("PATH", "")
