@@ -2,6 +2,8 @@
 
 Audit date: 2026-08-14
 
+Resource-remediation update: 2026-08-16
+
 Scope: determine whether the three selected benchmarks already provide enough evidence to freeze the LS07 differential-expression and Reactome tasks. This note records only material present in BixBench v1.5 and its official capsule; absent parameters are not inferred.
 
 ## Sources inspected
@@ -87,14 +89,28 @@ Minimum non-invented remediation:
 3. Export and hash the complete per-gene reference table and environment lock.
 4. Have a second reviewer compare the rerun to the executed notebook and q3 record before setting `ACCEPTED=True`.
 
-### `ls07-combination-treatment-mechanism`: blocked for formal 80-point scoring
+### `ls07-combination-treatment-mechanism`: resource-provisioned, blocked for formal 80-point scoring
 
-The top pathway identity, overlap, odds ratio and overlap genes are recoverable as scalar benchmark evidence. The complete pinned Reactome resource, background universe, Ensembl mapping release and full enrichment table are not. Therefore the benchmark cannot by itself satisfy the current task card's hard gate requiring a supplied/pinned Reactome release and valid corrected statistics across a pathway table.
+The top pathway identity, overlap, odds ratio and overlap genes are recoverable as scalar benchmark evidence. A complete official Reactome resource and deterministic local background have now been added outside the original benchmark capsule, with their provenance boundary made explicit. The benchmark still does not supply an Ensembl release, an adjudicated DE result, or a full enrichment table, so it cannot by itself satisfy the scientific reference hard gate.
 
-Minimum non-invented remediation:
+Remaining non-invented remediation:
 
-1. Obtain an official archived `Reactome_2022`/Enrichr library snapshot and its provenance, or revise the task contract to score only the exact scalar BixBench questions. Do not silently substitute current Reactome or Enrichr data.
-2. Freeze the gene-ID mapping and effective background used with that snapshot.
-3. Reproduce and export the complete enrichment table under GSEApy 1.1.4, then independently review the q2/q4/q5 benchmark anchors.
+1. Adjudicate the LS07-1 DE threshold conflict and freeze the resulting per-gene table.
+2. Decide whether the capsule's supplied display-name mapping is acceptable despite the missing upstream release label; do not silently call a live mapping API.
+3. Reproduce and export the complete enrichment table under GSEApy 1.1.4 against the packaged GMT/background, then independently review the q2/q4/q5 benchmark anchors.
 
-Until then, the existing fail-closed oracle behavior is correct. No LS07 `scientific_checks.py` or acceptance tests were created by this audit, because doing so would encode unsupported gold and create a false `ready` status.
+Until then, the existing fail-closed `scientific_checks.py` behavior is correct: its structural checks may support calibration, but `ACCEPTED=False` prevents a formal scientific score. No fabricated full-result gold or passing acceptance record was added.
+
+## 2026-08-16 resource remediation
+
+The official Enrichr endpoint for the library named `Reactome_2022` was retrieved and frozen as `docs/inputs/ls07-combination-treatment-mechanism/Reactome_2022.gmt`.
+
+- Download URL: `https://maayanlab.cloud/Enrichr/geneSetLibrary?mode=text&libraryName=Reactome_2022`
+- Bytes: `778913`
+- SHA-256: `cfe1adc75aa3137ba74c1b35a3098e88ea1708b204e5edfd788092b7ef5c08f8`
+- Pathways: `1818`
+- Explicit local background: sorted unique union of all GMT gene symbols, `10489` genes
+- Background SHA-256: `1ef29c29901cdc2e1efdfd378141ea6811f49e2d70b35e63be2a4b0e9c41c0cc`
+- License boundary: Reactome annotation files are CC0; Enrichr attribution/citations and the BixBench expression-input boundary are recorded in `Reactome_2022.manifest.json`.
+
+This resolves the missing gene-set snapshot and unspecified local-universe **input** defects. It does not retroactively reproduce Enrichr's historical server-side default background, resolve the 677/679 DE conflict, establish an Ensembl release for the capsule mapping, or create a complete enrichment gold table. Therefore `ACCEPTED` remains `False` until a locked DE/enrichment reference run and the full acceptance suite are independently reviewed.

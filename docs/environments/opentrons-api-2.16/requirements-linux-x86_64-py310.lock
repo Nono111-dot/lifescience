@@ -1,0 +1,18 @@
+# Generated 2026-08-16 for CPython 3.10 / manylinux2014 x86_64.
+# Install only with: python -m pip install --require-hashes -r requirements-linux-x86_64-py310.lock
+aionotify==0.2.0 --hash=sha256:385e1becfaac2d9f4326673033d53912ef9565b6febdedbec593ee966df392c6
+anyio==3.3.0 --hash=sha256:929a6852074397afe1d989002aa96d457e3e1e5441357c60d03e7eea0e65e1b0
+attrs==26.1.0 --hash=sha256:c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309
+click==8.4.2 --hash=sha256:e6f9f66136c816745b9d65817da91d61d957fb16e02e4dcd0552553c5a197b76
+idna==3.18 --hash=sha256:7f952cbe720b688055e3f87de14f5c3e5fdaa8bc3928985c4077ca689de849a2
+jsonschema==3.0.2 --hash=sha256:5f9c0a719ca2ce14c5de2fd350a64fd2d13e8539db29836a86adc990bb1a068f
+numpy==1.26.4 --hash=sha256:ffa75af20b44f8dba823498024771d5ac50620e6915abac414251bd971b4529f
+opentrons==7.1.0 --hash=sha256:bab4a49fc1a8780558ed353153975c9e28b3b54964203cb5309aba5e50596248
+opentrons-shared-data==7.1.0 --hash=sha256:ec57c9414cbaacd88dc66a4bb8db2424ed794a8ba30b791cc0b59773b7c9e2ad
+pydantic==1.8.2 --hash=sha256:fec866a0b59f372b7e776f2d7308511784dace622e0992a0b59ea3ccee0ae833
+pyrsistent==0.20.0 --hash=sha256:21cc459636983764e692b9eba7144cdd54fdec23ccdb1e8ba392a63666c60c34
+pyserial==3.5 --hash=sha256:c4451db6ba391ca6ca299fb3ec7bae67a5c55dde170964c7a14ceefec02f2cf0
+setuptools==84.0.0 --hash=sha256:51a52592b3b99e102b609654876bd65f19f999935166d1352678931132b0c670
+six==1.17.0 --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
+sniffio==1.3.1 --hash=sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2
+typing-extensions==4.16.0 --hash=sha256:481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8

@@ -2,8 +2,9 @@ from __future__ import annotations
 import csv, json, math, re
 from pathlib import Path
 
-# Checker exists, but formal acceptance remains blocked until Reactome_2022 is archived
-# and the enrichment table is independently reproduced from the frozen counts.
+# Reactome_2022 and its derived background are now byte-frozen inputs. Formal
+# acceptance remains blocked until the DE rule is adjudicated and a complete
+# enrichment reference table is independently reproduced and accepted 3/3.
 ACCEPTED = False
 
 def check(workspace: Path):
@@ -28,8 +29,8 @@ def check(workspace: Path):
     if not fields_ok: failures.append('REACTOME_TABLE_SCHEMA')
     if not finite: failures.append('REACTOME_VALUES_INVALID')
     if not native_semantic: failures.append('BIX_NATIVE_MECHANISM_MISMATCH')
-    failures.append('REACTOME_2022_NOT_PINNED')
+    failures.append('REACTOME_REFERENCE_NOT_ACCEPTED')
     criteria.update(table_schema=fields_ok,finite_probabilities=finite,native_tp53_cell_cycle=native_semantic,
-                    formal_blocker='Reactome_2022 resource and reference run not pinned')
+                    formal_blocker='Frozen Reactome resource exists; complete enrichment reference and 3/3 acceptance are pending')
     return {'core_science':core,'direction':direction,'summary':summary,'hardgate_pass':False,
             'failure_codes':failures,'criteria':criteria}

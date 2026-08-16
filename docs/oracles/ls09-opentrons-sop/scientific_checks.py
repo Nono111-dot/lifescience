@@ -4,9 +4,9 @@ import ast
 import csv
 from pathlib import Path
 
-# BLOCKED after codex/C0 trial-2: the evaluation environment does not contain
-# the pinned Opentrons simulator required by the card. Do not score formal runs
-# until the simulator contract is frozen and the regression suite is rerun.
+# BLOCKED after codex/C0 trial-2. A simulator contract and hash-locked Linux
+# dependency set now exist, but neither harness has completed the clean install,
+# simulator smoke test, and regression rerun. Do not score formal runs yet.
 ACCEPTED = False
 
 WELLS = [f"{row}{col}" for col in range(1, 7) for row in "ABCD"]

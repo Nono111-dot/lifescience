@@ -20,10 +20,10 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 | `ls06-eno1-effect-size` | `proteomics_and_metabolomics` | L2 / 35 min | X / D,A,V,O,G | BixBench `bix-37-q1/q4` | ready |
 | `ls06-eno1-significance-audit` | `proteomics_and_metabolomics` | L2 / 30 min | A / D,X,V,I,O | BixBench `bix-37-q3` | ready |
 | `ls07-combination-treatment-deg` | `transcriptomics` | L3 / 75 min | X / D,P,T,A,G | BixBench `bix-43-q3` | blocked: pinned DESeq2 reference acceptance |
-| `ls07-combination-treatment-mechanism` | `systems_and_synthetic_biology` | L3 / 90 min | I / T,A,X,V,G | BixBench `bix-43-q5` | blocked: frozen Reactome_2022 resource/reference |
+| `ls07-combination-treatment-mechanism` | `systems_and_synthetic_biology` | L3 / 90 min | I / T,A,X,V,G | BixBench `bix-43-q5` | blocked: enrichment reference/oracle acceptance; Reactome input now frozen |
 | `ls08-multiome-column-match` | `single_cell_and_spatial` | L3 / 75 min | X / D,P,A,V,G | CompBioBench `multiome-match-atac-rna-q1` | blocked: hidden mapping/normalization acceptance |
 | `ls08-enhancer-promoter-integration` | `epigenomics_and_regulation` | L2 / 45 min | I / D,A,X,V,O | CompBioBench `ep-interactions-q1` | blocked: aggregation/tie-rule acceptance |
-| `ls09-opentrons-sop` | `systems_and_synthetic_biology` | L2 / 45 min | P / T,A,V,O,G | source-supported local extension; Opentrons official protocol/API rules | blocked: pinned simulator |
+| `ls09-opentrons-sop` | `systems_and_synthetic_biology` | L2 / 45 min | P / T,A,V,O,G | source-supported local extension; Opentrons official protocol/API rules | blocked: cross-harness simulator provisioning/acceptance |
 | `ls09-plate-dilution-recovery` | `systems_and_synthetic_biology` | L2 / 40 min | R / D,P,A,X,V | source-supported local extension; dilution mass balance and Opentrons volume rules | ready |
 | `ls10-neun-power-analysis` | `biomedical_and_clinical_bioinformatics` | L2 / 40 min | X / D,A,V,I,G | BixBench `bix-19-q1/q2` | ready |
 | `ls10-treatment-response-model` | `biomedical_and_clinical_bioinformatics` | L2 / 45 min | X / D,A,V,I,G | BixBench `bix-51-q3/q4` | ready |
@@ -58,13 +58,13 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 
 ## `ls07-combination-treatment-mechanism`
 
-- Inputs: the three LS07 expression files plus a required evaluator-pinned `Reactome_2022` gene-set resource and manifest. The latter is not currently packaged; there is no valid decoy substitute.
-- Prompt: **Using the frozen differential-expression rule and supplied Reactome release, identify the best-supported primary mechanism of the combination treatment. Write `output/pathway_enrichment.csv` with `pathway_id,pathway_name,overlap,p_value,padj,direction`, `output/mechanism_call.json`, `output/analysis.py`, and `output/report.md` (maximum 600 words). Distinguish enrichment from demonstrated causation.**
+- Inputs: the three LS07 expression files plus `Reactome_2022.gmt`, `Reactome_2022.background.txt`, and `Reactome_2022.manifest.json`. The official Enrichr-named snapshot contains 1,818 pathways and its explicit local background contains 10,489 unique gene symbols. No remote or newer library is a valid substitute.
+- Prompt: **Using the frozen differential-expression rule, `Reactome_2022.gmt`, and `Reactome_2022.background.txt`, identify the best-supported primary mechanism of the combination treatment. Do not query a remote enrichment service or substitute a different release/background. Write `output/pathway_enrichment.csv` with `pathway_id,pathway_name,overlap,p_value,padj,direction`, `output/mechanism_call.json`, `output/analysis.py`, and `output/report.md` (maximum 600 words). Distinguish enrichment from demonstrated causation.**
 - Deliverables: pathway table with declared tested universe/release; mechanism JSON referencing a table row; report; rerunnable script. Missing statistics are empty/null.
 - Hard gates: exact pinned gene-set release and universe used; corrected enrichment statistics valid; mechanism call supported by a reported row; no causal overclaim.
 - Deterministic 80: coverage/schema 10; overlap/statistics/ranking and primary mechanism 40 against the pinned reference; evidence direction/restraint 15; summary consistency 5; static/rerunnable script 10.
 - Ablation expectation: `[pathway-analysis]`, `[gene-set-reference]`, `[network-interpretation]`, `[reproducible-code]`; expected to reduce stale-release, universe and causal-language errors.
-- Readiness blocker: the required Reactome resource and accepted reference run do not exist locally. Do not fetch a newer release during a run or infer a gold pathway from the benchmark ideal.
+- Readiness blocker: the Reactome library and explicit background are now packaged and hashed, resolving the missing-input defect. The complete DE/enrichment reference table, mapping adjudication, benchmark-anchor reconciliation, and 3/3 positive/negative oracle acceptance are still absent. Do not infer a full gold table merely from the published top-pathway scalar anchors.
 
 ## `ls08-multiome-column-match`
 
@@ -88,13 +88,13 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 
 ## `ls09-opentrons-sop`
 
-- Inputs: `sop.md`, `instrument.csv`, `labware.csv`, `reagent_map.csv`, `sample_map.csv`; total 2,407 bytes. They pin robot/API, pipette, deck slots, labware, wells, source volumes and 24 samples. Provenance and scientific basis are in `docs/research/ls09-local-extension-provenance.md`; no answer-bearing decoy.
+- Inputs: `sop.md`, `instrument.csv`, `labware.csv`, `reagent_map.csv`, `sample_map.csv`, and `simulator_contract.json`. They pin robot/API, pipette, deck slots, labware, wells, source volumes, 24 samples, Opentrons package 7.1.0, Protocol API 2.16, invocation, capture policy, and failure behavior. Provenance and scientific basis are in `docs/research/ls09-local-extension-provenance.md`; no answer-bearing decoy.
 - Prompt: **Translate the supplied SOP into an auditable Opentrons protocol plan. The transfer plan represents exactly eight net liquid-transfer stages per sample; do not list individual mix strokes or low-level aspirate/dispense movements as extra rows. Write `output/protocol.py`, `output/transfer_plan.csv` with `step,source,destination,volume_uL,pipette,tip_policy`, `output/simulation.txt`, and `output/report.md`. Respect labware, deck, pipette, volume and contamination constraints. Run the supplied pinned simulator; if it is unavailable or fails, record the exact error and mark the protocol not execution-ready rather than claiming success.**
 - Deliverables: static Opentrons protocol; 192-row net-transfer plan; verbatim simulator record; report. All wells/volumes/pipettes/tip policies must be explicit.
 - Hard gates: exact net-transfer contract and liquid balance; valid deck/labware/wells/pipette range and contamination-safe tip policy; static protocol contract; pinned simulation success.
 - Deterministic 80: coverage/schema 10; transfer contract, balance, pipette and tip policy 40; protocol/simulation decision 15; report consistency 5; static protocol plus isolated pinned simulation 10.
 - Ablation expectation: `[protocol-planning]`, `[liquid-handling]`, `[labware-validation]`, `[simulation]`; expected to reduce unsafe tips, invalid volumes, deck and false-success errors.
-- Readiness blocker: checker is `ACCEPTED=False`; the repository lacks the pinned Opentrons simulator. A failed/missing simulator is a valid run observation but cannot produce a formal scientific score for this card.
+- Readiness blocker: the repository now contains a pinned Opentrons 7.1.0 / API 2.16 simulator contract and hash-locked Linux CPython 3.10 dependency set. The checker remains `ACCEPTED=False` until that exact environment is provisioned identically in Codex and all scheduled Duanyan arms, the reference protocol is executed by the real simulator 3/3, and wrong/empty controls fail. A failed/missing simulator remains a valid run observation but cannot produce a formal score.
 
 ## `ls09-plate-dilution-recovery`
 
