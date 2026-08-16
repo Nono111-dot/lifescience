@@ -9,9 +9,9 @@ This protocol is the campaign-specific supplement requested for all 25 repositor
 | Condition | Client | Scientific capability policy |
 |---|---|---|
 | `C0` | Codex | Native client only. No added life-science skill, MCP/SCP or task-specific scientific package. |
-| `T1` | 端砚 | The agent may autonomously select, install and invoke suitable **Agent Skills** from the approved `life_science_agent_skills.xlsx` catalogue. MCP/SCP entries are excluded from this campaign. |
+| `T1` | Codex | Same Codex client/model/build as C0, with task-appropriate **Agent Skills** selected from the approved `life_science_agent_skills.xlsx` catalogue and installed from its fixed GitHub commit/path. MCP/SCP entries are excluded from this campaign. |
 
-The primary contrast is the requested practical `C0` versus `T1` comparison. Because client and capability treatment change together, it must be reported as a combined condition comparison, not as a pure causal estimate of skill uplift.
+The primary contrast is a matched Codex capability ablation. Client, model/build, machine class, prompt, inputs and network policy are identical; only the predeclared task-specific Agent Skill installation differs. Subject to successful reset and order control, the paired difference may be reported as Codex skill uplift.
 
 ## Frozen scope
 
@@ -31,8 +31,8 @@ A task-condition pair may be marked `formal_released` only when all of the follo
 4. A static deterministic grader is independently accepted: correct/empty/wrong controls pass in three clean repetitions, and submission code is not imported or executed by the grader.
 5. Any clean rerun occurs in an isolated, pinned environment and is recorded separately from static grading.
 6. Prompt/deliverable, scientific validity and answer-leak review are signed off by reviewers independent of the run operator.
-7. Exact Codex and 端砚 client/model/build, machine class, network policy, time source and permission policy are frozen.
-8. Every T1 catalogue entry eligible for discovery has a target-client canonical runtime ID, version and install source; selected entries pass install/invoke/uninstall smoke tests.
+7. The exact Codex client/model/build, machine class, network policy, time source and permission policy are frozen identically across C0 and T1.
+8. Every predeclared T1 skill has a fixed GitHub repository, commit, directory path and expected `SKILL.md` SHA-256; selected entries pass install/load/uninstall smoke tests before their first formal use.
 9. The post-reset inventory equals the campaign baseline and a fresh conversation exposes no prior task state.
 10. Blind judges are assigned and cannot see client, condition, installed skills, deterministic score or gold data.
 
@@ -46,24 +46,24 @@ Unreleased attempts may be retained as `calibration` or `preflight_diagnostic`, 
 4. Export the normalized capability inventory and compare it byte-for-byte with the campaign baseline.
 5. Create a new one-use workspace; copy only the current task's public inputs and create an empty `output/`.
 6. Recompute the input manifest and record client/model/build, machine, network and wall-clock source.
-7. For `C0`, verify zero added domain capabilities. For `T1`, expose the approved Agent Skill catalogue; the agent chooses what to install without operator routing.
+7. For `C0`, verify zero added domain capabilities. For `T1`, install only the task's predeclared catalogue rows into the isolated Codex profile, then start a fresh Codex task so the installed skills are loaded.
 
 The run cannot start if the inventory differs, any old task ID/path is visible, or a prior capability remains enabled.
 
 ## T1 selection and installation record
 
-The Excel workbook is the selection authority, not proof that a package is installable. For every discovered, attempted, installed or invoked skill, record:
+The Excel workbook's `真实说明书索引` sheet is the selection and source authority. Skill choice is made before seeing a run's outputs or gold data, based only on the frozen task card and catalogue metadata, and is recorded in the task-to-skill plan. For every attempted, installed, loaded or invoked skill, record:
 
 - workbook item ID and exact display name;
-- canonical 端砚 runtime package ID and version;
-- install source and catalogue-match result;
+- Codex install name, GitHub repository, fixed commit and directory path;
+- expected and installed `SKILL.md` SHA-256 plus catalogue-match result;
 - discovery, install, invoke and uninstall timestamps;
 - result/failure code and evidence-log path;
 - post-reset inventory diff.
 
-The operator must not recommend a skill, repair installation, provide scientific hints or substitute an unlisted package. If the workbook row cannot be mapped to an exact 端砚 runtime package, record `capability_unavailable` and do not improvise an installation source.
+The run operator must not change the predeclared selection after seeing outputs, provide scientific hints or substitute an unlisted package. If the fixed source cannot be installed or loaded, record `capability_unavailable`; do not improvise another repository or branch.
 
-The 146 Agent Skill rows eligible for this campaign are normalized in `docs/capability-runtime-mapping-v1.tsv`. Blank runtime fields and `pending` smoke states are deliberate fail-closed blockers to be completed from an actual 端砚 inventory/export; they are not placeholders that may be guessed from display names.
+The 146 Agent Skill rows eligible for this campaign are normalized in `docs/capability-runtime-mapping-v1.tsv`. All 146 fixed `SKILL.md` sources and hashes have been verified. Installation smoke status is recorded separately; a source-verification pass is not the same as a successful Codex load/invoke/reset.
 
 ## Run, freeze and score
 

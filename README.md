@@ -15,7 +15,8 @@ Current evaluation package:
 - `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
 - `docs/capability-whitelist-v1.tsv`: 22-row previously smoke-tested subset; **not** the complete catalog
 - `docs/capability-catalog-audit-2026-08-14.md`: Feishu revision-717 audit of the 222-row life-science candidate catalog
-- `docs/capability-runtime-mapping-v1.tsv`: 146 T1 Agent Skill rows and unresolved 端砚 runtime/smoke gates
+- `docs/capability-runtime-mapping-v1.tsv`: 146 T1 Agent Skill fixed GitHub sources, hashes and Codex smoke states
+- `docs/task-skill-plan-codex-t1-v1.tsv`: predeclared Codex T1 selections for all 25 tasks, including explicit no-match rows
 - `docs/formal-run-queue-2026-08-16.tsv`: current 10-task × C0/T0/T1/T2 fail-closed execution queue; the 2026-08-14 file is retained as historical evidence
 - `docs/formal-run-queue-c0-t1-2026-08-16.tsv`: deterministic 50-row queue for the requested 25-task C0/T1 campaign
 - `docs/input-remediation-2026-08-16.md`: exact input, provenance, integrity, environment, documentation, and remaining-blocker changes from the pre-evaluation remediation pass

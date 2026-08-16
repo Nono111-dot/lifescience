@@ -9,7 +9,7 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 - Paths are workspace-relative. An analysis script must read only `inputs/` and recreate the declared machine-readable artifacts under `output/` in a clean copy.
 - Deterministic score is always 80: coverage/schema 10, core science 40, direction/decision 15, summary consistency 5, static/rerunnable script 10. The independent checker is the named `docs/oracles/<task-id>/scientific_checks.py`; submission code is not imported by the static checker.
 - Blind `JudgeScore` is 20: Evidence, Method, Restraint and Readability are each 0/3/5. The judge sees report artifacts only and must not see harness, condition, capability trace or deterministic score.
-- C0/T0 are baseline conditions. T1 exposes the complete experiment-approved 222-item life-science catalog for autonomous discovery/installation; T2 adds approved MCP/SCP connections. The task card never recommends a package. The operator records actual discovery/install/call evidence and performs the mandatory post-run reset.
+- C0 is Codex with no added domain skill. T1 uses the same Codex client/model/build with task-appropriate Agent Skills predeclared from the approved workbook and installed from fixed GitHub commits before a fresh task starts; MCP/SCP rows are excluded. The operator records install/load/invocation evidence and performs the mandatory post-run reset.
 - Source/license boundary: BixBench and CompBioBench files retain their upstream terms; this repository does not assert a new license over them. The LS09 synthetic fixtures are locally authored and intended for CC0-1.0 only after scientific review.
 - Input byte identity is frozen by `docs/inputs/SHA256SUMS.tsv` and the per-run `INPUT_MANIFEST.sha256.tsv`.
 

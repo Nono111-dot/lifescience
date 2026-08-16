@@ -78,6 +78,7 @@ def main() -> int:
     inventory = read_tsv(DOCS / "input-problem-inventory-v1.tsv")
     queue = read_tsv(DOCS / "formal-run-queue-c0-t1-2026-08-16.tsv")
     capabilities = read_tsv(DOCS / "capability-runtime-mapping-v1.tsv")
+    skill_plan = read_tsv(DOCS / "task-skill-plan-codex-t1-v1.tsv")
     task_ids = [row["task_id"] for row in inventory]
     pair_counts: dict[str, Counter] = defaultdict(Counter)
     for row in queue:
@@ -93,16 +94,48 @@ def main() -> int:
             failures.append(f"UNPAIRED_QUEUE:{task_id}")
     if len(capabilities) != 146:
         failures.append("T1_AGENT_SKILL_CATALOG_NOT_146")
+    if len(skill_plan) != 25 or {row["task_id"] for row in skill_plan} != set(task_ids):
+        failures.append("T1_TASK_SKILL_PLAN_SCOPE_INVALID")
 
-    mapped = [row for row in capabilities if row["runtime_package_id"] and row["runtime_install_source"]]
+    mapped = [
+        row for row in capabilities
+        if row["source_repo"] and row["source_ref"] and row["source_path"] and row["codex_install_source"]
+    ]
+    source_verified = [row for row in capabilities if row["source_verification"] == "sha256_pass"]
     smoke_ready = [
         row for row in capabilities
         if row["install_smoke_status"] == row["invoke_smoke_status"] == row["uninstall_smoke_status"] == "pass"
     ]
     if len(mapped) != len(capabilities):
-        failures.append("T1_RUNTIME_MAPPING_INCOMPLETE")
-    if len(smoke_ready) != len(capabilities):
-        failures.append("T1_SMOKE_TESTS_INCOMPLETE")
+        failures.append("T1_INSTALL_SOURCE_MAPPING_INCOMPLETE")
+    if len(source_verified) != len(capabilities):
+        failures.append("T1_SOURCE_SHA_VERIFICATION_INCOMPLETE")
+
+    capability_by_id = {row["catalog_item_id"]: row for row in capabilities}
+    selected_ids = {
+        item
+        for row in skill_plan
+        if row["selected_catalog_item_ids"] != "NONE"
+        for item in row["selected_catalog_item_ids"].split(";")
+    }
+    unknown_selected = sorted(selected_ids - set(capability_by_id))
+    for item in unknown_selected:
+        failures.append(f"T1_SELECTED_SKILL_UNKNOWN:{item}")
+    selected_install_ready = {
+        item for item in selected_ids
+        if item in capability_by_id and capability_by_id[item]["install_smoke_status"] == "pass"
+    }
+    selected_full_smoke = {
+        item for item in selected_ids
+        if item in capability_by_id
+        and capability_by_id[item]["install_smoke_status"] == "pass"
+        and capability_by_id[item]["invoke_smoke_status"] == "pass"
+        and capability_by_id[item]["uninstall_smoke_status"] == "pass"
+    }
+    if selected_install_ready != selected_ids:
+        failures.append("T1_SELECTED_SKILL_INSTALL_SMOKE_INCOMPLETE")
+    if selected_full_smoke != selected_ids:
+        failures.append("T1_SELECTED_SKILL_LOAD_INVOKE_RESET_SMOKE_INCOMPLETE")
 
     accepted = accepted_oracles()
     missing_accepted = sorted(set(task_ids) - accepted)
@@ -118,8 +151,14 @@ def main() -> int:
         "run_count": len(queue),
         "paired_tasks": sum(pair_counts[t] == Counter({"C0": 1, "T1": 1}) for t in task_ids),
         "agent_skill_catalog_rows": len(capabilities),
-        "runtime_mapped_rows": len(mapped),
+        "install_source_mapped_rows": len(mapped),
+        "source_sha_verified_rows": len(source_verified),
         "smoke_ready_rows": len(smoke_ready),
+        "t1_tasks_with_selected_skill": sum(row["selected_catalog_item_ids"] != "NONE" for row in skill_plan),
+        "t1_tasks_without_catalog_match": sum(row["selected_catalog_item_ids"] == "NONE" for row in skill_plan),
+        "selected_unique_skills": len(selected_ids),
+        "selected_install_smoke_ready": len(selected_install_ready),
+        "selected_full_smoke_ready": len(selected_full_smoke),
         "accepted_oracles": len(accepted & set(task_ids)),
         "input_files_checked": checked_inputs,
         "formal_release": not failures,

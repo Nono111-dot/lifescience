@@ -15,8 +15,8 @@ The paste-once Prompt inside each card is the only task instruction given to an 
 - C0/T1 campaign: `docs/evaluation-protocol-c0-t1-v2.md`.
 - Release decision: `docs/formal-eval-release-status-2026-08-16.md`.
 
-Structural completeness is not scientific acceptance. A card remains blocked until its declared reference, oracle, acceptance controls, reviewers, target-client runtime and environment-reset gates are all closed.
+Structural completeness is not scientific acceptance. A card remains blocked until its declared reference, oracle, acceptance controls, reviewers, selected Codex Skill smoke tests and environment-reset gates are all closed.
 
 ## Current denominator
 
-The requested queue contains 25 tasks and 50 planned runs. All 69 agent-visible input files pass the corrected byte manifest, but only 7/25 scientific oracles are accepted and no T1 runtime package has completed target-client smoke testing. The formal denominator is therefore currently zero. Attempts made before release must be labelled calibration or diagnostic and excluded from headline scores.
+The requested queue contains 25 tasks and 50 planned Codex runs. All 69 agent-visible input files pass the corrected byte manifest and all 146 catalogue Skill sources pass fixed-commit SHA verification, but only 7/25 scientific oracles are accepted. The formal denominator is therefore currently zero. Attempts made before release must be labelled calibration or diagnostic and excluded from headline scores.

@@ -1,0 +1,26 @@
+task_id	selected_catalog_item_ids	selection_basis	treatment_status
+ls01-grna-offtarget-rank	ITEM-213	Synthetic Biology Design is the closest catalogue workflow for guide-design trade-off auditing.	selected_install_smoke_pass
+ls01-primer-transcript-audit	ITEM-095	Direct DNA/RNA sequence and oligonucleotide analysis support.	selected_install_smoke_pass
+ls01-vector-orf-audit	ITEM-095;ITEM-213	Sequence/oligonucleotide checks plus synthetic-biology design audit.	selected_install_smoke_pass
+ls02-deleterious-mutation	ITEM-150;ITEM-220	Genome annotation plus variant pathogenicity assessment.	selected_install_smoke_pass
+ls02-find-deletion	ITEM-112	Chromosome Structure Analysis is the closest structural-variant workflow.	selected_install_smoke_pass
+ls02-infer-genome-build	ITEM-217	UCSC Genome Browser Exploration covers coordinate/build reasoning.	selected_install_smoke_pass
+ls03-cryptic-exon	ITEM-216	Transcriptome Analysis Pipeline covers transcript/junction analysis.	selected_install_smoke_pass
+ls03-atac-sample-swap	ITEM-199	Regulatory Region Analysis is the closest ATAC/regulatory workflow.	selected_install_smoke_pass
+ls03-genome-coordinates	ITEM-199	Regulatory Region Analysis covers enhancer/promoter evidence.	selected_install_smoke_pass
+ls04-differential-composition	ITEM-036	scvi-tools covers probabilistic single-cell analysis and composition-aware workflows.	selected_install_smoke_pass
+ls04-perturbseq-reference-map	ITEM-035	scGPT covers single-cell embeddings and reference mapping.	selected_install_smoke_pass
+ls04-spatial-deconvolution	ITEM-036	scvi-tools is the closest catalogue package for single-cell/spatial latent modelling.	selected_install_smoke_pass
+ls05-protein-shape	ITEM-186	Protein Structure Comprehensive Analysis supports structure inspection.	selected_install_smoke_pass
+ls05-structure-model-ranking	ITEM-187	Protein Structure Quality Assessment directly supports model-quality ranking.	selected_install_smoke_pass
+ls05-low-confidence-pocket	ITEM-102	Binding Site Characterization directly supports pocket evidence auditing.	selected_install_smoke_pass
+ls06-eno1-effect-size	ITEM-189	Proteome-Level Analysis is the closest proteomics table-analysis workflow.	selected_install_smoke_pass
+ls06-eno1-significance-audit	ITEM-189	Proteome-Level Analysis is the closest proteomics significance workflow.	selected_install_smoke_pass
+ls07-combination-treatment-deg	ITEM-216	Transcriptome Analysis Pipeline supports differential-expression workflow control.	selected_install_smoke_pass
+ls07-combination-treatment-mechanism	ITEM-216;ITEM-143	Transcriptome analysis plus Gene Ontology Analysis supports enrichment interpretation without changing the pinned Reactome contract.	selected_install_smoke_pass
+ls08-multiome-column-match	ITEM-160	Multi-Omics Integration directly matches cross-modality alignment.	selected_install_smoke_pass
+ls08-enhancer-promoter-integration	ITEM-160;ITEM-199	Multi-omics integration plus regulatory-region analysis matches the two-evidence task.	selected_install_smoke_pass
+ls09-opentrons-sop	NONE	No Agent Skill in the workbook covers Opentrons, liquid handling or laboratory protocol simulation; installing an unrelated skill would confound T1.	no_catalog_match
+ls09-plate-dilution-recovery	NONE	No Agent Skill in the workbook covers dilution, pipetting or liquid-handling recovery; installing an unrelated skill would confound T1.	no_catalog_match
+ls10-neun-power-analysis	NONE	No Agent Skill in the workbook provides statistical power analysis; installing an unrelated clinical workflow would confound T1.	no_catalog_match
+ls10-treatment-response-model	NONE	No Agent Skill in the workbook provides logistic-regression/statistical modelling; installing an unrelated clinical workflow would confound T1.	no_catalog_match
