@@ -2,7 +2,7 @@
   "method": "AUDIT_RULE.md v1",
   "rows": [
     {"construct_id": "c01", "frame_ok": true, "start_ok": true, "stop_ok": true, "tag_ok": false, "overall_status": "fail", "issues": ["TAG"]},
-    {"construct_id": "c02", "frame_ok": true, "start_ok": true, "stop_ok": false, "tag_ok": true, "overall_status": "fail", "issues": ["STOP"]},
+    {"construct_id": "c02", "frame_ok": false, "start_ok": true, "stop_ok": false, "tag_ok": true, "overall_status": "fail", "issues": ["STOP", "FRAME"]},
     {"construct_id": "c03", "frame_ok": false, "start_ok": true, "stop_ok": true, "tag_ok": false, "overall_status": "fail", "issues": ["FRAME", "TAG"]}
   ]
 }
