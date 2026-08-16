@@ -1,0 +1,3 @@
+# Local full-artifact adjudication
+
+The native BixBench record exposes scalar ideal `677`, while its recovered notebook prints `679` under a partly different threshold implementation. Neither publishes a row-level gold table. For this expanded local task, the paste-once prompt is authoritative: filtering is evaluated on the six selected samples, all three numeric thresholds use strict `>`, and PyDESeq2 0.5.0 is frozen. The independent run retained 18,029 genes, produced 4,196 null adjusted p-values, and marked 555 rows as passing. This 555 endpoint is explicitly a local full-artifact adjudication and must not be represented as the native BixBench ideal.

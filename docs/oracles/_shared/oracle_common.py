@@ -91,9 +91,18 @@ def _coverage(output: Path, required: list[str]) -> tuple[int, list[str]]:
     return (10 if not failures else 0), failures
 
 
-def _script(output: Path, required: list[str]) -> tuple[int, list[str]]:
+def _script(workspace: Path, output: Path, required: list[str]) -> tuple[int, list[str]]:
     script_names = [name for name in required if name in {"analysis.py", "protocol.py"}]
-    if not script_names:  # L1 visual health check uses reproducible view metadata in task checker.
+    if not script_names:
+        # The L1 protein-shape task intentionally has no executable analysis.py;
+        # its reproducibility contract is machine-readable view metadata.
+        if set(required) == {"shape_call.json", "shape_view.png"}:
+            try:
+                call = json.loads((output / "shape_call.json").read_text(encoding="utf-8"))
+                ok = all(bool(call.get(key)) for key in ("method", "atom_selection", "projection"))
+                return (10 if ok else 0), ([] if ok else ["VIEW_METADATA_INCOMPLETE"])
+            except Exception as exc:
+                return 0, [f"VIEW_METADATA_UNPARSEABLE:{type(exc).__name__}"]
         return 0, []
     failures: list[str] = []
     for name in script_names:
@@ -109,7 +118,28 @@ def _script(output: Path, required: list[str]) -> tuple[int, list[str]]:
         literals = [node.value for node in ast.walk(tree) if isinstance(node, ast.Constant) and isinstance(node.value, str)]
         if any(value.startswith(("C:\\", "/Users/", "/home/")) for value in literals):
             failures.append(f"SCRIPT_ABSOLUTE_PATH:{name}")
-    return (10 if not failures else 0), failures
+    if failures:
+        return 0, failures
+    # Two points are earned for a parseable, portable script. The remaining
+    # points require an evaluator-owned isolated rerun record; the static oracle
+    # never executes untrusted submission code itself.
+    score = 2
+    record_path = workspace / ".evaluator" / "reproducibility.json"
+    try:
+        record = json.loads(record_path.read_text(encoding="utf-8"))
+    except Exception:
+        return score, ["RERUN_RECORD_MISSING"]
+    clean = record.get("clean_run_exit_code") == 0 and record.get("required_outputs_reproduced") is True
+    equivalent = clean and record.get("semantic_equivalence_pass") is True
+    if clean:
+        score += 6
+    else:
+        failures.append("CLEAN_RERUN_FAILED")
+    if equivalent:
+        score += 2
+    else:
+        failures.append("RERUN_OUTPUT_MISMATCH")
+    return score, failures
 
 
 def _load_scientific_checker(oracle_dir: Path):
@@ -132,7 +162,7 @@ def run(task_id: str) -> int:
     output = workspace / "output"
     required = REQUIRED_OUTPUTS[task_id]
     coverage_score, failures = _coverage(output, required)
-    script_score, script_failures = _script(output, required)
+    script_score, script_failures = _script(workspace, output, required)
     failures.extend(script_failures)
 
     oracle_dir = Path(__file__).resolve().parent.parent / task_id
@@ -172,4 +202,3 @@ def run(task_id: str) -> int:
     if args.json_out:
         Path(args.json_out).write_text(payload + "\n", encoding="utf-8")
     return 0 if result["grader_status"] == "scored" else 2
-

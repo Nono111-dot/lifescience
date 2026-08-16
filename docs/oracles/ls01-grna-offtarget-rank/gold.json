@@ -1,0 +1,11 @@
+{
+  "method": "RANKING_RULE.md v1",
+  "rows": [
+    {"guide_id": "g02", "rank": 1, "on_target_score": 0.67, "risk_class": "low", "decision": "recommend"},
+    {"guide_id": "g06", "rank": 2, "on_target_score": 0.64, "risk_class": "low", "decision": "acceptable"},
+    {"guide_id": "g04", "rank": 3, "on_target_score": 0.59, "risk_class": "low", "decision": "acceptable"},
+    {"guide_id": "g03", "rank": 4, "on_target_score": 0.74, "risk_class": "high", "decision": "reject"},
+    {"guide_id": "g01", "rank": 5, "on_target_score": 0.82, "risk_class": "critical", "decision": "reject"},
+    {"guide_id": "g05", "rank": 6, "on_target_score": 0.78, "risk_class": "critical", "decision": "reject"}
+  ]
+}

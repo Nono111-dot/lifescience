@@ -1,0 +1,1 @@
+{"annotation":"Ensembl Genes 112","gene":"GNG10","chrom":"chr9","start":111664537,"end":111664589,"length_bp":53,"left_junction":{"intron_start":111661716,"intron_end":111664536,"read_support":32},"right_junction":{"intron_start":111664590,"intron_end":111666814,"read_support":25},"mapped_reads_mapq20":160807,"total_reads":200414}

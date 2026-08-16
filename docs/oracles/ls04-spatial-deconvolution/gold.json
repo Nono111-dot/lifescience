@@ -1,0 +1,7 @@
+{
+  "method": "single-cell library normalization; mean reference profile per label; target-spot library normalization; non-negative least squares; normalize coefficients",
+  "target_spot": "Spot_710-1",
+  "weights": {"B_Cell":0.3173822167906145,"Endothelial":0.3544164940152358,"Macrophage":0.3166070560204089,"T_Cell":0.011594233173740818,"Fibroblast_Stroma":0.0,"Tumor_Core":0.0},
+  "supported_types_at_0.05": ["B_Cell","Endothelial","Macrophage"],
+  "residual": 0.016676053825656827
+}

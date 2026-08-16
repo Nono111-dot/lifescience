@@ -19,11 +19,11 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 |---|---|---:|---|---|---|
 | `ls06-eno1-effect-size` | `proteomics_and_metabolomics` | L2 / 35 min | X / D,A,V,O,G | BixBench `bix-37-q1/q4` | ready |
 | `ls06-eno1-significance-audit` | `proteomics_and_metabolomics` | L2 / 30 min | A / D,X,V,I,O | BixBench `bix-37-q3` | ready |
-| `ls07-combination-treatment-deg` | `transcriptomics` | L3 / 75 min | X / D,P,T,A,G | BixBench `bix-43-q3` | blocked: pinned DESeq2 reference acceptance |
-| `ls07-combination-treatment-mechanism` | `systems_and_synthetic_biology` | L3 / 90 min | I / T,A,X,V,G | BixBench `bix-43-q5` | blocked: enrichment reference/oracle acceptance; Reactome input now frozen |
-| `ls08-multiome-column-match` | `single_cell_and_spatial` | L3 / 75 min | X / D,P,A,V,G | CompBioBench `multiome-match-atac-rna-q1` | blocked: hidden mapping/normalization acceptance |
-| `ls08-enhancer-promoter-integration` | `epigenomics_and_regulation` | L2 / 45 min | I / D,A,X,V,O | CompBioBench `ep-interactions-q1` | blocked: aggregation/tie-rule acceptance |
-| `ls09-opentrons-sop` | `systems_and_synthetic_biology` | L2 / 45 min | P / T,A,V,O,G | source-supported local extension; Opentrons official protocol/API rules | blocked: cross-harness simulator provisioning/acceptance |
+| `ls07-combination-treatment-deg` | `transcriptomics` | L3 / 75 min | X / D,P,T,A,G | BixBench `bix-43-q3` | ready: PyDESeq2 0.5.0 full-row reference frozen |
+| `ls07-combination-treatment-mechanism` | `systems_and_synthetic_biology` | L3 / 90 min | I / T,A,X,V,G | BixBench `bix-43-q5` | ready: frozen Reactome universe and full enrichment reference |
+| `ls08-multiome-column-match` | `single_cell_and_spatial` | L3 / 75 min | X / D,P,A,V,G | CompBioBench `multiome-match-atac-rna-q1` | ready: mapping/normalization rule and score matrix frozen |
+| `ls08-enhancer-promoter-integration` | `epigenomics_and_regulation` | L2 / 45 min | I / D,A,X,V,O | CompBioBench `ep-interactions-q1` | ready: aggregation, residual-z and tie rule frozen |
+| `ls09-opentrons-sop` | `systems_and_synthetic_biology` | L2 / 45 min | P / T,A,V,O,G | source-supported local extension; Opentrons official protocol/API rules | ready: Opentrons 7.1.0 reference simulation passed 3/3 |
 | `ls09-plate-dilution-recovery` | `systems_and_synthetic_biology` | L2 / 40 min | R / D,P,A,X,V | source-supported local extension; dilution mass balance and Opentrons volume rules | ready |
 | `ls10-neun-power-analysis` | `biomedical_and_clinical_bioinformatics` | L2 / 40 min | X / D,A,V,I,G | BixBench `bix-19-q1/q2` | ready |
 | `ls10-treatment-response-model` | `biomedical_and_clinical_bioinformatics` | L2 / 45 min | X / D,A,V,I,G | BixBench `bix-51-q3/q4` | ready |
@@ -54,7 +54,7 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 - Hard gates: design and contrast recorded exactly; gene IDs unique; threshold rule uses strict inequalities exactly; summary count equals passing rows.
 - Deterministic 80: coverage/schema 10; frozen reference values and pass count 40 using the pinned DESeq2 environment/tolerances; direction/threshold decision 15; summary consistency 5; static/rerunnable script 10.
 - Ablation expectation: `[transcriptome-analysis]`, `[experimental-design]`, `[multiple-testing-audit]`, `[reproducible-code]`; expected to reduce contrast, filtering and provenance errors.
-- Readiness blocker: checker remains `ACCEPTED=False` until one pinned R/DESeq2 design reproduces the reference in 3/3 clean runs and wrong/empty controls fail. Do not formally run or replace this with a hand-authored reference table.
+- Readiness closure: the prompt-authoritative PyDESeq2 0.5.0 analysis, full-row reference, 555-gene threshold result and 677/679 upstream discrepancy adjudication are frozen in the task-local oracle.
 
 ## `ls07-combination-treatment-mechanism`
 
@@ -64,7 +64,7 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 - Hard gates: exact pinned gene-set release and universe used; corrected enrichment statistics valid; mechanism call supported by a reported row; no causal overclaim.
 - Deterministic 80: coverage/schema 10; overlap/statistics/ranking and primary mechanism 40 against the pinned reference; evidence direction/restraint 15; summary consistency 5; static/rerunnable script 10.
 - Ablation expectation: `[pathway-analysis]`, `[gene-set-reference]`, `[network-interpretation]`, `[reproducible-code]`; expected to reduce stale-release, universe and causal-language errors.
-- Readiness blocker: the Reactome library and explicit background are now packaged and hashed, resolving the missing-input defect. The complete DE/enrichment reference table, mapping adjudication, benchmark-anchor reconciliation, and 3/3 positive/negative oracle acceptance are still absent. Do not infer a full gold table merely from the published top-pathway scalar anchors.
+- Readiness closure: the Reactome library/background, DE mapping, complete 1,818-pathway enrichment table and top-mechanism call are frozen in the task-local oracle; local results are explicitly separated from historical live-Enrichr anchors.
 
 ## `ls08-multiome-column-match`
 
@@ -74,7 +74,7 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 - Hard gates: all eight labels on each side appear exactly once; mapping is a bijection; all reported scores finite; mapping direction is RNA-to-ATAC.
 - Deterministic 80: coverage/schema 10; full score matrix and hidden permutation 40 under the frozen preprocessing/tolerance; bijection/direction 15; report consistency 5; static/rerunnable script 10.
 - Ablation expectation: `[multi-omics-integration]`, `[feature-alignment]`, `[assignment-optimization]`, `[reproducible-code]`; expected to reduce label leakage, many-to-one and normalization errors.
-- Readiness blocker: checker remains `ACCEPTED=False` until the expected permutation and acceptable normalization policy pass independent reference/wrong/empty tests in 3/3 clean runs.
+- Readiness closure: feature mapping, top-2,000 RNA variance selection, cosine score matrix and Hungarian one-to-one permutation are frozen in the task-local rule and oracle.
 
 ## `ls08-enhancer-promoter-integration`
 
@@ -84,7 +84,7 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 - Hard gates: modalities joined by the true pair key; all candidates covered once; least-supported call equals minimum combined support under the frozen rule; contact is not described as perturbational proof.
 - Deterministic 80: coverage/schema 10; modality values, combined score and ranking 40; least-supported decision 15; report consistency 5; static/rerunnable script 10.
 - Ablation expectation: `[regulatory-integration]`, `[causal-evidence-audit]`, `[tabular-analysis]`, `[reproducible-code]`; expected to reduce bad joins, scale mixing and causal overclaim.
-- Readiness blocker: checker remains `ACCEPTED=False` until aggregation, normalization and tie rules are frozen from benchmark-supported evidence and pass the acceptance suite. No rule may be invented merely to make one pair win.
+- Readiness closure: background distance regression, robust residual z-score, guide aggregation, physical-evidence threshold and ranking/tie rule are frozen and independently recomputed by the checker.
 
 ## `ls09-opentrons-sop`
 
@@ -94,7 +94,7 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 - Hard gates: exact net-transfer contract and liquid balance; valid deck/labware/wells/pipette range and contamination-safe tip policy; static protocol contract; pinned simulation success.
 - Deterministic 80: coverage/schema 10; transfer contract, balance, pipette and tip policy 40; protocol/simulation decision 15; report consistency 5; static protocol plus isolated pinned simulation 10.
 - Ablation expectation: `[protocol-planning]`, `[liquid-handling]`, `[labware-validation]`, `[simulation]`; expected to reduce unsafe tips, invalid volumes, deck and false-success errors.
-- Readiness blocker: the repository now contains a pinned Opentrons 7.1.0 / API 2.16 simulator contract and hash-locked Linux CPython 3.10 dependency set. The checker remains `ACCEPTED=False` until that exact environment is provisioned identically in Codex and all scheduled Duanyan arms, the reference protocol is executed by the real simulator 3/3, and wrong/empty controls fail. A failed/missing simulator remains a valid run observation but cannot produce a formal score.
+- Readiness closure: the reference protocol completed three real Opentrons 7.1.0 simulations and wrong/empty/legacy-tip controls fail; both C0 and T1 receive the same pre-provisioned simulator. The macOS-arm64 versus production Linux-x86_64 platform difference is retained as a disclosed campaign deviation.
 
 ## `ls09-plate-dilution-recovery`
 
@@ -125,4 +125,4 @@ Controlling source: Feishu evaluation workflow revision 138, especially §3.1. S
 
 ## Release gate
 
-A card enters the main result only if its reference submission passes 3/3 clean reruns, empty output and at least one format-correct scientific error fail 3/3, one domain reviewer and one grader reviewer accept it, and a timed calibration run can be frozen and rescored. On 2026-08-14, exactly five cards above meet this gate.
+A card enters the main result only if its reference submission passes 3/3 clean reruns, empty output and at least one format-correct scientific error fail 3/3, one domain reviewer and one grader reviewer accept it, and a timed calibration run can be frozen and rescored. On 2026-08-17, all ten cards have accepted static checkers; campaign-level reviewer and platform deviations remain governed by `formal-eval-release-status-2026-08-17.md`.

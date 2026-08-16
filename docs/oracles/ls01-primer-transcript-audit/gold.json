@@ -1,0 +1,8 @@
+{
+  "metadata_error": "CDS_OUT_OF_RANGE",
+  "rows": [
+    {"pair_id": "p01", "transcripts_matched": "TX_CANONICAL", "amplicon_length": 102, "cds_compatible": false, "status": "malformed_metadata"},
+    {"pair_id": "p02", "transcripts_matched": "TX_ALT", "amplicon_length": 99, "cds_compatible": false, "status": "malformed_metadata"},
+    {"pair_id": "p03", "transcripts_matched": "", "amplicon_length": null, "cds_compatible": false, "status": "malformed_metadata"}
+  ]
+}

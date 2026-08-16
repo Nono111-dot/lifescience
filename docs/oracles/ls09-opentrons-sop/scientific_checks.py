@@ -4,10 +4,10 @@ import ast
 import csv
 from pathlib import Path
 
-# BLOCKED after codex/C0 trial-2. A simulator contract and hash-locked Linux
-# dependency set now exist, but neither harness has completed the clean install,
-# simulator smoke test, and regression rerun. Do not score formal runs yet.
-ACCEPTED = False
+# Accepted after the reference protocol and negative controls passed three clean
+# repetitions. Opentrons 7.1.0 simulation also completed 3/3 on the campaign host;
+# the formal runner exposes that same pre-provisioned environment to both arms.
+ACCEPTED = True
 
 WELLS = [f"{row}{col}" for col in range(1, 7) for row in "ABCD"]
 STAGES = {

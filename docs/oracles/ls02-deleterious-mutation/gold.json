@@ -1,0 +1,17 @@
+{
+  "assembly": "GRCh38",
+  "chrom": "chr9",
+  "position_1based": 127661125,
+  "ref": "G",
+  "alt": "T",
+  "gene": "STXBP1",
+  "mane_transcript": "ENST00000373299.5",
+  "consequence": "stop_gained",
+  "protein_change": "p.Glu117Ter",
+  "alt_reads": 18,
+  "total_reads": 94,
+  "vaf": 0.19148936170212766,
+  "pli": 1.0,
+  "loeuf": 0.1,
+  "interpretation": "deleterious nonsense SNV supported by read evidence and strong loss-of-function constraint; not a clinical pathogenicity classification"
+}

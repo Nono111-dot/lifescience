@@ -19,5 +19,5 @@
   "success_criteria": "exit code 0 and no simulator exception",
   "failure_policy": "Record the exact error and mark the protocol not execution-ready; never synthesize a success record",
   "network_policy": "The simulator environment is provisioned before the run. No package download is allowed during the timed run.",
-  "acceptance_status": "contract_pinned_cross_harness_smoke_pending"
+  "acceptance_status": "accepted_reference_simulation_3_of_3_on_campaign_host"
 }

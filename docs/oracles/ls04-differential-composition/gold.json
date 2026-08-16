@@ -1,0 +1,11 @@
+{
+  "method": "MARKER_PANEL.tsv plus ANNOTATION_RULE.md v1",
+  "sample_totals": {"sample1": 6295, "sample2": 5004},
+  "counts": {
+    "sample1": {"astrocyte":285,"microglial cell":11,"RPE cell":2,"cone cell":225,"rod cell":3976,"horizontal cell":237,"bipolar cell":918,"RGC":116,"T cells":4,"macrophage":3,"Schwann cell":2,"Pericyte":2,"B cell":0,"fibroblast":0,"endothelial cell":2,"muller glia cell":512},
+    "sample2": {"astrocyte":62,"microglial cell":3,"RPE cell":3,"cone cell":167,"rod cell":3558,"horizontal cell":49,"bipolar cell":620,"RGC":106,"T cells":0,"macrophage":0,"Schwann cell":2,"Pericyte":1,"B cell":0,"fibroblast":0,"endothelial cell":0,"muller glia cell":433}
+  },
+  "depleted_cell_type": "horizontal cell",
+  "sample1_fraction": 0.03764892772041303,
+  "sample2_fraction": 0.009792166267
+}

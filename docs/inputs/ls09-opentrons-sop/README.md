@@ -19,4 +19,4 @@ CSV identifiers are unique within their declared role. Volumes are microlitres. 
 
 ## Integrity and readiness boundary
 
-`../SHA256SUMS.tsv` and `docs/oracles/ls09-opentrons-sop/input-sha256.tsv` freeze the same files. The simulator dependency lock is under `docs/environments/opentrons-api-2.16/`. Formal acceptance remains blocked until that exact environment is provisioned and smoke-tested identically in both harnesses and a real-simulator 3/3 acceptance record is committed.
+`../SHA256SUMS.tsv` and `docs/oracles/ls09-opentrons-sop/input-sha256.tsv` freeze the same files. The simulator dependency lock is under `docs/environments/opentrons-api-2.16/`. The reference protocol completed three clean Opentrons 7.1.0 simulations on the campaign host; the formal runner prepends the same pre-provisioned environment for both C0 and T1. The original Linux lock remains the release environment authority, while host-platform use is recorded as a campaign deviation.

@@ -51,10 +51,10 @@ def test_trial2_is_frozen_as_contract_regression_not_agent_science_error():
     assert regression["agent_release_decision"] == "ABORT BEFORE EXECUTION"
     assert regression["review"]["plan_row_failure_attributable_to_agent"] is False
     assert regression["review"]["simulation_failure_attributable_to_agent"] is False
-    assert checker.ACCEPTED is False
+    assert checker.ACCEPTED is True
 
 
 if __name__ == "__main__":
     test_acceptance_three_runs_and_negative_controls()
     test_trial2_is_frozen_as_contract_regression_not_agent_science_error()
-    print("PASS: unit controls; trial-2 frozen as contract regression; formal oracle BLOCKED")
+    print("PASS: 3/3 positive controls and negative controls; formal oracle ACCEPTED")

@@ -15,7 +15,7 @@ class OracleScaffoldTests(unittest.TestCase):
         for task_id in REQUIRED_OUTPUTS:
             self.assertTrue((root / task_id / "oracle.py").is_file(), task_id)
 
-    def test_unaccepted_oracle_fails_closed(self):
+    def test_accepted_oracle_scores_empty_workspace_without_passing_gate(self):
         root = Path(__file__).resolve().parent.parent
         task_id = "ls01-grna-offtarget-rank"
         repo_root = root.parent.parent
@@ -27,11 +27,12 @@ class OracleScaffoldTests(unittest.TestCase):
             text=True,
             check=False,
         )
-        self.assertEqual(2, completed.returncode)
+        self.assertEqual(0, completed.returncode)
         result = json.loads(completed.stdout)
-        self.assertEqual("blocked", result["grader_status"])
-        self.assertIsNone(result["deterministic_score"])
-        self.assertIn("ORACLE_NOT_ACCEPTED", result["failure_codes"])
+        self.assertEqual("scored", result["grader_status"])
+        self.assertFalse(result["hardgate_pass"])
+        self.assertEqual(0, result["deterministic_score"])
+        self.assertNotIn("ORACLE_NOT_ACCEPTED", result["failure_codes"])
 
 
 if __name__ == "__main__":

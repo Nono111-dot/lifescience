@@ -1,0 +1,1 @@
+{"threshold_nm":260,"n_cells":600,"timepoints_per_cell":250,"lags":[-20,20],"lag_convention":"contact(t) versus transcription(t+lag)","peak_absolute_lag":-1,"peak_association":0.07784324772318195,"peak_n_observations":149400,"causal_claim_supported":false}

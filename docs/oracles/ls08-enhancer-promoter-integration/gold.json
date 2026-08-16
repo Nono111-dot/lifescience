@@ -1,0 +1,62 @@
+{
+  "method": "background OLS log1p(mean contact) ~ log10(distance); residual robust z using median and 1.4826*MAD; guide log2((mean perturbed+0.5)/(mean control+0.5)); pair median; physical eligibility z>=1.645; combined_support=z*abs(median effect); eligible ranks descending; rank 0 ineligible; least supported is largest positive rank",
+  "rows": [
+    {
+      "pair_id": "EP1",
+      "contact_evidence": 1.9674206415099622,
+      "perturbation_effect": 0.373164431546745,
+      "combined_support": 0.7341714053023974,
+      "eligible": true,
+      "rank": 3
+    },
+    {
+      "pair_id": "EP2",
+      "contact_evidence": 1.8112792487595297,
+      "perturbation_effect": -1.2390155576864736,
+      "combined_support": 2.2442031685277257,
+      "eligible": true,
+      "rank": 1
+    },
+    {
+      "pair_id": "EP3",
+      "contact_evidence": 3.104750280566484,
+      "perturbation_effect": -0.010776186090758526,
+      "combined_support": 0.033457366788719176,
+      "eligible": true,
+      "rank": 4
+    },
+    {
+      "pair_id": "EP4",
+      "contact_evidence": 2.686143938459411,
+      "perturbation_effect": -0.7951462854782025,
+      "combined_support": 2.13587737492579,
+      "eligible": true,
+      "rank": 2
+    },
+    {
+      "pair_id": "EP5",
+      "contact_evidence": -1.562483623348734,
+      "perturbation_effect": -0.47085852950907303,
+      "combined_support": 0,
+      "eligible": false,
+      "rank": 0
+    },
+    {
+      "pair_id": "EP6",
+      "contact_evidence": -0.869530292560567,
+      "perturbation_effect": -0.2538824404942062,
+      "combined_support": 0,
+      "eligible": false,
+      "rank": 0
+    },
+    {
+      "pair_id": "EP7",
+      "contact_evidence": -1.2775950573376373,
+      "perturbation_effect": -0.5167708297845629,
+      "combined_support": 0,
+      "eligible": false,
+      "rank": 0
+    }
+  ],
+  "least_supported": "EP3"
+}

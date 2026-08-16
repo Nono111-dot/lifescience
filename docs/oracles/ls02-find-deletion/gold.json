@@ -1,0 +1,1 @@
+{"build":"GRCh38","chrom":"chr22","start_100kb":20000000,"end_100kb":21000000,"size_bp":1000000,"total_pairs":332123,"mapped_reads":641922,"breakpoint_spanning_pairs":5,"evidence":"zero-coverage interval with five approximately 1 Mb discordant pairs"}

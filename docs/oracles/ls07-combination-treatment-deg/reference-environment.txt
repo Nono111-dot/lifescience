@@ -1,0 +1,7 @@
+pydeseq2==0.5.0
+anndata==0.10.8
+numpy==1.26.4
+pandas==2.3.3
+scipy==1.17.1
+formulaic==1.2.2
+python==3.12.13

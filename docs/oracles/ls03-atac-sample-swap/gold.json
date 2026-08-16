@@ -1,0 +1,31 @@
+{
+  "swap_detected": true,
+  "organ_a": "Cloaca",
+  "organ_b": "Stomach",
+  "organ_count": 15,
+  "candidate_pair_count": 105,
+  "input_column_totals": {
+    "Bladder": 701506327,
+    "Brain": 1168148790,
+    "Cloaca": 484000505,
+    "GallBladder": 565994637,
+    "Gill": 1094125058,
+    "Heart": 868549497,
+    "Intestine": 699794434,
+    "Kidney": 745602917,
+    "Limb": 1147926115,
+    "Liver": 398317869,
+    "Lung": 877686879,
+    "Pancreas": 1398702406,
+    "Prostate": 973845979,
+    "Spleen": 497829833,
+    "Stomach": 455786546
+  },
+  "independent_reference": {
+    "dataset": "NCBI GEO GSE273356",
+    "method": "cross-check benchmark 10-kb column profiles against unswapped tissue fragment sources, then confirm with AmexT_v47 promoter/marker accessibility",
+    "source_file_sizes_bytes": {"Cloaca": 4079467003, "Stomach": 4355106294},
+    "first_1MiB_complete_bed_rows": {"Cloaca": 120562, "Stomach": 120634},
+    "interpretation": "the Stomach source has the larger source profile but the Cloaca-labelled benchmark column has the larger of the two totals; genome-local promoter evidence independently reverses the two labels"
+  }
+}

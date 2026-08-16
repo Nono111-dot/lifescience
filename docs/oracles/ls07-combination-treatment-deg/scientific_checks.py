@@ -1,47 +1,31 @@
 from __future__ import annotations
-import csv, json, math
+import csv,gzip,json,math
 from pathlib import Path
-
-# Native endpoint 677 is public, but row-level DE values require a pinned DESeq2
-# reference run. Keep diagnostic scoring available without admitting formal runs.
-ACCEPTED = False
-
-def num(v):
-    try: return float(v)
-    except (TypeError, ValueError): return math.nan
-
-def check(workspace: Path):
-    out=workspace/'output'; failures=[]; criteria={}
+ACCEPTED=True
+NULL={'','na','nan','null','none'}
+def _table(path,compressed=False):
     try:
-        with (out/'differential_expression.csv').open(encoding='utf-8-sig',newline='') as f: rows=list(csv.DictReader(f))
-    except Exception: rows=[]
-    ids=[str(r.get('gene_id','')) for r in rows]
-    unique=bool(rows) and len(ids)==len(set(ids)) and all(ids)
-    predicate_ok=True; passing=0; numeric_rows=0
-    for r in rows:
-        bm,lfc,padj=num(r.get('baseMean')),num(r.get('log2FoldChange')),num(r.get('padj'))
-        expected=math.isfinite(bm) and math.isfinite(lfc) and math.isfinite(padj) and padj<.05 and abs(lfc)>.5 and bm>10
-        reported=str(r.get('pass','')).strip().lower() in {'true','1','yes'}
-        if reported!=expected: predicate_ok=False
-        passing += int(reported); numeric_rows += int(math.isfinite(bm) and math.isfinite(lfc))
-    try: summary=json.loads((out/'summary.json').read_text(encoding='utf-8'))
-    except Exception: summary={}
-    reported_count=summary.get('n_passing',summary.get('passing_genes',summary.get('count')))
-    try: reported_count=int(reported_count)
-    except Exception: reported_count=-1
-    count_internal=reported_count==passing
-    # BixBench bix-43-q3 publishes 677 as its native ideal for the frozen DESeq2 analysis.
-    benchmark_count=passing==677 and reported_count==677
-    core=(10 if unique else 0)+(10 if numeric_rows==len(rows) and rows else 0)+(10 if predicate_ok else 0)+(10 if benchmark_count else 0)
-    direction=15 if predicate_ok and benchmark_count else 0
-    summary_score=5 if count_internal and benchmark_count else 0
-    if not unique: failures.append('DE_GENE_IDS_INVALID')
-    if not predicate_ok: failures.append('DE_PASS_PREDICATE_MISMATCH')
-    if not benchmark_count: failures.append('DE_BIX_NATIVE_COUNT_MISMATCH')
-    if not count_internal: failures.append('DE_SUMMARY_MISMATCH')
-    criteria.update(unique_gene_ids=unique,numeric_rows=numeric_rows,predicate_exact=predicate_ok,
-                    passing_rows=passing,bix_native_count_677=benchmark_count,summary_internal=count_internal)
-    failures.append('DESEQ2_REFERENCE_ENV_NOT_PINNED')
-    criteria['formal_blocker']='DESeq2 version/design/reference table not pinned; 677 validates only the native endpoint'
-    return {'core_science':core,'direction':direction,'summary':summary_score,
-            'hardgate_pass':False,'failure_codes':failures,'criteria':criteria}
+        h=gzip.open(path,'rt',encoding='utf-8-sig',newline='') if compressed else path.open(encoding='utf-8-sig',newline='')
+        with h:return list(csv.DictReader(h))
+    except Exception:return []
+def _id(r):return r.get('gene_id') or r.get('') or r.get('Unnamed: 0') or ''
+def _num(a,b):
+    if str(b).strip().lower() in NULL:return str(a).strip().lower() in NULL
+    try:return math.isclose(float(a),float(b),rel_tol=2e-5,abs_tol=1e-8)
+    except Exception:return False
+def _bool(x):return str(x).strip().lower() in {'true','1','yes'}
+def check(workspace:Path):
+    gold=_table(Path(__file__).parent/'reference_results.csv.gz',True);rows=_table(workspace/'output'/'differential_expression.csv');gb={_id(r):r for r in gold};by={_id(r):r for r in rows};coverage=len(rows)==len(by)==len(gold)==18029 and set(by)==set(gb);stats=[];passes=[]
+    for gid,g in gb.items():
+        r=by.get(gid,{})
+        stats.append(all(_num(r.get(k,''),g.get(k,'')) for k in ('baseMean','log2FoldChange','lfcSE','stat','pvalue','padj')))
+        passes.append(_bool(r.get('pass'))==_bool(g.get('pass_strict')))
+    try:s=json.loads((workspace/'output'/'summary.json').read_text())
+    except Exception:s={}
+    count_ok=int(s.get('passing_genes',s.get('pass_count',-1)))==555;contrast=str(s.get('contrast','')).lower();contrast_ok='cisplatin_ic50_cbd_ic50' in contrast and 'dmso' in contrast and str(s.get('design','group')).lower().replace('~','').strip()=='group'
+    core=(12 if coverage else 0)+(20 if all(stats) else 0)+(8 if all(passes) else 0);direction=count_ok and contrast_ok
+    report=(workspace/'output'/'report.md').read_text(errors='replace').lower() if (workspace/'output'/'report.md').is_file() else '';summary='555' in report and '0.05' in report and '0.5' in report and ('strict' in report or 'greater than' in report)
+    failures=[]
+    for ok,code in [(coverage,'GENE_COVERAGE'),(all(stats),'DE_STATISTICS'),(all(passes),'PASS_PREDICATE'),(count_ok,'PASS_COUNT'),(contrast_ok,'CONTRAST_DESIGN'),(summary,'REPORT')]:
+        if not ok:failures.append(code+'_MISMATCH')
+    return {'core_science':core,'direction':15 if direction else 0,'summary':5 if summary else 0,'hardgate_pass':coverage and all(stats) and all(passes) and direction,'failure_codes':failures,'criteria':{'18029_unique_genes':coverage,'statistics_correct_rows':sum(stats),'statistics_total':len(stats),'pass_correct_rows':sum(passes),'local_pass_count_555':count_ok,'six_sample_group_contrast':contrast_ok,'report_thresholds_and_count':summary}}

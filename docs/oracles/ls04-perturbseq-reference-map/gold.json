@@ -1,0 +1,8 @@
+{
+  "method": "unique common genes; guide pseudobulk raw counts; CPM 1e6; log1p; subtract within-dataset mean non-targeting pseudobulk; cosine matrix; maximum-weight one-to-one Hungarian assignment",
+  "rows": [
+    {"target_gene":"PABPC1","query_guide_id":"guide18","score":0.19926841632799608,"runner_up_score":0.1304956736685386,"confidence":"medium"},
+    {"target_gene":"NUDT21","query_guide_id":"guide13","score":0.4195703597293311,"runner_up_score":0.16970343069461893,"confidence":"high"},
+    {"target_gene":"LEO1","query_guide_id":"guide14","score":0.13309168781334235,"runner_up_score":0.14452276198253836,"confidence":"low"}
+  ]
+}
