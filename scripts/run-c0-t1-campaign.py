@@ -150,6 +150,15 @@ def main() -> int:
                 exit_code = 124; status = "timeout"
         execution = {"run_id": run_id, "task_id": task_id, "condition": condition, "model": args.model, "reasoning": args.reasoning, "client_version": subprocess.check_output([str(CODEX), "--version"], text=True).strip(), "started_at": utc(), "duration_seconds": time.monotonic() - started, "exit_code": exit_code, "status": status, "items": items}
         (log_dir / "execution.json").write_text(json.dumps(execution, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        if status != "completed":
+            # A transport/auth/client failure is not a model submission.  Preserve the
+            # one-use workspace and logs for infrastructure adjudication, but never
+            # freeze/score an empty or partial output as a deterministic zero.
+            print(
+                f"ABORT {seq}/50 {run_id} status={status} exit_code={exit_code} {utc()}",
+                flush=True,
+            )
+            return 2
         repro_python = str(OPENTRONS_PYTHON_BIN / "python") if task_id == "ls09-opentrons-sop" else str(BASE_PYTHON_BIN / "python")
         subprocess.run([sys.executable, str(ROOT / "scripts/check-reproducibility.py"), "--workspace", str(workspace), "--task-id", task_id, "--python", repro_python], stdout=(log_dir / "reproducibility_stdout.txt").open("w"), stderr=(log_dir / "reproducibility_stderr.txt").open("w"), check=False)
         subprocess.run([sys.executable, str(ROOT / "scripts/freeze-c0-t1-run.py"), "--campaign", str(campaign), "--run-id", run_id], check=True)
