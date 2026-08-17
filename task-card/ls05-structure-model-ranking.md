@@ -1,0 +1,82 @@
+# Task card: `ls05-structure-model-ranking`
+
+> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+
+## LS05-2｜结构模型置信度综合排名 — `ls05-structure-model-ranking`
+
+**Formal status:** `ready_local_extension` — Frozen rule, gold, accepted oracle and 3/3 acceptance tests present; synthetic fixture, not upstream benchmark.
+
+| 字段 | 内容 |
+| --- | --- |
+| ID | ls05-structure-model-ranking |
+| Domain / sub-domain | structural biology / model confidence |
+| Level / time | L2, 35 min |
+| Priority | P0 |
+| Anchor / related | D / P, A, O |
+| Source idea | benchmark-informed local extension (not an upstream benchmark item) |
+| Card version | task-cards-v1.md |
+
+### Inputs
+
+inputs/model_metrics.csv （164 B）
+
+inputs/residue_errors.csv （162 B）
+
+inputs/SCORING_RULE.md （大小未在 SHA 清单中记录）
+
+**输入说明：** model and residue metric CSVs plus the frozen SCORING_RULE.md; provenance and limits are documented in ls05-local-extension-provenance.md.
+
+仓库清单总大小：约 0.01 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+
+### Prompt（运行时仅复制本框）
+
+> Using only the files in inputs/, rank every supplied structural model exactly according to inputs/SCORING_RULE.md. Write output/model_ranking.csv with rank,model_id,global_score,interface_score,critical_residue_risk,decision, output/analysis.py, and output/report.md. Explain how chain-mapping completeness and critical-region uncertainty affect the ranking. Do not claim coordinate-level, interface, or experimental properties that are not present in the inputs.
+
+### Deliverables / Output contract
+
+output/model_ranking.csv
+
+output/analysis.py
+
+output/report.md.
+
+所有 CSV/TSV/JSON 必须可解析；ID 唯一；数值 finite；缺失值使用空字段或 null。
+
+可重跑脚本必须只使用相对 inputs/ 与 output/ 路径；grader 不直接 import 未受信提交代码。
+
+### Hard gates
+
+□ every model once
+
+□ unique ranks
+
+□ input metrics preserved
+
+□ rerun
+
+### Ablation（不进入 Prompt）
+
+`C0` uses no added life-science capability. In `T1`, task-appropriate Agent Skills are predeclared from the approved workbook catalogue and installed from their fixed GitHub commit/path before a fresh Codex task starts; MCP/SCP rows are excluded. Selection uses task metadata only and cannot change after outputs are observed. Every installed skill must be removed and the isolated Codex baseline verified before the next run.
+
+### DeterministicArtifactScore（0–80, authoritative v2）
+
+| Component | Points | Deterministic requirement |
+| --- | ---: | --- |
+| Coverage / schema | 10 | 10: every model occurs once, ranks are unique, and all required artifacts parse. |
+| Core science | 40 | 40: exact rank tuple/order (20) plus nine frozen global/interface/critical-risk fields prorated (20). |
+| Direction / decision | 15 | 15: three preferred/alternate/reject decisions prorated against frozen gold. |
+| Summary consistency | 5 | 5: report names model_A and identifies model_B's incomplete mapping consistently. |
+| Script / reproducibility | 10 | 10: analysis.py parses and contains no absolute user path; submission code is never imported by oracle. |
+
+No scientific points may be emitted until a static oracle, tolerances and correct/empty/wrong controls are independently accepted 3/3. Missing core artifact gives zero deterministic points.
+
+### JudgeScore（0–20）
+
+| Dimension | 0 | 3 | 5 |
+| --- | --- | --- | --- |
+| Evidence | No task-specific evidence, fabricated/untraceable support, or contradiction with machine-readable artifacts. | At least one traceable task-specific input/result supports the main claim, but coverage, linkage or uncertainty is incomplete. | Every main claim links to the relevant input/result artifact; decisive measurements/rows and evidence-bound uncertainty are explicit. |
+| Method | Missing or materially invalid method. | Broadly valid method with incomplete choices, direction, units or limitations. | Correct, auditable method with all consequential choices, direction, units and limitations stated. |
+| Restraint | Unsupported causal/clinical/experimental claim. | Mostly calibrated but one important boundary is vague. | Claims stay within the supplied evidence and all important limitations are explicit. |
+| Readability | Unusable or internally confusing report. | Understandable with notable ambiguity or clutter. | Concise, internally consistent and easy to audit against formal artifacts. |
+
+The judge records main-claim count, supported-claim count, evidence locations and a short rationale. Judge points cannot repair a deterministic hard-gate failure.

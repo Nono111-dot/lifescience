@@ -4,6 +4,7 @@ This repository contains reproducible desktop UI evaluation tasks for life-scien
 
 Current evaluation package:
 
+- `task-card/`: GitHub-facing directory with 25 standalone task cards (start here)
 - `docs/task-cards-v2.md`: 25-task v2 entry point
 - `docs/task-cards/ls01-ls05-v2.md`: normalized §3.1 cards for LS01–LS05
 - `docs/ls06-ls10-runbook-v2.md`: current 10-task scope and per-run capability reset gate
@@ -48,7 +49,7 @@ docs/
         └── test_oracle.py
 ```
 
-Start with [the 25-task v2 index](docs/task-cards-v2.md). Input licensing and copying rules are documented in [the input index](docs/inputs/README.md). The current formal campaign is fail-closed at preflight; do not interpret an unreviewed attempt as a formal score.
+Start with [the 25 standalone task cards](task-card/README.md). Input licensing and copying rules are documented in [the input index](docs/inputs/README.md). Formal release status and deviations are recorded separately from task-card completeness.
 
 ## Quick start
 
