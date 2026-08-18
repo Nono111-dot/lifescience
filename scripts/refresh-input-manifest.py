@@ -20,7 +20,14 @@ def digest(path: Path) -> str:
 
 
 def main() -> int:
-    paths = sorted(path for path in INPUTS.rglob("*") if path.is_file() and path != MANIFEST)
+    with (ROOT / "docs" / "selected-tasks-v1.tsv").open(encoding="utf-8", newline="") as handle:
+        task_ids = [row["task_id"] for row in csv.DictReader(handle, delimiter="\t")]
+    paths = sorted(
+        path
+        for task_id in task_ids
+        for path in (INPUTS / task_id).rglob("*")
+        if path.is_file()
+    )
     with MANIFEST.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle, delimiter="\t", quoting=csv.QUOTE_ALL, lineterminator="\n")
         writer.writerow(("path", "bytes", "sha256"))

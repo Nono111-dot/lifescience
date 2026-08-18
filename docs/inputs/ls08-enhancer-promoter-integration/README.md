@@ -15,4 +15,4 @@ Join the two modalities only by the supplied pair key. Keep physical contact and
 
 ## Integrity and readiness boundary
 
-See `../SHA256SUMS.tsv`. The source question mentions eight candidates while the supplied files contain `EP1` through `EP7`; this discrepancy is deliberately disclosed and must not be silently repaired. Formal scoring remains blocked until aggregation, normalization, and tie rules are independently accepted.
+See `../SHA256SUMS.tsv`. The source question mentions eight candidates while the supplied files contain `EP1` through `EP7`; this discrepancy is deliberately disclosed and must not be silently repaired. The frozen integration rule, gold artifacts and accepted static checker define scoring for the supplied EP1–EP7 files.

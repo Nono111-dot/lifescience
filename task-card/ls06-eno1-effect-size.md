@@ -1,10 +1,16 @@
 # Task card: `ls06-eno1-effect-size`
 
-> Canonical individual task card materialized from `docs/ls06-ls10-task-cards-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/ls06-ls10-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## `ls06-eno1-effect-size`
 
-- Inputs: `Proteomic_data .xlsx` (target; sheet `Tumor vs Normal`; columns include `gene`, `Normal`, `Tumor`, `Ratio`, `FC`, `log2FC`, `p.value`, `adj.Pval`) and `MeRIP_RNA_result.xlsx` (unrelated decoy; transcript/m6A table). Total 1,801,598 bytes. Provenance: BixBench capsule data; answer-bearing notebooks excluded.
+### Inputs (authoritative packaged inventory)
+- `inputs/MeRIP_RNA_result.xlsx` — 1,155,180 bytes
+- `inputs/Proteomic_data .xlsx` — 646,418 bytes
+- `inputs/README.md` — 1,248 bytes
+
+**Total:** 1,802,846 bytes (1.72 MiB).
+
 - Prompt: **Using the supplied proteomics results, calculate ENO1 tumor-versus-normal fold change and log2 fold change. Write `output/eno1_effect.json` with `gene,tumor_value,normal_value,fold_change,log2_fold_change,source_file,source_sheet`, `output/analysis.py`, and `output/report.md`. State the fold-change direction and do not substitute the unrelated workbook.**
 - Deliverables: one JSON object with finite numeric values and source identifiers; UTF-8 Markdown report; rerunnable Python script. No additional artifact is required.
 - Hard gates: exact ENO1/source row; all four core values within checker tolerance; fold-change/log2 direction internally consistent; source file and sheet traceable.

@@ -1,6 +1,6 @@
 # Task card: `ls02-deleterious-mutation`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS02-1｜嵌合有害 nonsense SNV 识别 — `ls02-deleterious-mutation`
 
@@ -14,15 +14,15 @@
 | Priority | P0 |
 | Anchor / related | D / P, T, A, R, O |
 | Source idea | CompBioBench deleterious-mutation-q2 |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/deleterious.mutation.q2.R1.fq.gz` — 53,964,925 bytes
+- `inputs/reference/GRCh38_chr9.fa.gz` — 36,554,007 bytes
+- `inputs/reference/README.md` — 584 bytes
+- `inputs/reference/gencode.v47.chr9.annotation.gtf.gz` — 2,358,409 bytes
 
-inputs/deleterious.mutation.q2.R1.fq.gz （51.46 MiB）
-
-**输入说明：** inputs/deleterious.mutation.q2.R1.fq.gz plus evaluator-pinned chr9 reference bundle (to be added).
-
-仓库清单总大小：约 51.46 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 92,877,925 bytes (88.58 MiB).
 
 ### Prompt（运行时仅复制本框）
 

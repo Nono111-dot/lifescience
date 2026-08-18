@@ -1,8 +1,0 @@
-slot_task_id	ls_task	priority	status	upstream	upstream_id	replaces_task_id	input_status	mapping_note
-ls01-promoter-sequence-retrieval	LS01	P0	selected	CompBioBench	promoter-sequence-retrieval-q1	ls01-grna-offtarget-rank	internet_native	LS01 sequence retrieval and strand orientation; does not preserve gRNA off-target atomic skill
-ls01-short-sequence-reference-alignment	LS01	P0	selected	CompBioBench	align-one-sequence-to-reference-q1	ls01-primer-transcript-audit	fetchable	LS01 short primer/probe-like sequence localization; does not preserve transcript primer-pair design
-ls01-main-cds-annotation	LS01	P0	selected	CompBioBench	orf-annot-q1	ls01-vector-orf-audit	fetchable	LS01 ORF/CDS analysis; does not preserve full vector audit
-ls05-structure-model-ranking	LS05	P0	benchmark-informed local extension	Zhang 2004; Mariani 2013	DOI:10.1002/prot.20264; DOI:10.1093/bioinformatics/btt473	ls05-structure-model-ranking	ready_local_extension	Synthetic fixture; frozen lexicographic rule and accepted deterministic oracle; not an upstream benchmark item
-ls05-low-confidence-pocket	LS05	P0	benchmark-informed local extension	AlphaFold DB guidance; Jumper 2021; Terwilliger 2024	AFDB FAQ; DOI:10.1038/s41586-021-03819-2; DOI:10.1038/s41592-023-02087-4	ls05-low-confidence-pocket	ready_local_extension	Synthetic fixture; frozen confidence-deferral rule and accepted deterministic oracle; not an upstream benchmark item
-ls09-opentrons-sop	LS09	P1	blocked	NONE	NONE	ls09-opentrons-sop	missing_public_dataset_and_scorer	ABC-Bench paper prompt exists but dataset/scorer are not public
-ls09-plate-dilution-recovery	LS09	P1	blocked	NONE	NONE	ls09-plate-dilution-recovery	domain_mismatch	BioProBench TEST-ERR-000950 is text protocol correction rather than machine-executable automation

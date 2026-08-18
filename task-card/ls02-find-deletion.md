@@ -1,6 +1,6 @@
 # Task card: `ls02-find-deletion`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS02-2｜浅层双端测序大片段缺失定位 — `ls02-find-deletion`
 
@@ -14,17 +14,15 @@
 | Priority | P0 |
 | Anchor / related | D / P, T, A, R, O |
 | Source idea | CompBioBench find-deletion-q1 |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/find.deletion.r1.fq.gz` — 16,705,359 bytes
+- `inputs/find.deletion.r2.fq.gz` — 16,701,241 bytes
+- `inputs/reference/GRCh38_chr22.fa.gz` — 11,147,284 bytes
+- `inputs/reference/README.md` — 295 bytes
 
-inputs/find.deletion.r1.fq.gz （15.93 MiB）
-
-inputs/find.deletion.r2.fq.gz （15.93 MiB）
-
-**输入说明：** paired FASTQ files plus pinned hg38 bundle (to be added).
-
-仓库清单总大小：约 31.86 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 44,554,179 bytes (42.49 MiB).
 
 ### Prompt（运行时仅复制本框）
 

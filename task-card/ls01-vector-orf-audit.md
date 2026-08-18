@@ -1,6 +1,6 @@
 # Task card: `ls01-vector-orf-audit`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS01-3｜表达载体 ORF 与克隆兼容性审计 — `ls01-vector-orf-audit`
 
@@ -14,15 +14,13 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, O |
 | Source idea | custom |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/AUDIT_RULE.md` — 704 bytes
+- `inputs/constructs.csv` — 262 bytes
 
-inputs/constructs.csv （262 B）
-
-**输入说明：** inputs/constructs.csv.
-
-仓库清单总大小：约 0.01 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 966 bytes (0.00 MiB).
 
 ### Prompt（运行时仅复制本框）
 

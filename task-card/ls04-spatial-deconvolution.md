@@ -1,6 +1,6 @@
 # Task card: `ls04-spatial-deconvolution`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS04-3｜空间转录组目标 Spot 反卷积 — `ls04-spatial-deconvolution`
 
@@ -14,15 +14,12 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, O |
 | Source idea | CompBioBench spatial-sim-q1 |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/spatial.sim.tar.gz` — 2,174,692 bytes
 
-inputs/spatial.sim.tar.gz （2.07 MiB）
-
-**输入说明：** inputs/spatial.sim.tar.gz.
-
-仓库清单总大小：约 2.07 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 2,174,692 bytes (2.07 MiB).
 
 ### Prompt（运行时仅复制本框）
 

@@ -1,15 +1,15 @@
 # 25-task C0/T1 formal evaluation protocol v2
 
-Status: **preflight only; no formal run is released until every gate below is closed**.
+Status: **frozen standalone protocol for the 25-task campaign**.
 
-This protocol is the campaign-specific supplement requested for all 25 repository tasks. It narrows the experiment to one matched trial per task in two conditions, `C0` and `T1` (50 runs total). It does not retroactively convert a blocked or calibration result into formal evidence. Where this supplement is silent, `evaluation-protocol-v1.md` and the controlling evaluation guide apply.
+This protocol covers one matched trial per task in two conditions, `C0` and `T1` (50 runs total). Release decisions and deviations are recorded in `formal-eval-release-status-2026-08-17.md`.
 
 ## Comparison and interpretation
 
 | Condition | Client | Scientific capability policy |
 |---|---|---|
 | `C0` | Codex | Native client only. No added life-science skill, MCP/SCP or task-specific scientific package. |
-| `T1` | Codex | Same Codex client/model/build as C0, with task-appropriate **Agent Skills** selected from the approved `life_science_agent_skills.xlsx` catalogue and installed from its fixed GitHub commit/path. MCP/SCP entries are excluded from this campaign. |
+| `T1` | Codex | Same Codex client/model/build as C0, with the task's predeclared **Agent Skills** installed from exact pinned GitHub repository/commit/path records. MCP/SCP entries are excluded. |
 
 The primary contrast is a matched Codex capability ablation. Client, model/build, machine class, prompt, inputs and network policy are identical; only the predeclared task-specific Agent Skill installation differs. Subject to successful reset and order control, the paired difference may be reported as Codex skill uplift.
 
@@ -17,7 +17,7 @@ The primary contrast is a matched Codex capability ablation. Client, model/build
 
 - 25 stable task IDs from `docs/input-problem-inventory-v1.tsv`.
 - One trial in each condition: 25 `C0` + 25 `T1` = 50 independent runs.
-- Randomization seed: `20260816`; the immutable execution order is stored in the local campaign `audit/run_matrix.tsv`.
+- Randomization seed: `20260816`; the immutable execution order is stored in `docs/formal-run-queue-c0-t1-2026-08-16.tsv`.
 - Run outputs, screenshots, logs, frozen workspaces, grader output and judge forms remain local and are not committed to GitHub.
 - GitHub contains task definitions, input/provenance manifests, accepted static graders, environment contracts and release status only.
 
@@ -32,7 +32,7 @@ A task-condition pair may be marked `formal_released` only when all of the follo
 5. Any clean rerun occurs in an isolated, pinned environment and is recorded separately from static grading.
 6. Prompt/deliverable, scientific validity and answer-leak review are signed off by reviewers independent of the run operator.
 7. The exact Codex client/model/build, machine class, network policy, time source and permission policy are frozen identically across C0 and T1.
-8. Every predeclared T1 skill has a fixed GitHub repository, commit, directory path and expected `SKILL.md` SHA-256; selected entries pass install/load/uninstall smoke tests before their first formal use.
+8. Every predeclared T1 skill has a fixed GitHub repository, commit, directory path and expected `SKILL.md` SHA-256; selected entries have successful install/hash evidence and a clean post-run removal/reset attestation. Actual invocation is recorded separately and is not inferred from installation.
 9. The post-reset inventory equals the campaign baseline and a fresh conversation exposes no prior task state.
 10. Blind judges are assigned and cannot see client, condition, installed skills, deterministic score or gold data.
 
@@ -52,7 +52,7 @@ The run cannot start if the inventory differs, any old task ID/path is visible, 
 
 ## T1 selection and installation record
 
-The Excel workbook's `真实说明书索引` sheet is the selection and source authority. Skill choice is made before seeing a run's outputs or gold data, based only on the frozen task card and catalogue metadata, and is recorded in the task-to-skill plan. For every attempted, installed, loaded or invoked skill, record:
+Skill choice is made before seeing a run's outputs or gold data, based only on the frozen task card and published skill metadata, and is recorded in the task-to-skill plan. For every attempted, installed, loaded or invoked skill, record:
 
 - workbook item ID and exact display name;
 - Codex install name, GitHub repository, fixed commit and directory path;
@@ -63,7 +63,7 @@ The Excel workbook's `真实说明书索引` sheet is the selection and source a
 
 The run operator must not change the predeclared selection after seeing outputs, provide scientific hints or substitute an unlisted package. If the fixed source cannot be installed or loaded, record `capability_unavailable`; do not improvise another repository or branch.
 
-The 146 Agent Skill rows are normalized in `docs/capability-runtime-mapping-v1.tsv`. All fixed `SKILL.md` sources and hashes have been verified, but 122 explicitly require MCP/SCP or an API key and are not eligible for strict skill-only T1. The task plan may select only the remaining direct candidates; installation success is not the same as a successful Codex load/invoke/reset.
+The 18 unique skills actually selected by the 25-task plan are normalized in `docs/capability-runtime-mapping-v1.tsv`. All fixed `SKILL.md` sources and installed hashes were verified. Installation/exposure and actual invocation are reported separately; a skill that the evaluated agent did not open must not be described as used.
 
 ## Run, freeze and score
 
@@ -87,9 +87,9 @@ Blind Evidence is scored from visible report citations and traceability only:
 
 Judges record claim count, supported-claim count, evidence locations and a short rationale. Evidence points cannot repair a deterministic hard-gate failure.
 
-## Required local and Feishu records
+## Required local and evaluation-platform records
 
-The local campaign stores immutable per-run workspaces, hashes, status, capability traces, oracle JSON, judge forms and deviations. Feishu receives native tables for:
+The local campaign stores immutable per-run workspaces, hashes, status, capability traces, oracle JSON, judge forms and deviations. The external evaluation platform receives native tables for:
 
 1. task-level and condition-level score statistics with denominators and exclusions;
 2. the complete 50-row evaluation log, including unreleased/invalid attempts;

@@ -1,10 +1,15 @@
 # Task card: `ls10-treatment-response-model`
 
-> Canonical individual task card materialized from `docs/ls06-ls10-task-cards-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/ls06-ls10-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## `ls10-treatment-response-model`
 
-- Inputs: `data.xlsx` (22,788 bytes), sheet `Sheet1`; columns include `Efficacy`, `Age`, `Gender`, `BMI` and other non-model covariates. The target model uses only the named outcome/predictors; other columns are distractors. Provenance: BixBench capsule data.
+### Inputs (authoritative packaged inventory)
+- `inputs/README.md` — 806 bytes
+- `inputs/data.xlsx` — 22,788 bytes
+
+**Total:** 23,594 bytes (0.02 MiB).
+
 - Prompt: **Fit a logistic regression for the binary treatment-response outcome using BMI, age and gender. Use complete cases, document outcome coding and gender reference level, and report the age log-odds coefficient and two-sided p-value. Write `output/model_coefficients.csv` with `term,estimate,std_error,z,p_value,odds_ratio`, `output/model_metadata.json`, `output/analysis.py`, and `output/report.md`.**
 - Deliverables: unique coefficient rows; metadata with formula, outcome coding, reference level, complete-case count and implementation/version; report; rerunnable script.
 - Hard gates: specified model only; binary outcome coding and gender reference documented; age term unique and finite; coefficient, odds ratio and significance interpretation mutually consistent.

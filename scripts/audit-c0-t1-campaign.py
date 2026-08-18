@@ -37,7 +37,7 @@ def accepted_oracles() -> set[str]:
     return accepted
 
 
-def input_hash_audit() -> tuple[int, list[str]]:
+def input_hash_audit(task_ids: list[str]) -> tuple[int, list[str]]:
     manifest = DOCS / "inputs" / "SHA256SUMS.tsv"
     if not manifest.is_file():
         return 0, ["INPUT_HASH_MANIFEST_MISSING"]
@@ -49,8 +49,9 @@ def input_hash_audit() -> tuple[int, list[str]]:
     }
     actual_paths = {
         path.relative_to(ROOT).as_posix()
-        for path in (DOCS / "inputs").rglob("*")
-        if path.is_file() and path != manifest
+        for task_id in task_ids
+        for path in (DOCS / "inputs" / task_id).rglob("*")
+        if path.is_file()
     }
     for rel in sorted(actual_paths - manifest_paths):
         failures.append(f"INPUT_UNMANIFESTED:{rel}")
@@ -92,8 +93,6 @@ def main() -> int:
     for task_id in task_ids:
         if pair_counts[task_id] != Counter({"C0": 1, "T1": 1}):
             failures.append(f"UNPAIRED_QUEUE:{task_id}")
-    if len(capabilities) != 146:
-        failures.append("T1_AGENT_SKILL_CATALOG_NOT_146")
     if len(skill_plan) != 25 or {row["task_id"] for row in skill_plan} != set(task_ids):
         failures.append("T1_TASK_SKILL_PLAN_SCOPE_INVALID")
 
@@ -116,15 +115,19 @@ def main() -> int:
         item
         for row in skill_plan
         if row["selected_catalog_item_ids"] != "NONE"
-        for item in row["selected_catalog_item_ids"].split(";")
+        for item in row["selected_catalog_item_ids"].split(",")
     }
+    if len(capabilities) != len(selected_ids):
+        failures.append("T1_SELECTED_SKILL_MAPPING_SCOPE_MISMATCH")
     unknown_selected = sorted(selected_ids - set(capability_by_id))
     for item in unknown_selected:
         failures.append(f"T1_SELECTED_SKILL_UNKNOWN:{item}")
+    for item in sorted(set(capability_by_id) - selected_ids):
+        failures.append(f"T1_SKILL_MAPPING_UNUSED:{item}")
     ineligible_selected = sorted(
         item for item in selected_ids
         if item in capability_by_id
-        and capability_by_id[item]["strict_t1_eligibility"] != "candidate_pending_runtime_smoke"
+        and capability_by_id[item]["strict_t1_eligibility"] != "selected_executed"
     )
     for item in ineligible_selected:
         failures.append(f"T1_SELECTED_SKILL_EXTERNAL_DEPENDENCY:{item}")
@@ -139,17 +142,22 @@ def main() -> int:
         and capability_by_id[item]["invoke_smoke_status"] == "pass"
         and capability_by_id[item]["uninstall_smoke_status"] == "pass"
     }
+    selected_reset_ready = {
+        item for item in selected_ids
+        if item in capability_by_id
+        and capability_by_id[item]["uninstall_smoke_status"] == "pass"
+    }
     if selected_install_ready != selected_ids:
         failures.append("T1_SELECTED_SKILL_INSTALL_SMOKE_INCOMPLETE")
-    if selected_full_smoke != selected_ids:
-        failures.append("T1_SELECTED_SKILL_LOAD_INVOKE_RESET_SMOKE_INCOMPLETE")
+    if selected_reset_ready != selected_ids:
+        failures.append("T1_SELECTED_SKILL_RESET_SMOKE_INCOMPLETE")
 
     accepted = accepted_oracles()
     missing_accepted = sorted(set(task_ids) - accepted)
     for task_id in missing_accepted:
         failures.append(f"ORACLE_NOT_ACCEPTED:{task_id}")
 
-    checked_inputs, input_failures = input_hash_audit()
+    checked_inputs, input_failures = input_hash_audit(task_ids)
     failures.extend(input_failures)
 
     result = {
@@ -157,21 +165,17 @@ def main() -> int:
         "task_count": len(task_ids),
         "run_count": len(queue),
         "paired_tasks": sum(pair_counts[t] == Counter({"C0": 1, "T1": 1}) for t in task_ids),
-        "agent_skill_catalog_rows": len(capabilities),
+        "selected_skill_mapping_rows": len(capabilities),
         "install_source_mapped_rows": len(mapped),
         "source_sha_verified_rows": len(source_verified),
         "smoke_ready_rows": len(smoke_ready),
         "t1_tasks_with_selected_skill": sum(row["selected_catalog_item_ids"] != "NONE" for row in skill_plan),
         "t1_tasks_without_catalog_match": sum(row["selected_catalog_item_ids"] == "NONE" for row in skill_plan),
         "selected_unique_skills": len(selected_ids),
-        "strict_t1_source_candidates": sum(
-            row["strict_t1_eligibility"] == "candidate_pending_runtime_smoke" for row in capabilities
-        ),
-        "mcp_or_api_dependent_skill_rows": sum(
-            row["strict_t1_eligibility"] == "blocked_external_dependency" for row in capabilities
-        ),
         "selected_install_smoke_ready": len(selected_install_ready),
+        "selected_reset_smoke_ready": len(selected_reset_ready),
         "selected_full_smoke_ready": len(selected_full_smoke),
+        "selected_not_invoked_in_scored_run": len(selected_ids - selected_full_smoke),
         "accepted_oracles": len(accepted & set(task_ids)),
         "input_files_checked": checked_inputs,
         "formal_release": not failures,

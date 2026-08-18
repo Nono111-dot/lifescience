@@ -13,10 +13,10 @@ The paste-once Prompt inside each card is the only task instruction given to an 
 - Input bytes: `docs/inputs/SHA256SUMS.tsv` and per-directory provenance notes.
 - Deterministic score: `docs/deterministic-rubrics-v2.tsv` (10/40/15/5/10 = 80).
 - C0/T1 campaign: `docs/evaluation-protocol-c0-t1-v2.md`.
-- Release decision: `docs/formal-eval-release-status-2026-08-16.md`.
+- Release decision: `docs/formal-eval-release-status-2026-08-17.md`.
 
-Structural completeness is not scientific acceptance. A card remains blocked until its declared reference, oracle, acceptance controls, reviewers, selected Codex Skill smoke tests and environment-reset gates are all closed.
+Structural completeness and scientific acceptance are audited separately. Current release status, deviations and capability-use limitations are authoritative in `docs/formal-eval-release-status-2026-08-17.md`.
 
 ## Current denominator
 
-The requested queue contains 25 tasks and 50 planned Codex runs. All 69 agent-visible input files pass the corrected byte manifest and all 146 catalogue Skill sources pass fixed-commit SHA verification, but only 7/25 scientific oracles are accepted. The formal denominator is therefore currently zero. Attempts made before release must be labelled calibration or diagnostic and excluded from headline scores.
+The frozen queue contains 25 tasks and 50 Codex runs. The canonical input manifest covers the 25 task directories, all 25 scientific oracles are accepted, and all 18 selected Agent Skills have pinned source/hash plus install and clean-reset evidence. Six exposed skills were not opened by the evaluated agent; this limitation is recorded in the release status and must not be reported as skill use.

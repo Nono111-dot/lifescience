@@ -1,6 +1,6 @@
 # Task card: `ls02-infer-genome-build`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS02-3｜VCF 基因组版本推断 — `ls02-infer-genome-build`
 
@@ -14,15 +14,17 @@
 | Priority | P0 |
 | Anchor / related | D / P, T, A, O |
 | Source idea | CompBioBench vcf-infer-build-q1 |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/references/README.md` — 563 bytes
+- `inputs/references/hg18_chr20.fa.gz` — 19,496,195 bytes
+- `inputs/references/hg19_chr20.fa.gz` — 18,072,551 bytes
+- `inputs/references/hg38_chr20.fa.gz` — 18,840,364 bytes
+- `inputs/references/reference_manifest.json` — 1,108 bytes
+- `inputs/vcf.infer.build.q1.vcf.gz` — 3,788,749 bytes
 
-inputs/vcf.infer.build.q1.vcf.gz （3.61 MiB）
-
-**输入说明：** inputs/vcf.infer.build.q1.vcf.gz plus pinned diagnostic reference bundle (to be added).
-
-仓库清单总大小：约 3.61 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 60,199,530 bytes (57.41 MiB).
 
 ### Prompt（运行时仅复制本框）
 

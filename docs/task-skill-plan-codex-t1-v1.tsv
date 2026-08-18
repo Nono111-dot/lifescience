@@ -1,26 +1,26 @@
 task_id	selected_catalog_item_ids	selection_basis	treatment_status
-ls01-grna-offtarget-rank	NONE	No strict-T1 candidate performs CRISPR guide/off-target auditing without an MCP/API dependency.	no_strict_t1_match
+ls01-grna-offtarget-rank	KDENSE-biopython,KDENSE-exploratory-data-analysis	Biopython supports local sequence handling while exploratory-data-analysis supports auditable multi-criterion ranking of the supplied guide tables.	selected_external_pinned
 ls01-primer-transcript-audit	NONE	The apparent DNA/RNA sequence Skill is MCP-dependent; no independent primer-audit candidate remains.	no_strict_t1_match
 ls01-vector-orf-audit	NONE	The apparent synthetic-biology Skill is MCP-dependent; no independent ORF/cloning-audit candidate remains.	no_strict_t1_match
 ls02-deleterious-mutation	NONE	No strict-T1 candidate covers read-level variant calling plus consequence/constraint assessment.	no_strict_t1_match
-ls02-find-deletion	NONE	The chromosome-analysis Skill is MCP-dependent; no independent structural-variant workflow remains.	no_strict_t1_match
-ls02-infer-genome-build	NONE	The UCSC exploration Skill is MCP-dependent; no independent build-inference workflow remains.	no_strict_t1_match
+ls02-find-deletion	KDENSE-pysam,KDENSE-genomic-coordinates	pysam supports local paired-read coverage and breakpoint evidence; genomic-coordinates enforces hg38 coordinate and rounding discipline.	selected_external_pinned
+ls02-infer-genome-build	KDENSE-genomic-coordinates,KDENSE-pysam	Genomic-coordinates directly covers assembly mismatch diagnosis and REF checks; pysam supports reproducible local VCF/FASTA access.	selected_external_pinned
 ls03-cryptic-exon	NONE	The transcriptome pipeline is MCP-dependent; Borzoi does not implement junction calling from supplied reads.	no_strict_t1_match
-ls03-atac-sample-swap	NONE	No strict-T1 candidate performs label-swap detection on an ATAC count matrix.	no_strict_t1_match
+ls03-atac-sample-swap	KDENSE-deeptools,KDENSE-exploratory-data-analysis	deepTools provides ATAC sample correlation/PCA guidance and exploratory-data-analysis supports unique-swap evidence and uncertainty checks.	selected_external_pinned
 ls03-genome-coordinates	NONE	No strict-T1 candidate analyzes the supplied distance/time table without external regulatory services.	no_strict_t1_match
-ls04-differential-composition	ITEM-036	scvi-tools directly supports probabilistic single-cell latent modelling and composition-aware analysis.	selected_install_smoke_pass
+ls04-differential-composition	KDENSE-scanpy,KDENSE-scvi-tools	scanpy supports QC, normalization and annotation; scvi-tools supports probabilistic latent modelling and label transfer for the supplied retinal matrices.	selected_external_pinned
 ls04-perturbseq-reference-map	ITEM-035	scGPT directly supports single-cell embeddings and reference mapping.	selected_install_smoke_pass
-ls04-spatial-deconvolution	ITEM-036	scvi-tools is the closest independent candidate for single-cell/spatial latent modelling.	selected_install_smoke_pass
-ls05-protein-shape	NONE	Available independent structure Skills predict/design structures rather than inspect the supplied PDB letter shape.	no_strict_t1_match
+ls04-spatial-deconvolution	KDENSE-scanpy,KDENSE-scvi-tools,KDENSE-deepspot-m	scanpy/scvi-tools cover reference preprocessing and latent mapping; deepspot-m adds task-specific spatial transcriptomics guidance.	selected_external_pinned
+ls05-protein-shape	KDENSE-biopython,KDENSE-matplotlib	Biopython parses the supplied PDB locally and matplotlib supports the required reproducible shape rendering without external structures.	selected_external_pinned
 ls05-structure-model-ranking	NONE	Available independent predictors do not implement the task's frozen local scoring rule.	no_strict_t1_match
-ls05-low-confidence-pocket	NONE	The directly relevant binding-site Skill is MCP-dependent; independent docking/prediction Skills do not match the frozen evidence-only contract.	no_strict_t1_match
-ls06-eno1-effect-size	NONE	Proteome-Level Analysis is MCP-dependent and no independent workbook effect-size Skill exists.	no_strict_t1_match
+ls05-low-confidence-pocket	KDENSE-biopython,KDENSE-uncertainty-and-units	Biopython supports local structure evidence handling and uncertainty-and-units enforces propagation of pLDDT/PAE confidence limits.	selected_external_pinned
+ls06-eno1-effect-size	KDENSE-exploratory-data-analysis,KDENSE-statistical-analysis	The skills support auditable source selection, fold-change calculation and direction/uncertainty reporting on the supplied proteomics workbook.	selected_external_pinned
 ls06-eno1-significance-audit	NONE	Proteome-Level Analysis is MCP-dependent and no independent multiple-testing/workbook Skill exists.	no_strict_t1_match
-ls07-combination-treatment-deg	NONE	The transcriptome pipeline is MCP-dependent and no independent DESeq2-compatible Skill exists.	no_strict_t1_match
-ls07-combination-treatment-mechanism	NONE	The transcriptome and ontology-analysis Skills are MCP-dependent; no independent pinned-Reactome workflow remains.	no_strict_t1_match
+ls07-combination-treatment-deg	KDENSE-pydeseq2,KDENSE-bulk-rnaseq	PyDESeq2 directly matches the required local DESeq2 workflow and bulk-rnaseq adds design/QC and reproducibility gates.	selected_external_pinned
+ls07-combination-treatment-mechanism	KDENSE-pydeseq2,KDENSE-pathway-enrichment	PyDESeq2 covers the approved contrast and pathway-enrichment directly covers frozen-background GSEA interpretation.	selected_external_pinned
 ls08-multiome-column-match	ITEM-036	scvi-tools includes multi-modal single-cell modelling and is the closest independent cross-modality candidate.	selected_install_smoke_pass
 ls08-enhancer-promoter-integration	NONE	The directly relevant regulatory/multi-omics Skills are MCP-dependent; Borzoi does not operate on the supplied paired evidence tables.	no_strict_t1_match
 ls09-opentrons-sop	NONE	No workbook Agent Skill covers Opentrons, liquid handling or protocol simulation.	no_strict_t1_match
-ls09-plate-dilution-recovery	NONE	No workbook Agent Skill covers dilution, pipetting or liquid-handling recovery.	no_strict_t1_match
+ls09-plate-dilution-recovery	KDENSE-pylabrobot,KDENSE-uncertainty-and-units	PyLabRobot provides liquid-handling planning concepts and uncertainty-and-units supports exact volume/concentration balance and abort conditions.	selected_external_pinned
 ls10-neun-power-analysis	NONE	No workbook Agent Skill provides statistical power analysis.	no_strict_t1_match
-ls10-treatment-response-model	NONE	No workbook Agent Skill provides logistic-regression/statistical modelling.	no_strict_t1_match
+ls10-treatment-response-model	KDENSE-statsmodels,KDENSE-statistical-analysis	statsmodels directly supports logistic regression coefficient inference; statistical-analysis adds coding, complete-case and reporting checks.	selected_external_pinned

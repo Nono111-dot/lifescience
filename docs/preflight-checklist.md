@@ -13,19 +13,18 @@
 - [ ] Static oracle cannot execute submission code
 - [ ] Isolated clean-rerun environment pinned (if required)
 - [ ] Any required scientific simulator/reference environment is provisioned before timing, matches its exact lock, and passes the task-specific smoke check in every scheduled harness
-- [ ] Second operator completes within 1.5× limit
+- [ ] Independent-review sign-off is recorded, or the missing-review deviation is disclosed before delivery
 
 ## Harness/condition
 
 - [ ] Fresh conversation and one-use workspace
 - [ ] Client/model/build and hardware recorded
 - [ ] Network policy frozen
-- [ ] C0/T0/T1/T2 assigned before opening task
-- [ ] Full experiment-approved 222-catalog subset exposed to the agent
-- [ ] Agent is free to autonomously install/call multiple capabilities from that subset
-- [ ] All non-catalog life-science skills/MCPs disabled
-- [ ] Every exposed capability has an exact-name catalog match and runtime smoke-test result
-- [ ] Installed/invoked/failed/out-of-catalog attempts will be captured automatically
+- [ ] C0/T1 condition assigned from the frozen 50-row queue before opening the task
+- [ ] C0 receives no added life-science Agent Skill; T1 receives only the task's predeclared rows from `docs/task-skill-plan-codex-t1-v1.tsv`
+- [ ] All unselected life-science skills and all MCP/SCP capabilities are disabled
+- [ ] Every selected skill matches `docs/capability-runtime-mapping-v1.tsv` by repository, commit, path and `SKILL.md` SHA-256
+- [ ] Install, exposure, actual invocation, failure and post-run removal/reset evidence will be captured separately
 - [ ] Permission policy and timer checked
 
 ## Previous-run reset gate

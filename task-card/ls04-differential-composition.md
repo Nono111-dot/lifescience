@@ -1,6 +1,6 @@
 # Task card: `ls04-differential-composition`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS04-1｜视网膜单细胞差异组成分析 — `ls04-differential-composition`
 
@@ -14,19 +14,16 @@
 | Priority | P0 |
 | Anchor / related | D / P, T, A, R, O |
 | Source idea | CompBioBench differential-composition-q1 |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/ANNOTATION_RULE.md` — 724 bytes
+- `inputs/MARKER_PANEL.tsv` — 673 bytes
+- `inputs/differential.composition.q1.1.mtx.gz` — 29,076,744 bytes
+- `inputs/differential.composition.q1.2.mtx.gz` — 31,011,024 bytes
+- `inputs/differential.composition.q1.genes.txt.gz` — 223,316 bytes
 
-inputs/differential.composition.q1.1.mtx.gz （27.73 MiB）
-
-inputs/differential.composition.q1.2.mtx.gz （29.57 MiB）
-
-inputs/differential.composition.q1.genes.txt.gz （218.1 KiB）
-
-**输入说明：** two Matrix Market matrices and gene list; pinned marker reference to be added.
-
-仓库清单总大小：约 57.52 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 60,312,481 bytes (57.52 MiB).
 
 ### Prompt（运行时仅复制本框）
 

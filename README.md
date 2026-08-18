@@ -1,65 +1,54 @@
 # Life Science UI Evaluation Tasks
 
-This repository contains reproducible desktop UI evaluation tasks for life-science workflows.
+This repository contains the frozen 25-task life-science UI evaluation set used for the matched Codex `C0`/`T1` campaign.
 
-Current evaluation package:
+## Start here
 
-- `task-card/`: GitHub-facing directory with 25 standalone task cards (start here)
-- `docs/task-cards-v2.md`: 25-task v2 entry point
-- `docs/task-cards/ls01-ls05-v2.md`: normalized §3.1 cards for LS01–LS05
-- `docs/ls06-ls10-runbook-v2.md`: current 10-task scope and per-run capability reset gate
-- `docs/ls06-ls10-task-cards-v2.md`: current ten complete §3.1 task cards and scientific release gates
-- `docs/task-cards-v1.md`: legacy 25-card index
-- `docs/deterministic-rubrics-v2.tsv`: per-task 10/40/15/5/10 deterministic rubric
-- `docs/benchmark-rubrics/`: source-grounded native scoring evidence for all 25 selected tasks
-- `docs/oracles/<task-id>/oracle.py`: 25 fail-closed static oracle entry points
-- `docs/input-problem-inventory-v1.tsv`: source question, level, size, readiness and blockers
-- `docs/capability-whitelist-v1.tsv`: 22-row previously smoke-tested subset; **not** the complete catalog
-- `docs/capability-catalog-audit-2026-08-14.md`: Feishu revision-717 audit of the 222-row life-science candidate catalog
-- `docs/capability-runtime-mapping-v1.tsv`: 146 T1 Agent Skill fixed GitHub sources, hashes and Codex smoke states
-- `docs/task-skill-plan-codex-t1-v1.tsv`: predeclared Codex T1 selections for all 25 tasks, including explicit no-match rows
-- `docs/formal-run-queue-2026-08-16.tsv`: current 10-task × C0/T0/T1/T2 fail-closed execution queue; the 2026-08-14 file is retained as historical evidence
-- `docs/formal-run-queue-c0-t1-2026-08-16.tsv`: deterministic 50-row queue for the requested 25-task C0/T1 campaign
-- `docs/input-remediation-2026-08-16.md`: exact input, provenance, integrity, environment, documentation, and remaining-blocker changes from the pre-evaluation remediation pass
-- `docs/input-integrity-remediation-2026-08-16.md`: 25-task 69/69 hash audit, manifest-coverage repair and CRLF/LF correction evidence
-- `docs/evaluation-protocol-v1.md`: Codex/端砚 conditions, SOP, scoring and go/no-go
-- `docs/evaluation-protocol-c0-t1-v2.md`: requested 25-task × C0/T1 campaign supplement
-- `docs/formal-eval-release-status-2026-08-16.md`: explicit preflight no-go and unresolved release evidence
-- `docs/preflight-checklist.md`: formal-run acceptance checklist
-- `docs/run-record-template.tsv`: immutable per-run record schema
-- `docs/blind-judge-form.md`: blinded 20-point review form
-- `scripts/prepare-workspace.ps1`: non-overwriting one-use workspace preparation
-- `scripts/prepare-c0-t1-run.py`: non-destructive per-run input copy and hash manifest for the 50-run campaign
-- `scripts/freeze-c0-t1-run.py`: immutable local freeze/hash step that never executes submission code
-- `scripts/audit-c0-t1-campaign.py`: fail-closed 25-task/50-run/capability/oracle/input preflight
+- [`task-card/`](task-card/README.md): 25 participant-facing task cards and paste-once prompts.
+- [`docs/inputs/`](docs/inputs/README.md): task-local input directories and the canonical SHA-256 manifest.
+- [`docs/input-download-report.md`](docs/input-download-report.md): upstream and synthetic-input provenance boundaries.
+- [`docs/deterministic-rubrics-v2.tsv`](docs/deterministic-rubrics-v2.tsv): authoritative 80-point deterministic scoring contracts.
+- [`docs/evaluation-protocol-c0-t1-v2.md`](docs/evaluation-protocol-c0-t1-v2.md): standalone 25-task evaluation protocol.
+- [`docs/formal-eval-release-status-2026-08-17.md`](docs/formal-eval-release-status-2026-08-17.md): release decision, deviations and capability-use boundary.
 
 ## Repository layout
 
 ```text
-docs/
-├── ai4s-ui-taskbook-v0.1.md
-├── inputs/
-│   ├── README.md
-│   └── life-l2-paired-expression/
-│       ├── README.md
-│       └── paired_expression.csv
-└── oracles/
-    └── life-l2-paired-expression/
-        ├── oracle.py
-        └── test_oracle.py
+task-card/                         participant-facing cards
+docs/inputs/<task-id>/             participant-visible inputs
+docs/oracles/<task-id>/            evaluator-only static graders and gold
+docs/benchmark-rubrics/            source/native rubric evidence
+docs/research/                     provenance and adjudication evidence
+scripts/                           preparation, execution, freeze and audit tools
 ```
 
-Start with [the 25 standalone task cards](task-card/README.md). Input licensing and copying rules are documented in [the input index](docs/inputs/README.md). Formal release status and deviations are recorded separately from task-card completeness.
+The repository contains evaluator-only answer material under `docs/oracles/`. Do not expose the repository or that directory to a participant or evaluated agent. A participant workspace receives only one task's `inputs/` directory and the corresponding paste-once Prompt.
 
-## Quick start
+## Prepare one task
 
 ```bash
-mkdir -p workspace/inputs workspace/output
-cp -R docs/inputs/life-l2-paired-expression/. workspace/inputs/
-
-# Complete the task in workspace/, then grade it:
-python3 docs/oracles/life-l2-paired-expression/oracle.py \
-  --workspace workspace
+python3 scripts/prepare-c0-t1-run.py \
+  --repo . \
+  --campaign /absolute/path/to/campaign \
+  --run-id ls01-grna-offtarget-rank-c0-001 \
+  --task-id ls01-grna-offtarget-rank \
+  --condition C0
 ```
 
-The oracle prints JSON containing a `deterministic_score` from 0 to 80, per-criterion results, `hardgate_pass`, and `failure_codes`. Visual quality is scored separately from 0 to 20 by a blind judge.
+The prepared workspace contains read-only task inputs, an empty `output/`, and a task-local input manifest. Gold, oracle code, historical outputs and scores are not copied.
+
+## Validate the delivery
+
+```bash
+python3 scripts/audit-c0-t1-campaign.py
+python3 scripts/acceptance-ls06-ls10.py
+for test_file in $(find docs/oracles -name 'test_*.py' | sort); do
+  python3 "$test_file" || exit 1
+done
+```
+
+`docs/inputs/SHA256SUMS.tsv` is generated by `scripts/refresh-input-manifest.py`. Regenerate it after any intentional input change and rerun the full audit before release.
+
+## Duplication policy
+
+Some task pairs intentionally contain byte-identical source files so each task can be copied and uploaded independently. Git stores identical blobs once internally. Canonical aggregate task-card sources and their generated participant-facing cards are retained only where required by the materialization workflow; obsolete pilot tasks, drafts and superseded run queues are not part of this delivery.

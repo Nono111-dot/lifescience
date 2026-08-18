@@ -9,6 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "task-card"
+INPUTS = ROOT / "docs" / "inputs"
 
 
 def sections(path: Path, heading_pattern: re.Pattern[str]) -> list[tuple[str, str]]:
@@ -21,16 +22,57 @@ def sections(path: Path, heading_pattern: re.Pattern[str]) -> list[tuple[str, st
     return result
 
 
+def packaged_inputs(task_id: str) -> str:
+    task_root = INPUTS / task_id
+    paths = sorted(path for path in task_root.rglob("*") if path.is_file())
+    if not paths:
+        raise RuntimeError(f"No packaged inputs found for {task_id}")
+    total = sum(path.stat().st_size for path in paths)
+    lines = ["### Inputs (authoritative packaged inventory)\n"]
+    for path in paths:
+        relative = path.relative_to(task_root).as_posix()
+        lines.append(f"- `inputs/{relative}` — {path.stat().st_size:,} bytes\n")
+    lines.append(f"\n**Total:** {total:,} bytes ({total / 1024 / 1024:.2f} MiB).\n")
+    return "".join(lines)
+
+
+def normalize_inputs(body: str, task_id: str) -> str:
+    inventory = packaged_inputs(task_id)
+    rich = re.compile(r"(?ms)^### Inputs(?: \(authoritative packaged inventory\))?\s*\n.*?(?=^### Prompt|^- Prompt:)")
+    if rich.search(body):
+        return rich.sub(inventory + "\n", body, count=1)
+    compact = re.compile(r"(?m)^- Inputs:.*$")
+    if compact.search(body):
+        return compact.sub(inventory.rstrip(), body, count=1)
+    raise RuntimeError(f"No input section found for {task_id}")
+
+
+def normalize_source(path: Path, heading_pattern: re.Pattern[str]) -> None:
+    text = path.read_text(encoding="utf-8")
+    matches = list(heading_pattern.finditer(text))
+    for index in range(len(matches) - 1, -1, -1):
+        match = matches[index]
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
+        section = text[match.start() : end]
+        normalized = normalize_inputs(section, match.group("task_id"))
+        text = text[: match.start()] + normalized + text[end:]
+    path.write_text(text, encoding="utf-8")
+
+
 def main() -> None:
     source_1 = ROOT / "docs" / "task-cards" / "ls01-ls05-v2.md"
     source_2 = ROOT / "docs" / "ls06-ls10-task-cards-v2.md"
+    pattern_1 = re.compile(r"^## .*?`(?P<task_id>ls0[1-5]-[^`]+)`\s*$", re.MULTILINE)
+    pattern_2 = re.compile(r"^## `(?P<task_id>ls(?:06|07|08|09|10)-[^`]+)`\s*$", re.MULTILINE)
+    normalize_source(source_1, pattern_1)
+    normalize_source(source_2, pattern_2)
     cards = sections(
         source_1,
-        re.compile(r"^## .*?`(?P<task_id>ls0[1-5]-[^`]+)`\s*$", re.MULTILINE),
+        pattern_1,
     )
     cards += sections(
         source_2,
-        re.compile(r"^## `(?P<task_id>ls(?:06|07|08|09|10)-[^`]+)`\s*$", re.MULTILINE),
+        pattern_2,
     )
     if len(cards) != 25 or len({task_id for task_id, _ in cards}) != 25:
         raise RuntimeError(f"Expected 25 unique task cards, found {len(cards)}")
@@ -44,20 +86,22 @@ def main() -> None:
         )
         header = (
             f"# Task card: `{task_id}`\n\n"
-            f"> Canonical individual task card materialized from `{source}`. "
-            "The Prompt is the only instruction pasted into an evaluated run; oracle-only "
-            "answers and evaluation outputs are never exposed to the agent.\n\n"
+            f"> Canonical participant-facing card generated from `{source}`. "
+            "The packaged-input inventory below is generated from the frozen task directory. "
+            "Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.\n\n"
         )
-        (TARGET / f"{task_id}.md").write_text(header + body, encoding="utf-8")
+        (TARGET / f"{task_id}.md").write_text(
+            header + normalize_inputs(body, task_id), encoding="utf-8"
+        )
 
     ordered = sorted(task_id for task_id, _ in cards)
     lines = [
         "# Task cards\n",
-        "This directory is the GitHub-facing entry point for the 25 frozen life-science task cards. "
-        "Each task has one standalone file containing its metadata, paste-once Prompt, deliverables, "
-        "scientific hard gates, deterministic scoring details, and ablation/skill expectation.\n",
-        "Gold answers, hidden reference artifacts, run outputs, and evaluation scores are intentionally "
-        "not stored in these participant-visible cards.\n",
+        "This directory is the participant-facing entry point for the 25 frozen life-science task cards. "
+        "Each task has one standalone file containing an exact packaged-input inventory, paste-once Prompt, "
+        "deliverables, scientific hard gates, deterministic scoring details and capability expectation.\n",
+        "Evaluator-only answers, oracle fixtures, run outputs and scores are not stored in these cards "
+        "and must never be copied into a participant workspace.\n",
         "## Card index\n",
     ]
     lines.extend(f"- [`{task_id}`]({task_id}.md)\n" for task_id in ordered)

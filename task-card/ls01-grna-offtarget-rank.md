@@ -1,6 +1,6 @@
 # Task card: `ls01-grna-offtarget-rank`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS01-1｜CRISPR guide 活性与脱靶风险排名 — `ls01-grna-offtarget-rank`
 
@@ -14,17 +14,14 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, O |
 | Source idea | source: custom fixture |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/RANKING_RULE.md` — 970 bytes
+- `inputs/candidates.csv` — 246 bytes
+- `inputs/off_targets.csv` — 295 bytes
 
-inputs/candidates.csv （246 B）
-
-inputs/off_targets.csv （295 B）
-
-**输入说明：** inputs/candidates.csv, inputs/off_targets.csv.
-
-仓库清单总大小：约 0.01 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 1,511 bytes (0.00 MiB).
 
 ### Prompt（运行时仅复制本框）
 

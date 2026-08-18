@@ -1,6 +1,6 @@
 # Task card: `ls05-low-confidence-pocket`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS05-3｜低置信度口袋与突变优先级评估 — `ls05-low-confidence-pocket`
 
@@ -14,19 +14,14 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, O |
 | Source idea | benchmark-informed local extension (not an upstream benchmark item) |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/SCORING_RULE.md` — 1,753 bytes
+- `inputs/confidence.csv` — 142 bytes
+- `inputs/mutation_candidates.csv` — 167 bytes
 
-inputs/confidence.csv （142 B）
-
-inputs/mutation_candidates.csv （167 B）
-
-inputs/SCORING_RULE.md （大小未在 SHA 清单中记录）
-
-**输入说明：** confidence and mutation-candidate CSVs plus the frozen SCORING_RULE.md; provenance and limits are documented in ls05-local-extension-provenance.md.
-
-仓库清单总大小：约 0.01 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 2,062 bytes (0.00 MiB).
 
 ### Prompt（运行时仅复制本框）
 

@@ -1,6 +1,6 @@
 # Task card: `ls03-cryptic-exon`
 
-> Canonical individual task card materialized from `docs/task-cards/ls01-ls05-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS03-1｜高表达隐蔽外显子识别 — `ls03-cryptic-exon`
 
@@ -14,15 +14,15 @@
 | Priority | P0 |
 | Anchor / related | D / P, T, A, R, O |
 | Source idea | CompBioBench cryptic-exon-q1 |
-| Card version | task-cards-v1.md |
+| Card version | task-cards-v2.md |
 
-### Inputs
+### Inputs (authoritative packaged inventory)
+- `inputs/cryptic.exon.q1.fq.gz` — 16,920,968 bytes
+- `inputs/reference/GRCh38_chr9.fa.gz` — 36,554,007 bytes
+- `inputs/reference/README.md` — 505 bytes
+- `inputs/reference/ensembl112_protein_coding_exons.tsv.gz` — 6,339,899 bytes
 
-inputs/cryptic.exon.q1.fq.gz （16.14 MiB）
-
-**输入说明：** inputs/cryptic.exon.q1.fq.gz plus pinned human genome/transcriptome index (to be added).
-
-仓库清单总大小：约 16.14 MiB。输入只读；缺失参考包、许可或版本信息以状态框为准。
+**Total:** 59,815,379 bytes (57.04 MiB).
 
 ### Prompt（运行时仅复制本框）
 

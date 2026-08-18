@@ -1,10 +1,17 @@
 # Task card: `ls08-enhancer-promoter-integration`
 
-> Canonical individual task card materialized from `docs/ls06-ls10-task-cards-v2.md`. The Prompt is the only instruction pasted into an evaluated run; oracle-only answers and evaluation outputs are never exposed to the agent.
+> Canonical participant-facing card generated from `docs/ls06-ls10-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## `ls08-enhancer-promoter-integration`
 
-- Inputs: `ep.interactions.q1.hic.csv` (contact evidence; 6,388 bytes) and `ep.interactions.q1.expr.csv` (CRISPR-expression evidence; 3,792 bytes). Provenance: Genentech CompBioBench frozen retrieval; no decoy file.
+### Inputs (authoritative packaged inventory)
+- `inputs/INTEGRATION_RULE.md` — 1,011 bytes
+- `inputs/README.md` — 1,131 bytes
+- `inputs/ep.interactions.q1.expr.csv` — 3,792 bytes
+- `inputs/ep.interactions.q1.hic.csv` — 6,388 bytes
+
+**Total:** 12,322 bytes (0.01 MiB).
+
 - Prompt: **Integrate the supplied Hi-C and CRISPR-expression evidence for all candidate enhancer-promoter pairs and identify the least supported causal pair. Write `output/pair_evidence.csv` with `pair_id,contact_evidence,perturbation_effect,combined_support,rank`, `output/least_supported.json`, `output/analysis.py`, and `output/report.md`. Treat physical contact and perturbation evidence as distinct.**
 - Deliverables: every candidate pair exactly once, unique ranks, one least-supported call, report and rerunnable script; units/scales and tie policy stated.
 - Hard gates: modalities joined by the true pair key; all candidates covered once; least-supported call equals minimum combined support under the frozen rule; contact is not described as perturbational proof.

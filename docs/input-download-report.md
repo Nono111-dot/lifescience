@@ -1,4 +1,4 @@
-# Selected input download report
+# Frozen input provenance report
 
 This repository freezes inputs for 25 life-science desktop-agent evaluation tasks. The authoritative selection is `selected-tasks-v1.tsv`; file hashes are recorded in `inputs/SHA256SUMS.tsv`.
 
@@ -15,12 +15,6 @@ The upstream datasets vary substantially in size. Tasks above the internal L2 re
 
 The original `histone-chip-q1` candidate was rejected because its two input files were approximately 167 MB and 173 MB, exceeding GitHub's normal per-file limit. It was replaced by the smaller CompBioBench `genome-coords-q1` task.
 
-## Required next gates
+## Current closure
 
-An input directory is not a completed evaluation task. Before a task enters the formal 25-task set it still needs:
-
-1. a full task card with one-paste prompt, output contract and 2–4 scientific hard gates;
-2. an independent deterministic oracle or a fixed manual grader;
-3. correct, empty, format-correct/wrong, and row-identity regression submissions;
-4. one domain review and one grader review;
-5. a timed calibration run and a frozen-workspace regrade.
+All 25 selected input directories now have a matching standalone task card, accepted static oracle, deterministic rubric and frozen manifest entry. Reference and negative-control evidence is retained under the evaluator-only oracle directories. The authoritative current decision and disclosed review/runtime deviations are in `formal-eval-release-status-2026-08-17.md`; this document records input provenance rather than release status.

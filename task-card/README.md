@@ -1,6 +1,6 @@
 # Task cards
-This directory is the GitHub-facing entry point for the 25 frozen life-science task cards. Each task has one standalone file containing its metadata, paste-once Prompt, deliverables, scientific hard gates, deterministic scoring details, and ablation/skill expectation.
-Gold answers, hidden reference artifacts, run outputs, and evaluation scores are intentionally not stored in these participant-visible cards.
+This directory is the participant-facing entry point for the 25 frozen life-science task cards. Each task has one standalone file containing an exact packaged-input inventory, paste-once Prompt, deliverables, scientific hard gates, deterministic scoring details and capability expectation.
+Evaluator-only answers, oracle fixtures, run outputs and scores are not stored in these cards and must never be copied into a participant workspace.
 ## Card index
 - [`ls01-grna-offtarget-rank`](ls01-grna-offtarget-rank.md)
 - [`ls01-primer-transcript-audit`](ls01-primer-transcript-audit.md)
