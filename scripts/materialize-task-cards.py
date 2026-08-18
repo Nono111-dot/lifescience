@@ -60,7 +60,7 @@ def normalize_source(path: Path, heading_pattern: re.Pattern[str]) -> None:
 
 
 def main() -> None:
-    source_1 = ROOT / "docs" / "task-cards" / "ls01-ls05-v2.md"
+    source_1 = ROOT / "docs" / "ls01-ls05-task-cards-v2.md"
     source_2 = ROOT / "docs" / "ls06-ls10-task-cards-v2.md"
     pattern_1 = re.compile(r"^## .*?`(?P<task_id>ls0[1-5]-[^`]+)`\s*$", re.MULTILINE)
     pattern_2 = re.compile(r"^## `(?P<task_id>ls(?:06|07|08|09|10)-[^`]+)`\s*$", re.MULTILINE)
@@ -80,7 +80,7 @@ def main() -> None:
     TARGET.mkdir(exist_ok=True)
     for task_id, body in cards:
         source = (
-            "docs/task-cards/ls01-ls05-v2.md"
+            "docs/ls01-ls05-task-cards-v2.md"
             if task_id.startswith(("ls01-", "ls02-", "ls03-", "ls04-", "ls05-"))
             else "docs/ls06-ls10-task-cards-v2.md"
         )

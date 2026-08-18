@@ -2,7 +2,7 @@
 
 This is the campaign entry point for the 25 frozen task IDs. It combines:
 
-- `docs/task-cards/ls01-ls05-v2.md` — 15 normalized §3.1 cards;
+- `docs/ls01-ls05-task-cards-v2.md` — 15 normalized §3.1 cards;
 - `docs/ls06-ls10-task-cards-v2.md` — 10 detailed §3.1 cards.
 
 The paste-once Prompt inside each card is the only task instruction given to an evaluated agent. Gold data, expected outputs, oracle internals, reviewer notes and scoring results remain outside the run workspace.

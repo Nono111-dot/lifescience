@@ -1,6 +1,6 @@
 # Task card: `ls03-atac-sample-swap`
 
-> Canonical participant-facing card generated from `docs/task-cards/ls01-ls05-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
+> Canonical participant-facing card generated from `docs/ls01-ls05-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS03-2｜bulk ATAC-seq 样本标签互换检测 — `ls03-atac-sample-swap`
 
