@@ -1,10 +1,10 @@
 # Input index
 
-This directory contains inputs for exactly the 25 task IDs listed in `docs/selected-tasks-v1.tsv`.
+This directory contains inputs for exactly the 25 task IDs listed in `docs/contracts/selected-tasks-v1.tsv`.
 
 For a run, copy the contents of exactly one `docs/inputs/<task-id>/` directory into a fresh workspace's `inputs/` directory. Keep file names and subdirectories unchanged and never edit the repository copy.
 
-The authoritative file inventory, byte size and SHA-256 for every participant-visible input is [`SHA256SUMS.tsv`](SHA256SUMS.tsv). The matching individual task card under `task-card/` contains an automatically generated exact input list. Those two sources supersede prose summaries elsewhere.
+The authoritative file inventory, byte size and SHA-256 for every participant-visible input is [`SHA256SUMS.tsv`](SHA256SUMS.tsv). The matching individual task card under `task-card/` contains the frozen exact input list. Those two sources supersede prose summaries elsewhere.
 
 Several task pairs intentionally repeat byte-identical source files:
 
@@ -26,3 +26,5 @@ Record provenance and redistribution terms in the task card or a task-local READ
 python3 scripts/refresh-input-manifest.py
 python3 scripts/audit-c0-t1-campaign.py
 ```
+
+Update the matching standalone task card's input inventory in the same change; the audit fails if a packaged input is absent from the card.

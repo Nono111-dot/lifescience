@@ -1,6 +1,6 @@
 # Task card: `ls04-spatial-deconvolution`
 
-> Canonical participant-facing card generated from `docs/ls01-ls05-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
+> Canonical participant-facing standalone card. The packaged-input inventory below matches the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS04-3｜空间转录组目标 Spot 反卷积 — `ls04-spatial-deconvolution`
 
@@ -14,7 +14,7 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, O |
 | Source idea | CompBioBench spatial-sim-q1 |
-| Card version | task-cards-v2.md |
+| Card version | standalone-v2 |
 
 ### Inputs (authoritative packaged inventory)
 - `inputs/spatial.sim.tar.gz` — 2,174,692 bytes

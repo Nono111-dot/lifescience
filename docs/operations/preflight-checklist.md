@@ -21,9 +21,9 @@
 - [ ] Client/model/build and hardware recorded
 - [ ] Network policy frozen
 - [ ] C0/T1 condition assigned from the frozen 50-row queue before opening the task
-- [ ] C0 receives no added life-science Agent Skill; T1 receives only the task's predeclared rows from `docs/task-skill-plan-codex-t1-v1.tsv`
+- [ ] C0 receives no added life-science Agent Skill; T1 receives only the task's predeclared rows from `docs/contracts/task-skill-plan-codex-t1-v1.tsv`
 - [ ] All unselected life-science skills and all MCP/SCP capabilities are disabled
-- [ ] Every selected skill matches `docs/capability-runtime-mapping-v1.tsv` by repository, commit, path and `SKILL.md` SHA-256
+- [ ] Every selected skill matches `docs/contracts/capability-runtime-mapping-v1.tsv` by repository, commit, path and `SKILL.md` SHA-256
 - [ ] Install, exposure, actual invocation, failure and post-run removal/reset evidence will be captured separately
 - [ ] Permission policy and timer checked
 

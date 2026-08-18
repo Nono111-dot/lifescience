@@ -15,7 +15,7 @@
 1. **CompBioBench**：题面和元数据取自 `Genentech/compbiobench-data-v1/compbiobench.v1.tsv`（本次核查下载时间：2026-08-14）。数据集声明 CC-BY-4.0。公开表包含 `question_id`、question、`internet_required`、输入文件等，但不包含 gold。公开 runner 负责隔离运行与答案抽取，不包含正确答案或本地 verifier。正确性只能提交到私有 server-side leaderboard 获取。因此表中的 CompBioBench `native_gold_or_range` 均明确写作 private/not public；任何本地 gold 必须标为“独立复算/人工复核”，不能声称是 benchmark 官方答案。
 2. **BixBench**：取自仓库本地保存的官方数据行 `.tmp_tests/BixBench.jsonl`，version `1.5`。该文件公开 `question_id`、question、ideal、distractors 与 `eval_mode`，所以表中可如实给出 ideal/range。这里只记录 `eval_mode` 名称；未发现公开的 verifier 实现，不能推断 `str_verifier` 或 `llm_verifier` 的全部归一化、容错或提示词细节。
 3. **Custom**：`new-fixture` 不是三个 benchmark 的原题，没有 benchmark 原生 prompt、gold 或 verifier。允许做格式/完整性审计；科学答案必须另立来源、独立复算和双人review。
-4. 用户提到的 BioAgent-Bench single-cell 集合并未出现在 `selected-tasks-v1.tsv` 的任何一行，因此当前25题没有可诚实归因于它的原生评分标准。若要采用其评分，需先把具体 task ID 映射到本地题目，不能仅凭领域相似性移植。
+4. 用户提到的 BioAgent-Bench single-cell 集合并未出现在 `docs/contracts/selected-tasks-v1.tsv` 的任何一行，因此当前25题没有可诚实归因于它的原生评分标准。若要采用其评分，需先把具体 task ID 映射到本地题目，不能仅凭领域相似性移植。
 
 ## 如何使用
 

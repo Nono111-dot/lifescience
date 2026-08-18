@@ -87,7 +87,7 @@ def prompt_for(task_id: str) -> str:
 
 
 def selected_items(task_id: str) -> list[str]:
-    with (ROOT / "docs/task-skill-plan-codex-t1-v1.tsv").open(encoding="utf-8", newline="") as handle:
+    with (ROOT / "docs/contracts/task-skill-plan-codex-t1-v1.tsv").open(encoding="utf-8", newline="") as handle:
         for row in csv.DictReader(handle, delimiter="\t"):
             if row["task_id"] == task_id:
                 return [] if row["selected_catalog_item_ids"] == "NONE" else row["selected_catalog_item_ids"].split(",")
@@ -123,7 +123,7 @@ def main() -> int:
     parser.add_argument("--opentrons-python-executable", type=Path, default=Path(sys.executable))
     args = parser.parse_args(); campaign = args.campaign.resolve()
     skill_installer = args.skill_installer or args.codex_home / "skills/.system/skill-installer/scripts/install-skill-from-github.py"
-    queue = list(csv.DictReader((ROOT / "docs/formal-run-queue-c0-t1-2026-08-16.tsv").open(encoding="utf-8"), delimiter="\t"))
+    queue = list(csv.DictReader((ROOT / "docs/contracts/formal-run-queue-c0-t1-2026-08-16.tsv").open(encoding="utf-8"), delimiter="\t"))
     for row in queue:
         seq = int(row["sequence"])
         if not args.start_sequence <= seq <= args.end_sequence: continue

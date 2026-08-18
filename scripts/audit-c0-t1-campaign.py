@@ -76,10 +76,10 @@ def input_hash_audit(task_ids: list[str]) -> tuple[int, list[str]]:
 
 
 def main() -> int:
-    inventory = read_tsv(DOCS / "input-problem-inventory-v1.tsv")
-    queue = read_tsv(DOCS / "formal-run-queue-c0-t1-2026-08-16.tsv")
-    capabilities = read_tsv(DOCS / "capability-runtime-mapping-v1.tsv")
-    skill_plan = read_tsv(DOCS / "task-skill-plan-codex-t1-v1.tsv")
+    inventory = read_tsv(DOCS / "contracts" / "input-problem-inventory-v1.tsv")
+    queue = read_tsv(DOCS / "contracts" / "formal-run-queue-c0-t1-2026-08-16.tsv")
+    capabilities = read_tsv(DOCS / "contracts" / "capability-runtime-mapping-v1.tsv")
+    skill_plan = read_tsv(DOCS / "contracts" / "task-skill-plan-codex-t1-v1.tsv")
     task_ids = [row["task_id"] for row in inventory]
     pair_counts: dict[str, Counter] = defaultdict(Counter)
     for row in queue:

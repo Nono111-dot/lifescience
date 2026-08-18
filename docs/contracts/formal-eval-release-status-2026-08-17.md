@@ -16,7 +16,7 @@ Status: **dataset delivery ready; capability-use limitations disclosed**.
 ## T1 capability record
 
 - Fifteen tasks received one or more predeclared Agent Skills; ten tasks received `NONE`.
-- Eighteen unique selected skills are pinned to an exact repository, commit, path and `SKILL.md` SHA-256 in `docs/capability-runtime-mapping-v1.tsv`.
+- Eighteen unique selected skills are pinned to an exact repository, commit, path and `SKILL.md` SHA-256 in `docs/contracts/capability-runtime-mapping-v1.tsv`.
 - All 18 selected skills have successful install/hash evidence and a clean post-run removal/reset attestation.
 - Twelve selected skills were visibly opened or invoked in at least one scored run. Six were installed and exposed but not opened by the evaluated agent: `ITEM-035`, `ITEM-036`, `KDENSE-bulk-rnaseq`, `KDENSE-deepspot-m`, `KDENSE-pysam` and `KDENSE-scvi-tools`.
 

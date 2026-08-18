@@ -1,6 +1,6 @@
 # Task card: `ls01-vector-orf-audit`
 
-> Canonical participant-facing card generated from `docs/ls01-ls05-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
+> Canonical participant-facing standalone card. The packaged-input inventory below matches the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS01-3｜表达载体 ORF 与克隆兼容性审计 — `ls01-vector-orf-audit`
 
@@ -14,7 +14,7 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, O |
 | Source idea | custom |
-| Card version | task-cards-v2.md |
+| Card version | standalone-v2 |
 
 ### Inputs (authoritative packaged inventory)
 - `inputs/AUDIT_RULE.md` — 704 bytes

@@ -1,6 +1,6 @@
 # Task card: `ls04-perturbseq-reference-map`
 
-> Canonical participant-facing card generated from `docs/ls01-ls05-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
+> Canonical participant-facing standalone card. The packaged-input inventory below matches the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS04-2｜Perturb-seq 查询—参考映射 — `ls04-perturbseq-reference-map`
 
@@ -14,7 +14,7 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, O |
 | Source idea | CompBioBench perturb-seq-align-q1 |
-| Card version | task-cards-v2.md |
+| Card version | standalone-v2 |
 
 ### Inputs (authoritative packaged inventory)
 - `inputs/perturb.seq.align.q1.query.h5ad` — 19,163,116 bytes

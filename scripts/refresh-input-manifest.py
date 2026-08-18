@@ -20,7 +20,7 @@ def digest(path: Path) -> str:
 
 
 def main() -> int:
-    with (ROOT / "docs" / "selected-tasks-v1.tsv").open(encoding="utf-8", newline="") as handle:
+    with (ROOT / "docs" / "contracts" / "selected-tasks-v1.tsv").open(encoding="utf-8", newline="") as handle:
         task_ids = [row["task_id"] for row in csv.DictReader(handle, delimiter="\t")]
     paths = sorted(
         path

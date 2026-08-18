@@ -6,10 +6,10 @@ This repository contains the frozen 25-task life-science UI evaluation set used 
 
 - [`task-card/`](task-card/README.md): 25 participant-facing task cards and paste-once prompts.
 - [`docs/inputs/`](docs/inputs/README.md): task-local input directories and the canonical SHA-256 manifest.
-- [`docs/input-download-report.md`](docs/input-download-report.md): upstream and synthetic-input provenance boundaries.
-- [`docs/deterministic-rubrics-v2.tsv`](docs/deterministic-rubrics-v2.tsv): authoritative 80-point deterministic scoring contracts.
-- [`docs/evaluation-protocol-c0-t1-v2.md`](docs/evaluation-protocol-c0-t1-v2.md): standalone 25-task evaluation protocol.
-- [`docs/formal-eval-release-status-2026-08-17.md`](docs/formal-eval-release-status-2026-08-17.md): release decision, deviations and capability-use boundary.
+- [`docs/provenance/input-download-report.md`](docs/provenance/input-download-report.md): upstream and synthetic-input provenance boundaries.
+- [`docs/contracts/deterministic-rubrics-v2.tsv`](docs/contracts/deterministic-rubrics-v2.tsv): authoritative 80-point deterministic scoring contracts.
+- [`docs/contracts/evaluation-protocol-c0-t1-v2.md`](docs/contracts/evaluation-protocol-c0-t1-v2.md): standalone 25-task evaluation protocol.
+- [`docs/contracts/formal-eval-release-status-2026-08-17.md`](docs/contracts/formal-eval-release-status-2026-08-17.md): release decision, deviations and capability-use boundary.
 
 ## Repository layout
 
@@ -17,6 +17,9 @@ This repository contains the frozen 25-task life-science UI evaluation set used 
 task-card/                         participant-facing cards
 docs/inputs/<task-id>/             participant-visible inputs
 docs/oracles/<task-id>/            evaluator-only static graders and gold
+docs/contracts/                    active protocol, rubric, queue and mappings
+docs/operations/                   run forms and preflight templates
+docs/provenance/                   source and local-extension provenance
 docs/benchmark-rubrics/            source/native rubric evidence
 docs/research/                     provenance and adjudication evidence
 scripts/                           preparation, execution, freeze and audit tools
@@ -51,4 +54,4 @@ done
 
 ## Duplication policy
 
-Some task pairs intentionally contain byte-identical source files so each task can be copied and uploaded independently. Git stores identical blobs once internally. Canonical aggregate task-card sources and their generated participant-facing cards are retained only where required by the materialization workflow; obsolete pilot tasks, drafts and superseded run queues are not part of this delivery.
+Some task pairs intentionally contain byte-identical source files so each task can be copied and uploaded independently. Git stores identical blobs once internally. The 25 standalone files under `task-card/` are the only task-card copies; obsolete aggregate sources, pilot tasks, drafts and superseded run queues are not part of this delivery.

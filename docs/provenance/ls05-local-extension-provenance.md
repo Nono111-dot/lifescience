@@ -61,4 +61,3 @@ These fixtures test evidence handling and calibrated structural interpretation, 
 structure calculation, pocket detection, docking, experimental binding, or mutation-effect
 prediction. A later public benchmark with released prompt, coordinates, gold and grader
 should replace them rather than being silently merged with them.
-

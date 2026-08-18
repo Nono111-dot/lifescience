@@ -1,6 +1,6 @@
 # Frozen input provenance report
 
-This repository freezes inputs for 25 life-science desktop-agent evaluation tasks. The authoritative selection is `selected-tasks-v1.tsv`; file hashes are recorded in `inputs/SHA256SUMS.tsv`.
+This repository freezes inputs for 25 life-science desktop-agent evaluation tasks. The authoritative selection is `docs/contracts/selected-tasks-v1.tsv`; file hashes are recorded in `docs/inputs/SHA256SUMS.tsv`.
 
 ## Source policy
 
@@ -17,4 +17,4 @@ The original `histone-chip-q1` candidate was rejected because its two input file
 
 ## Current closure
 
-All 25 selected input directories now have a matching standalone task card, accepted static oracle, deterministic rubric and frozen manifest entry. Reference and negative-control evidence is retained under the evaluator-only oracle directories. The authoritative current decision and disclosed review/runtime deviations are in `formal-eval-release-status-2026-08-17.md`; this document records input provenance rather than release status.
+All 25 selected input directories now have a matching standalone task card, accepted static oracle, deterministic rubric and frozen manifest entry. Reference and negative-control evidence is retained under the evaluator-only oracle directories. The authoritative current decision and disclosed review/runtime deviations are in `docs/contracts/formal-eval-release-status-2026-08-17.md`; this document records input provenance rather than release status.

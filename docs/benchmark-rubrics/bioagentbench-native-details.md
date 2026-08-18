@@ -16,7 +16,7 @@ The upstream repository license file is **CC BY 4.0**. Dataset-specific upstream
 
 ## Relationship to the current 25 selected tasks
 
-The current `docs/selected-tasks-v1.tsv` contains:
+The current `docs/contracts/selected-tasks-v1.tsv` contains:
 
 - 9 BixBench-derived rows,
 - 9 CompBioBench-derived rows,

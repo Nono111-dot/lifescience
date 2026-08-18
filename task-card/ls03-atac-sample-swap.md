@@ -1,6 +1,6 @@
 # Task card: `ls03-atac-sample-swap`
 
-> Canonical participant-facing card generated from `docs/ls01-ls05-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
+> Canonical participant-facing standalone card. The packaged-input inventory below matches the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS03-2｜bulk ATAC-seq 样本标签互换检测 — `ls03-atac-sample-swap`
 
@@ -14,7 +14,7 @@
 | Priority | P0 |
 | Anchor / related | D / P, A, V, O |
 | Source idea | CompBioBench sample-swap-atac-q1 |
-| Card version | task-cards-v2.md |
+| Card version | standalone-v2 |
 
 ### Inputs (authoritative packaged inventory)
 - `inputs/AmexT_v47-AmexG_v6.0-DD.gtf.gz` — 51,302,807 bytes

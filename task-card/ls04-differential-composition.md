@@ -1,6 +1,6 @@
 # Task card: `ls04-differential-composition`
 
-> Canonical participant-facing card generated from `docs/ls01-ls05-task-cards-v2.md`. The packaged-input inventory below is generated from the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
+> Canonical participant-facing standalone card. The packaged-input inventory below matches the frozen task directory. Only the Prompt is pasted into a run; evaluator-only answers and outputs are never exposed.
 
 ## LS04-1｜视网膜单细胞差异组成分析 — `ls04-differential-composition`
 
@@ -14,7 +14,7 @@
 | Priority | P0 |
 | Anchor / related | D / P, T, A, R, O |
 | Source idea | CompBioBench differential-composition-q1 |
-| Card version | task-cards-v2.md |
+| Card version | standalone-v2 |
 
 ### Inputs (authoritative packaged inventory)
 - `inputs/ANNOTATION_RULE.md` — 724 bytes

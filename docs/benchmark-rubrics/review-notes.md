@@ -12,7 +12,7 @@
 ## Review decisions
 
 1. `25-task-native-rubrics.tsv` is authoritative for what the upstream benchmark actually exposes. It does not award the local 80-point artifact score.
-2. `deterministic-rubrics-v2.tsv` is a proposed local extension. A row becomes active only after independent recomputation or an expert hidden checklist and §7.5 acceptance; it must never be labelled the benchmark's native rubric.
+2. `docs/contracts/deterministic-rubrics-v2.tsv` is a proposed local extension. A row becomes active only after independent recomputation or an expert hidden checklist and §7.5 acceptance; it must never be labelled the benchmark's native rubric.
 3. CompBioBench-derived tasks cannot receive an “official local correctness” score from public material. Options are: submit the exact native answer to the official private leaderboard; independently derive and dual-review local gold; or keep the task calibration-only/blocked.
 4. BixBench ideal/ranges may anchor the corresponding endpoint, but they do not support unlisted full-table, method-version, summary or script claims. Those are separately reviewed extensions.
 5. Custom tasks require a cited source workflow, complete fixture and two reviewers, or replacement with a task that has published truth/results. Do not infer a unique answer from plausible biology.

@@ -15,9 +15,9 @@ The primary contrast is a matched Codex capability ablation. Client, model/build
 
 ## Frozen scope
 
-- 25 stable task IDs from `docs/input-problem-inventory-v1.tsv`.
+- 25 stable task IDs from `docs/contracts/input-problem-inventory-v1.tsv`.
 - One trial in each condition: 25 `C0` + 25 `T1` = 50 independent runs.
-- Randomization seed: `20260816`; the immutable execution order is stored in `docs/formal-run-queue-c0-t1-2026-08-16.tsv`.
+- Randomization seed: `20260816`; the immutable execution order is stored in `docs/contracts/formal-run-queue-c0-t1-2026-08-16.tsv`.
 - Run outputs, screenshots, logs, frozen workspaces, grader output and judge forms remain local and are not committed to GitHub.
 - GitHub contains task definitions, input/provenance manifests, accepted static graders, environment contracts and release status only.
 
@@ -63,7 +63,7 @@ Skill choice is made before seeing a run's outputs or gold data, based only on t
 
 The run operator must not change the predeclared selection after seeing outputs, provide scientific hints or substitute an unlisted package. If the fixed source cannot be installed or loaded, record `capability_unavailable`; do not improvise another repository or branch.
 
-The 18 unique skills actually selected by the 25-task plan are normalized in `docs/capability-runtime-mapping-v1.tsv`. All fixed `SKILL.md` sources and installed hashes were verified. Installation/exposure and actual invocation are reported separately; a skill that the evaluated agent did not open must not be described as used.
+The 18 unique skills actually selected by the 25-task plan are normalized in `docs/contracts/capability-runtime-mapping-v1.tsv`. All fixed `SKILL.md` sources and installed hashes were verified. Installation/exposure and actual invocation are reported separately; a skill that the evaluated agent did not open must not be described as used.
 
 ## Run, freeze and score
 

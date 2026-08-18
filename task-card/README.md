@@ -1,6 +1,8 @@
 # Task cards
+
 This directory is the participant-facing entry point for the 25 frozen life-science task cards. Each task has one standalone file containing an exact packaged-input inventory, paste-once Prompt, deliverables, scientific hard gates, deterministic scoring details and capability expectation.
 Evaluator-only answers, oracle fixtures, run outputs and scores are not stored in these cards and must never be copied into a participant workspace.
+
 ## Card index
 - [`ls01-grna-offtarget-rank`](ls01-grna-offtarget-rank.md)
 - [`ls01-primer-transcript-audit`](ls01-primer-transcript-audit.md)
@@ -29,7 +31,8 @@ Evaluator-only answers, oracle fixtures, run outputs and scores are not stored i
 - [`ls10-treatment-response-model`](ls10-treatment-response-model.md)
 
 ## Controlling contracts
+
 - Input hashes and provenance: [`docs/inputs/SHA256SUMS.tsv`](../docs/inputs/SHA256SUMS.tsv)
-- Deterministic score allocation: [`docs/deterministic-rubrics-v2.tsv`](../docs/deterministic-rubrics-v2.tsv)
-- C0/T1 protocol: [`docs/evaluation-protocol-c0-t1-v2.md`](../docs/evaluation-protocol-c0-t1-v2.md)
-- Formal release status: [`docs/formal-eval-release-status-2026-08-17.md`](../docs/formal-eval-release-status-2026-08-17.md)
+- Deterministic score allocation: [`docs/contracts/deterministic-rubrics-v2.tsv`](../docs/contracts/deterministic-rubrics-v2.tsv)
+- C0/T1 protocol: [`docs/contracts/evaluation-protocol-c0-t1-v2.md`](../docs/contracts/evaluation-protocol-c0-t1-v2.md)
+- Formal release status: [`docs/contracts/formal-eval-release-status-2026-08-17.md`](../docs/contracts/formal-eval-release-status-2026-08-17.md)
